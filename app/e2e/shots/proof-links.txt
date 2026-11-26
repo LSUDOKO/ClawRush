@@ -1,7 +1,7 @@
-2026-11-26T22:52:42.482Z http://localhost:4321
+2026-11-26T23:04:23.408Z https://clawrush.adoranto737.workers.dev
 result: You: MISS
-cash_out: commit + undelegate profile (ER) https://explorer.solana.com/tx/LeK38f4PdJLm3esvzeELfKfsQHVBHEj6uMYbCg66Zg6wNKz36aQ77oMVdWDhbTUEbK7ddj89B6uHzXd2FGNS9Uq?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
-drop_claw → VRF request (ER) https://explorer.solana.com/tx/EezhoMey7Keu9ZxkX4VwKDHnQDWPZjqyxgLeW4Gota1tEMZ1u4WqFvBTJY9y91L9RF7fPrBymrz81UDzDoPQ7qP?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
-join_queue (session key, ER) https://explorer.solana.com/tx/343az9HhuZtYVYQhtSUv2ry6cZwzarZrTBXVDDQjPbC2XneTLBz4bmExbCiJYYu1TDEwfdrqy1ezjySFZJUYpVjh?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
-Session start: buy credits + session key + delegate (L1) https://explorer.solana.com/tx/2NGgvMESwWvRSQyaPkNoobGDjt3sEHJZ6ohSNPV91uBPTjyxQ6rCY63NMDR64G7DTfxDQdKUirqb3jxd4YBCXQT?cluster=devnet
+cash_out: commit + undelegate profile (ER) https://explorer.solana.com/tx/3Va8eNUi73vBFiKCZYU5J9VSbFk7evzTPEy7pRM2RDiCtgbkprwB5QFmsbLnvbEhAXVVGwDF1HBgq3zLCfM21swm?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
+drop_claw → VRF request (ER) https://explorer.solana.com/tx/TTByWNddFMLkqdT5VvxG2sbZSykBcje5qCPfUSuJ3T4dupToftfc7Q5oEm51xx5ijTiytM48yKY2MJfYNwAvPW4?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
+join_queue (session key, ER) https://explorer.solana.com/tx/4fHe8vYbK6dedTf9oYxY6ZSYUxJGPQz3bnvx7jM8sjxkUL4Qjnp8Cf5q93Nk3y9vBcT9AzmshukWqrtowoU2RbmJ?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
+Session start: buy credits + session key + delegate (L1) https://explorer.solana.com/tx/5THebt15NrZgWccYiA7K1gWcYYZsgibPZn3nqWXKKHzS4hhH4r8oxh5YKrypdUnrDcMzDQM3GHJGpig8KChCQ62K?cluster=devnet
 2FzY…2G7v https://explorer.solana.com/tx/2FzY9oJrQXab58GSnLmjZ6ShPzQnAnvi4zkzxRKjLLSkd4LGGMqU4vX2WctvvKXxmZyXv5dgELXfNk1cHpWN2G7v?cluster=devnet

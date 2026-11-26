@@ -282,7 +282,7 @@ export default function Game() {
           <div className="flex h-full items-center justify-center text-sm text-white/60">{cabErr ?? "Connecting to the cabinet on MagicBlock ER…"}</div>
         )}
         {toast && (
-          <div role="status" className={`absolute inset-x-3 top-3 rounded-xl px-3 py-2 text-center text-sm font-bold backdrop-blur ${toast.tone === "win" ? "bg-yellow-400/90 text-black" : toast.tone === "slip" ? "bg-fuchsia-600/90" : toast.tone === "miss" ? "bg-slate-700/90" : "bg-cyan-700/90"}`}>
+          <div role="status" className={`absolute inset-x-3 top-12 rounded-xl px-3 py-2 text-center text-sm font-bold backdrop-blur ${toast.tone === "win" ? "bg-yellow-400/90 text-black" : toast.tone === "slip" ? "bg-fuchsia-600/90" : toast.tone === "miss" ? "bg-slate-700/90" : "bg-cyan-700/90"}`}>
             {toast.text}
           </div>
         )}
@@ -309,7 +309,7 @@ export default function Game() {
           <div className="flex flex-1 flex-col items-stretch gap-2">
             {myTurn ? (
               <button onClick={drop} disabled={!canControl || !!busy} className="h-24 rounded-2xl bg-gradient-to-b from-yellow-300 to-orange-500 text-3xl font-black text-black shadow-[0_0_30px_rgba(255,180,0,0.6)] disabled:opacity-40">DROP</button>
-            ) : erProfile?.inQueue ? (
+            ) : queuePos >= 0 ? (
               <div className="rounded-2xl border border-white/15 p-3 text-center text-sm">{queuePos >= 0 ? `You're #${queuePos + 1} in queue` : myRound !== null ? "Waiting for VRF…" : "In queue…"}</div>
             ) : (
               <button onClick={join} disabled={!!busy || credLeft === 0} className="h-24 rounded-2xl bg-gradient-to-b from-pink-400 to-fuchsia-700 text-xl font-black shadow-[0_0_24px_rgba(255,61,189,0.6)] disabled:opacity-40">
@@ -323,7 +323,7 @@ export default function Game() {
         <Onramp stage={stage} wallet={wallet} useBurner={useBurner} burner={burner} sol={sol} usdc={usdc} credits={credits} setCredits={setCredits}
           busy={busy} pickBurner={pickBurner} leaveBurner={leaveBurner} airdrop={airdrop} start={startSession} cashOut={cashOut} />
       )}
-      {stage === "play" && !erProfile?.inQueue && (
+      {stage === "play" && queuePos < 0 && !myTurn && (
         <button onClick={cashOut} disabled={!!busy} className="h-11 rounded-xl border border-yellow-300/60 text-sm font-bold text-yellow-200 disabled:opacity-40">
           Cash out & claim prizes to wallet
         </button>
