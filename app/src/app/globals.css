@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-display: var(--font-display);
+}
+
+html, body { background: #0b0216; color: #fff; }
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(60rem 30rem at 50% -10%, rgba(255, 61, 189, 0.18), transparent 60%),
+    radial-gradient(40rem 30rem at 100% 100%, rgba(61, 245, 255, 0.12), transparent 60%),
+    #0b0216;
+  -webkit-tap-highlight-color: transparent;
+}
+.font-display { font-family: var(--font-display), ui-monospace, monospace; }
+button:focus-visible, a:focus-visible { outline: 2px solid #3df5ff; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .animate-pulse { animation: none; } }

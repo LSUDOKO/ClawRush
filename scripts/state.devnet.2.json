@@ -1,0 +1,30 @@
+{
+  "cabinetId": 2,
+  "programId": "9UwwBZu55wdbjQm3LdDKLHck79Sr95EPZsS5zRuvkKNs",
+  "validator": "MTEWGuqxUpYZGFJQcp8tLN7x5v9BSeoFHYWQQ3n3xzo",
+  "mints": {
+    "dUSDC": "27tFBLQhSH9oscjHyPhoHp9xTyNJaqgHtAJeaHwsvBxx",
+    "dGEM": "BSEHSh6Ss3yVN7D854X37rBn1VSfnehh2J9FkzVqg1XV",
+    "KOI": "GNQBfArzC57aaA8jUJ4ELrghVXZZtfhqsk3He3maexGH",
+    "ROBO": "6ZkrXoPkHmZ4xvsER3sUrTMM6D9aDAdwapR3pGS3ekZp"
+  },
+  "initCabinetSig": "2c8scc2Z9UmLcJQnzL6Vqqy9r7jSTWaTNgorAT7y7MRbTfCzB5694V2QY393QyZkxFu8ViYFJKPSo6WfLc1x86aM",
+  "config": "3t563gtPCCMnVk8xqL4nLKCNYCL2J4b24JduNERhMiub",
+  "cabinet": "AnS2MJT3GreDHAMXBXDLLKcFEjJjzNERdsTf4FUv3wTk",
+  "mystery": "6MjeB6kfAb9JPs7zy1DecWxCn8Ux3Fm1cGo1qfxJg1Kh",
+  "vault": "F3KBmcDwSQeFJAHbSi1P8k3TgRq2VUdwUcoqjC3v4FQf",
+  "vaultAtas": {
+    "dUSDC": "AC9HWtgdEg8SVPQTydUiwTeXv6CEx5Kewss1ac5hmVs1",
+    "dGEM": "DDx9WWYtkKABGnDraDQ3AuchdDDk8N4SXnu23yZFTE67",
+    "KOI": "EKXRAYRRwZWD3Lg4vzgJyr15j9jDg77CWukVHk8jgaLK",
+    "ROBO": "6qvyTw4smRe2dqP1xXtVfgjQhAB5qyjtfqTYK2EPn7dM"
+  },
+  "faucet": "6oxb3WBkK934sZ2PuUm9sxjeL99MuSfjc65ajEx2hTRZ",
+  "delegateCabinetSig": "3oGAx5p9jSnQpiAngB9wRf1FEaynLZ7BdP8JfUVd5GdqRG7s2xAG4kvk5sdLvuFonnTrNfdhVZ2zzYWg15ka7tEF",
+  "mysteryPermission": "9osLNY6BWmJN7B5RQUZQytUV5aw8iZMrfXVW8HdHUdTP",
+  "sealSig": "57usfrdVgNDEDKy4QPiGU3jRXX6zzKMJJrMSyzebzkJ1jda2GNmmFqTVHHfSKj3NsLpYb7UHKfd5bZEntssMzdT",
+  "players": {
+    "testA": "ekq9fHAkdwkuntW2imBGMH4vRxdPKucT3sKbSyiagYW",
+    "testB": "8fkYm3niYMfhXxBnx8KFophaqjsF72BHLk8b8Lqurzov"
+  }
+}

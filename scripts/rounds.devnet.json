@@ -1,0 +1,3108 @@
+[
+ {
+  "at": "2026-11-26T21:47:27.995Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 5,
+  "moveMs": 8185,
+  "round": 1,
+  "target": {
+   "id": 11,
+   "kind": 2
+  },
+  "aim": {
+   "x": 520,
+   "z": 420
+  },
+  "capsuleId": 11,
+  "kind": 2,
+  "alignErrBps": 0,
+  "gripBps": 8500,
+  "rollBps": 3298,
+  "outcome": "HELD",
+  "mint": "KOI",
+  "amount": "1",
+  "tier": 2,
+  "vrfMs": 107,
+  "dropSig": "5rT8UyX3pdebQZnD13MDQy6bwatM8DxiRimFwvhpQoq1AxQcZJ9VuP2ndw142BXAvq87spqP66AbUeAR3Ljeqk1j",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "3UdjKBkKXtPvmBqPCHuBbuPzpuCU2CwX97tethoFKYH6HMY5kwBVxSUMuZAhvsqK2dRjxsVarpmbFKSoW1fRofD6",
+    "layer": "er",
+    "ms": 855
+   },
+   {
+    "step": "move_claw",
+    "sig": "2F5mwiW9s3zGsjkjMX31fiVpts4eukP1ZEe4Vaxtp5DyoYaJWpLspjsaLetVLmsYTwAB8D1YjpqSnvNKLyh3GmgH",
+    "layer": "er",
+    "ms": 1026
+   },
+   {
+    "step": "move_claw",
+    "sig": "2xHpCLiWETXXFDh31Bj8KMuWuwmdMqWpG74hAcfdbfpg6pUSvSN96xXj3v7fgavyp4UiKLq8JKdmqQRHGfyspRAd",
+    "layer": "er",
+    "ms": 1271
+   },
+   {
+    "step": "move_claw",
+    "sig": "2R9eHUD9a5oSsVG5EEkpg7DJLSfFdjEYF7vp8FNRmTWercqGqDmM4aNobpUQwWTYSkkEHu3BSbdMt5qMT1m2DJn3",
+    "layer": "er",
+    "ms": 1111
+   },
+   {
+    "step": "move_claw",
+    "sig": "4LRmRuYnR96WsFT3fzvydJ5ReUAWF2hScN6wtzhW72HQdNSh51oBZ7NPeMaQaMaN7nPw8DbjPKfMLT9YBHxBbALn",
+    "layer": "er",
+    "ms": 1230
+   },
+   {
+    "step": "move_claw",
+    "sig": "4Dj6o2ZUh4GM5cygCr8LSSG52Azg9rfif5Mge8zQLUyKbXN6Q1gs9QRBTjHHgBUQnixcmbsemxsKMw9bwnYnJaKu",
+    "layer": "er",
+    "ms": 7414
+   },
+   {
+    "step": "drop_claw",
+    "sig": "5rT8UyX3pdebQZnD13MDQy6bwatM8DxiRimFwvhpQoq1AxQcZJ9VuP2ndw142BXAvq87spqP66AbUeAR3Ljeqk1j",
+    "layer": "er",
+    "ms": 2152
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:47:41.205Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 9,
+  "moveMs": 2768,
+  "round": 2,
+  "target": {
+   "id": 5,
+   "kind": 1
+  },
+  "aim": {
+   "x": 771,
+   "z": 528
+  },
+  "capsuleId": 5,
+  "kind": 1,
+  "alignErrBps": 2888,
+  "gripBps": 6768,
+  "rollBps": 2738,
+  "outcome": "HELD",
+  "mint": "KOI",
+  "amount": "1",
+  "tier": 0,
+  "vrfMs": 114,
+  "dropSig": "3DjsRnSPQT63eVhC26dqMg69a6E2nWtFGJhBezUEv9bc2Z41ghsanvcpr593Lp8j9xDwtUjayhuGtUe1N9D1ULYb",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "q21Vg35Qa9fdgqv5RsuZEpfjANnLqNSLYVkyfjpybrEgZtgGkym49VcjsFCMPuBdV9GuSQtQS3KcuK96T1WJgr2",
+    "layer": "er",
+    "ms": 414
+   },
+   {
+    "step": "move_claw",
+    "sig": "57bboMPf6rGEm2pSoucLZcP1rZ6d1kuf27EqzE2GMRvMLyGkSo9GAVMGcY6cFWDJgSPFcSVmkPnfBsk9NPKHat7V",
+    "layer": "er",
+    "ms": 1696
+   },
+   {
+    "step": "move_claw",
+    "sig": "2dyd1dy2HpkyZJvKPGfWyy8G8122Hhun8PV4zuTKhMaEkkiaL8CAt3DtXiqrxGvaRonVqjQFaac3qj5njKQdut8A",
+    "layer": "er",
+    "ms": 1290
+   },
+   {
+    "step": "move_claw",
+    "sig": "3Ky4LX25YCxSHaH5n9wWNgAA4GgGMLdAJcmXknmGJRfVeXga1dJLk96MZrAjr8eGyioN5WabHjAT1aTKsMzPVwES",
+    "layer": "er",
+    "ms": 1609
+   },
+   {
+    "step": "move_claw",
+    "sig": "5ZUNe3V2hSLqyhqGsrAWfxfZozaaBpgsFw8XohwhSbfXDVLFhkNDwAondQnUMo41TCsUBmZLmEKUHFWRbDEB7RNq",
+    "layer": "er",
+    "ms": 1124
+   },
+   {
+    "step": "move_claw",
+    "sig": "5hqwxzBTPTBgZBMZ5cgsyHMjWAW8aw2ESAvF1ZL6qREZVFjzbiwoieAhCyQR1n6Td4QtHUcPTXfPGaoiCA9P3ui1",
+    "layer": "er",
+    "ms": 1184
+   },
+   {
+    "step": "move_claw",
+    "sig": "4kgznRsENnZRzJJtw5YXQXMioAAwPSZm92CmRCy1Z6rzFaLPnNKw6LbHYGxYHS2tKUL58NuE7VYn8JUoNRFNESuX",
+    "layer": "er",
+    "ms": 1269
+   },
+   {
+    "step": "move_claw",
+    "sig": "3RkCohMVwkKNW3ANDx8g1bMGhetqsuKJMXWHqLyWHSK9VX6iUdPx1ujRK1pe8XgCVz4uypQeP5V2eR1ZwxYYuLn2",
+    "layer": "er",
+    "ms": 1231
+   },
+   {
+    "step": "move_claw",
+    "sig": "5U8yS2c1btXCSQxa61invgPJvyDWoizVonuVyapisyUmuHrzX7ARopJNj1JPaGipKt1NYDLV8pPAqSbT6EkwiCvE",
+    "layer": "er",
+    "ms": 2263
+   },
+   {
+    "step": "move_claw",
+    "sig": "387saTgyKhTnvnaa2cGb6Ksghqfu6E9FnGBWHsYxvYaxxHWcAS24ZjU7qVDpcXXeLtfQJ6vWjzMgxDc3GUXBhwM3",
+    "layer": "er",
+    "ms": 2199
+   },
+   {
+    "step": "drop_claw",
+    "sig": "3DjsRnSPQT63eVhC26dqMg69a6E2nWtFGJhBezUEv9bc2Z41ghsanvcpr593Lp8j9xDwtUjayhuGtUe1N9D1ULYb",
+    "layer": "er",
+    "ms": 2046
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:47:56.849Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "settlement": {
+   "cashOut": {
+    "erSig": "23q3i39ea24oGBR1m7wGtkxsUwQXkUeDDpzJ557SEqLAf5fveov5RT2yAx3vQH18E3wFCjpeYoPikAXTfaJAG4Hr",
+    "baseSig": "yojmQEz76UM6gZcbg1S3RgArVGBnQmaqMvjLjUvQvCCvrXTynvLiMnUB8XxJaBrGUuQfNqwvmRx7xpdxhxh21Vb"
+   },
+   "claims": [
+    {
+     "mint": "KOI",
+     "amount": "2",
+     "sig": "5XFELVeyyEaGqWzHPMeoFp9CAUUjZu3ryBFKSTE7P4d7BabSGtEJVZKLr91N5WHtQhjmmR4kFgNJW4h3JMnNjYKJ"
+    }
+   ]
+  },
+  "ok": true
+ },
+ {
+  "at": "2026-11-26T21:48:41.192Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 6,
+  "moveMs": 2049,
+  "round": 3,
+  "target": {
+   "id": 3,
+   "kind": 0
+  },
+  "aim": {
+   "x": 300,
+   "z": 560
+  },
+  "capsuleId": 3,
+  "kind": 0,
+  "alignErrBps": 0,
+  "gripBps": 8500,
+  "rollBps": 580,
+  "outcome": "HELD",
+  "mint": "dGEM",
+  "amount": "50000000",
+  "tier": 0,
+  "vrfMs": 252,
+  "dropSig": "4yTdVtdRyR7zwVdzUusbjjt9sHgUzKFRiH6Q5R2WTdxcrXR3r2yPLpEFmCa1KtpGYLui4yi28hZV3jTRTFqqmSmq",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "gvBAANr11JMre4xSiugYLSHV75fxhmCVBMTFCJuTWj3DGxJixqxduSJa5a9X2UaPyrSzufFnXPHhCtMSttp5evX",
+    "layer": "er",
+    "ms": 1332
+   },
+   {
+    "step": "move_claw",
+    "sig": "23tc6cFSJ7gYkStKEf2jM838s16waPrxozxGgu782yjFN9udnN7AqCDaUEiXRAeiDWkph248Fv7rCF9ZA7BJptmy",
+    "layer": "er",
+    "ms": 1433
+   },
+   {
+    "step": "move_claw",
+    "sig": "2NS6UbZHzA6BRZL5j294V5hkSb6SgNZRfuTds8j7ggtRGSZe46jo8uurr4CGxg8ksueieh2kjuHNNVmnKbKVHCGH",
+    "layer": "er",
+    "ms": 1843
+   },
+   {
+    "step": "move_claw",
+    "sig": "47jVzL3AUsSgRwotx5zjGaAWVL9mwMuru6jydNxZaVxqYvGQscHjWMd7UAVybeiA4WyHKYPhgHHcBmDfR7o9iVJR",
+    "layer": "er",
+    "ms": 1758
+   },
+   {
+    "step": "move_claw",
+    "sig": "5CzrEPm8Y1DWUtKapXS3gH4z64fbNe9fWMdYH2NNMFXaiMxhdfBgWTdsVBniSo8njjxj2vt7w3GyKNCfPJALgWHm",
+    "layer": "er",
+    "ms": 832
+   },
+   {
+    "step": "move_claw",
+    "sig": "4T7vnuzinLwbnq6H1CQ4CtmndLoHd65SHXqKPhKxe5WTSiSpqECBCqo5fnmB8tWt2mHNw7gwENW78doDVFtWEEP2",
+    "layer": "er",
+    "ms": 1454
+   },
+   {
+    "step": "move_claw",
+    "sig": "4hXfAiQkC1VpMRfJj6sN3Dq3c1WGfdAjyHEWuuUPjg2irRhRNnuzVC8btEDs7zJxZeePSkNbTouKTt2vozHi1aVy",
+    "layer": "er",
+    "ms": 859
+   },
+   {
+    "step": "drop_claw",
+    "sig": "4yTdVtdRyR7zwVdzUusbjjt9sHgUzKFRiH6Q5R2WTdxcrXR3r2yPLpEFmCa1KtpGYLui4yi28hZV3jTRTFqqmSmq",
+    "layer": "er",
+    "ms": 350
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:48:48.773Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 5,
+  "moveMs": 1088,
+  "round": 4,
+  "target": {
+   "id": 10,
+   "kind": 0
+  },
+  "aim": {
+   "x": 132,
+   "z": 467
+  },
+  "capsuleId": 10,
+  "kind": 0,
+  "alignErrBps": 2833,
+  "gripBps": 6801,
+  "rollBps": 277,
+  "outcome": "HELD",
+  "mint": "dUSDC",
+  "amount": "500000",
+  "tier": 0,
+  "vrfMs": 103,
+  "dropSig": "4tvyZoCmCfEfp5Mnc5YsJRENHpz1LkY6JG2JADsRtK6Usk6hrPnZVs24aRJhLTbFN1ZFv3ooUfKHWEkQeUVVeoAw",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "4sVkAW3QCPMbyAWV2LaGut638CniBUpHM9AjPK9zDD8SrVkenbj9rA8wypeuptY8p9ygQatJ8Rn2TKzRGp6nQ8ht",
+    "layer": "er",
+    "ms": 617
+   },
+   {
+    "step": "move_claw",
+    "sig": "2ty6j4quunAJEjTvRd6SXA3G3pm2AA5ddXyrSGQwx6Bbj7iTpxQPcyB2jKomum2TwSNmNQrMrJxuvCuZo2mXCH7F",
+    "layer": "er",
+    "ms": 258
+   },
+   {
+    "step": "move_claw",
+    "sig": "4Lk3b4hM4yjo9N1CKvnzxdBhxsj5QRP2skJ3ADQatZ2Lu11fHCRYr6TLzQEAf4YD8ArDupLdACAHbQWngcW17nZa",
+    "layer": "er",
+    "ms": 262
+   },
+   {
+    "step": "move_claw",
+    "sig": "59ChStRciciX6UaRdSiFwUJuqqjhG7Qfy5dJvVTHV3qmaZHvSR8aWarMdT6WwUPUMgh3MkpUspTQVE537AHckE1E",
+    "layer": "er",
+    "ms": 410
+   },
+   {
+    "step": "move_claw",
+    "sig": "3jnyrBKmd2jTcqRCqrS11TxQNsKVpfcauRjfcAFyzN5mAG1XeR893TxcEHhProLE3jJjmuedGEHnwUzWK4RsFpQk",
+    "layer": "er",
+    "ms": 404
+   },
+   {
+    "step": "move_claw",
+    "sig": "1EEPzyHAHipbEwrbaAJ1joNm7zxsRfLqqxxDW223Xu1o3KH83DsASd6nRLq7Gho1ztNEbuXjGa8zZALLHHSrjVC",
+    "layer": "er",
+    "ms": 726
+   },
+   {
+    "step": "drop_claw",
+    "sig": "4tvyZoCmCfEfp5Mnc5YsJRENHpz1LkY6JG2JADsRtK6Usk6hrPnZVs24aRJhLTbFN1ZFv3ooUfKHWEkQeUVVeoAw",
+    "layer": "er",
+    "ms": 1086
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:48:52.623Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 3,
+  "moveMs": 1338,
+  "round": 5,
+  "target": {
+   "id": 0,
+   "kind": 0
+  },
+  "aim": {
+   "x": 253,
+   "z": 285
+  },
+  "capsuleId": 0,
+  "kind": 0,
+  "alignErrBps": 6000,
+  "gripBps": 4900,
+  "rollBps": 4358,
+  "outcome": "HELD",
+  "mint": "dUSDC",
+  "amount": "1000000",
+  "tier": 0,
+  "vrfMs": 345,
+  "dropSig": "4Xy4ZZWXLBoM4eWdtKwbbEzPMuhcziWJT3WxET7CQ5e3Da2CTvoimBCfW13jFD6h6dRhncmoH7XBFz96hExpWrY6",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "5TgKHzV6tppeW3TLt92om4aAbkJ1uWj1SSUXRM929Vtrq1M8rsCQ4SvSBKJ2LnTZRfBEJHECAMAyFpq8xWE9tHwp",
+    "layer": "er",
+    "ms": 869
+   },
+   {
+    "step": "move_claw",
+    "sig": "3wKLB79QvA4UWXAjxr1q1qZHtX2NwTW9CD4Ecqt4KxcmzaRZSabV5oevhP5vZo1UbQ41ikXqW9M3ibvJh2CazLKk",
+    "layer": "er",
+    "ms": 926
+   },
+   {
+    "step": "move_claw",
+    "sig": "3DPoAwUe3QxXYRWFAWZgwU5UtAWedHHsnNPsRSZwj8wTTF4pYvquG86uAoUYtU8cgN5JhZAajGzYYnDvqFGY4sb2",
+    "layer": "er",
+    "ms": 817
+   },
+   {
+    "step": "move_claw",
+    "sig": "4JTEoNBHhR1nLzZkLJCUA9x2pGfohguS4qDzizVSAZsondPf9urQgpPPyL1uBk6AgiQtN7gb5Yju4W58pkzZRRA4",
+    "layer": "er",
+    "ms": 959
+   },
+   {
+    "step": "drop_claw",
+    "sig": "4Xy4ZZWXLBoM4eWdtKwbbEzPMuhcziWJT3WxET7CQ5e3Da2CTvoimBCfW13jFD6h6dRhncmoH7XBFz96hExpWrY6",
+    "layer": "er",
+    "ms": 675
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:48:56.754Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 10,
+  "moveMs": 3023,
+  "round": 6,
+  "target": {
+   "id": 8,
+   "kind": 2
+  },
+  "aim": {
+   "x": 868,
+   "z": 265
+  },
+  "capsuleId": 8,
+  "kind": 2,
+  "alignErrBps": 10000,
+  "gripBps": 2500,
+  "rollBps": 4581,
+  "outcome": "MISS",
+  "mint": null,
+  "amount": "0",
+  "tier": 0,
+  "vrfMs": 199,
+  "dropSig": "3Xsj5tKbApQhTGiQmPMiNDr74NQeNLq4Aa1wug839DmPj7BMrzY8X3GBJAThfw7GYjN5fkrMNK2Ro8wG2rHuAzH1",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "23HjTxA3hTSBtCdWoQaCBUCfNTFSbuUDXB3azYUtstv3Jms2DS4q6bnut8wZTS7diXxNuAjwK9Uhf5gueUopgKLq",
+    "layer": "er",
+    "ms": 1432
+   },
+   {
+    "step": "move_claw",
+    "sig": "HsRuP5HgbTyRjR4iac7ApooyFKztZceRb6chDovmQJD6R6LXqiET76LMiayNU992raGP58xA4CoitEzhvA6kJjq",
+    "layer": "er",
+    "ms": 2136
+   },
+   {
+    "step": "move_claw",
+    "sig": "52vZUgQ79z5QmQHG7TFSibYhnVPZgd2wSF5wyJ2JyEY1KQXcNaKWAjK14HBXXh6X4Zvs9aACB5RF5bkD5p86Vgjx",
+    "layer": "er",
+    "ms": 1785
+   },
+   {
+    "step": "move_claw",
+    "sig": "5PzxMf5Ui8RPbjymQvCPqPsX5MGCXdBjBVPUWtmF7treJLshgvCr93jeLcUrWZ9XYZYZMC47JUJbeTFH4JjWBvAj",
+    "layer": "er",
+    "ms": 2058
+   },
+   {
+    "step": "move_claw",
+    "sig": "4BNwn6qaZ7DjPwei8T8pgTdLvGjt7J2FZCvLpi6HJwTPtqQbnnMuWExECzrkBuUWiXDaNc8B9KvgqVot2WDsVf54",
+    "layer": "er",
+    "ms": 1844
+   },
+   {
+    "step": "move_claw",
+    "sig": "2jTPXGc9vT5EXkh2Xza71pMvK7Bx2JWpH9e58aveuWTs54DUD3QAKKjcxeTu538xwTS5RSzCKM1NL587h4NZADce",
+    "layer": "er",
+    "ms": 969
+   },
+   {
+    "step": "move_claw",
+    "sig": "4W3Bgz4g8ub1s1KTS65isgRFynNHvoKZWXLEbaNSNhLzgHnriWK4mPuESE3UUQhAw1WEJTkp1fCHPfb1MBYXqZrj",
+    "layer": "er",
+    "ms": 2055
+   },
+   {
+    "step": "move_claw",
+    "sig": "AUw9gBQdQkTWDiHuFrcGVC2D3Z8u1Ff5tSntodv9gSA1HLj22Zb3gvo2tfGGjCYgTT5m1AXFdJZJakbberuQCyK",
+    "layer": "er",
+    "ms": 1027
+   },
+   {
+    "step": "move_claw",
+    "sig": "1wCYsbxZKNmq5CCqAvtce2g4jYmJWqq4A4sUKnVZYz13CcX63ifDmqug47j8GKNFuBNdRkkFejo2Xh4wFRhXCkE",
+    "layer": "er",
+    "ms": 2233
+   },
+   {
+    "step": "move_claw",
+    "sig": "64grD7AQpK2u2ESYLqYmhLAEbBiSeiUfxM2Gbu2rfwxws9DiJDwbHf4MTSLKZZvHCaaYtQkpFEzzA7XGxGFQAG1R",
+    "layer": "er",
+    "ms": 2334
+   },
+   {
+    "step": "move_claw",
+    "sig": "atq4SgteDkbprY3RAn8pBTXWHdeexaCaVxJ8dcjA7ubgEdXCgkbQEixAMMR6HDbnX1kSTUWAGxjGuaLp31gyQGp",
+    "layer": "er",
+    "ms": 764
+   },
+   {
+    "step": "drop_claw",
+    "sig": "3Xsj5tKbApQhTGiQmPMiNDr74NQeNLq4Aa1wug839DmPj7BMrzY8X3GBJAThfw7GYjN5fkrMNK2Ro8wG2rHuAzH1",
+    "layer": "er",
+    "ms": 307
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:49:02.962Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 9,
+  "moveMs": 1121,
+  "round": 7,
+  "target": {
+   "id": 7,
+   "kind": 2
+  },
+  "aim": {
+   "x": 460,
+   "z": 820
+  },
+  "capsuleId": 7,
+  "kind": 2,
+  "alignErrBps": 0,
+  "gripBps": 8500,
+  "rollBps": 3201,
+  "outcome": "HELD",
+  "mint": "dUSDC",
+  "amount": "500000",
+  "tier": 1,
+  "vrfMs": 162,
+  "dropSig": "22L5qNzXgNB8CJQ1WXm7S8tYknX7ZTkKngrrS2D7AZgjj4xwwn5S8b1x98xXDrPr41J8m4eJnGxFaKMqaLtewxQz",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "4kpXPRKFDi6uHA2V2zf9MXy6kkya5S5SWdVq1RyFoVvRh4FyRTxk3Jn3Luc8F5M1aAytpMp6KjHuwcNa8iyahMKS",
+    "layer": "er",
+    "ms": 701
+   },
+   {
+    "step": "move_claw",
+    "sig": "4nHKEGvtXsV8ubGJZ4uK9uffYn2qVA8YTnnKdXn5qo2tRXZFo8TLbVUKHQzXzYN7tmFLTBq8tD1UywzLjNUQgbGz",
+    "layer": "er",
+    "ms": 283
+   },
+   {
+    "step": "move_claw",
+    "sig": "4bTfeH2AZ4FS5ke4Xn9ST9t5sf11ZAzRJrnMXk51pqeE2EkazcDEgyEsFgwyaX3Qh6dBovUGzygcXz8TtJqCqpiq",
+    "layer": "er",
+    "ms": 222
+   },
+   {
+    "step": "move_claw",
+    "sig": "2PmeiJv2SFv3rWWAAix8BfAobKKZqMXPRpW9hoPVBcnubwggBDWhLwMtUYuMxxQmozGpHvxE9K4ZsWoG2CzFD9FY",
+    "layer": "er",
+    "ms": 218
+   },
+   {
+    "step": "move_claw",
+    "sig": "5bz4MnaFRHtNUpMYEUPzjyWRh2yBojgUVEnw3mz327tSq58F92129T6VNTYz1Y1QLYUfarVGDJRC8UtsqTfQ9GXv",
+    "layer": "er",
+    "ms": 313
+   },
+   {
+    "step": "move_claw",
+    "sig": "6SNWJkVJEPZx38rWycLx53PTYJ6NtXi1YWTSEsmtjUn7MmJquMoTJU8fB3ckCWanYp99Vn9sKY3vqgtovSnUHpy",
+    "layer": "er",
+    "ms": 341
+   },
+   {
+    "step": "move_claw",
+    "sig": "4yZ9H3gCopDr8HAMeNVfUS55aQhTxupuCDAf8wipEuLj6bDkBUsMWtqo6xknBMeW5rUcjiqy9YEEQYT7dr34wsXL",
+    "layer": "er",
+    "ms": 370
+   },
+   {
+    "step": "move_claw",
+    "sig": "63qvQ7NqttVo6fRCxseZW5VRgEF4eLC7z3L42ZD1CbJspkc9jeWU9hDEFCHEMFjTg5VmVdCH22pxY3aXgqv7PM8o",
+    "layer": "er",
+    "ms": 514
+   },
+   {
+    "step": "move_claw",
+    "sig": "5WhLWCnpz84EuuWkf7n1d5ELWx3HihkxAFa36ZGWJ7Eqys7DdyxoCwRVo2WTT1QugC3Tk1MQ4mABSjmqritufVFb",
+    "layer": "er",
+    "ms": 464
+   },
+   {
+    "step": "move_claw",
+    "sig": "2Sxmzn4zH76KtpzfXbuvuu4Tqd9Wirj8hzo3VTSzZ46c3UMTWwTbWKeTH5zuhnsiLUW9PC9XaZgNuPqRqC1zmgiJ",
+    "layer": "er",
+    "ms": 414
+   },
+   {
+    "step": "drop_claw",
+    "sig": "22L5qNzXgNB8CJQ1WXm7S8tYknX7ZTkKngrrS2D7AZgjj4xwwn5S8b1x98xXDrPr41J8m4eJnGxFaKMqaLtewxQz",
+    "layer": "er",
+    "ms": 213
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:49:06.040Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 9,
+  "moveMs": 1640,
+  "round": 8,
+  "target": {
+   "id": 9,
+   "kind": 2
+  },
+  "aim": {
+   "x": 669,
+   "z": 770
+  },
+  "capsuleId": 9,
+  "kind": 2,
+  "alignErrBps": 2800,
+  "gripBps": 6820,
+  "rollBps": 7481,
+  "outcome": "SLIP",
+  "mint": null,
+  "amount": "0",
+  "tier": 0,
+  "vrfMs": 118,
+  "dropSig": "yRYLXm2H53oXqETpxTYBK1Qj4JFnNtKENQd2GyniXPw627cDtPxq2bhyWhbs9w27TRC6YPgtmD2c9q2p8Z39QEz",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "43cP3UL1SBA3SDxGzpFn1ca9QJizdrRJ5MAjvJBwyQYw7YBRvhP4gEjwMY6P4fkxrYvus7Z5duTvHiFebGuyPizi",
+    "layer": "er",
+    "ms": 6091
+   },
+   {
+    "step": "move_claw",
+    "sig": "3bbFgBgp8TGSPtro6coTrzHBMAWQfGNgQ9DksRotdpnhL5ec9JAvY5socHepinPpTYTPUpmGXunDW6yZnCxh43F3",
+    "layer": "er",
+    "ms": 1313
+   },
+   {
+    "step": "move_claw",
+    "sig": "v9J3arFZGLhytGtH6VfcXA4jxg7MgPNJUuEX4qb3cnpCSsT3VWKGRBo3MGsJMDczPb4DGM5UVgcU9gpNCtjbfah",
+    "layer": "er",
+    "ms": 874
+   },
+   {
+    "step": "move_claw",
+    "sig": "vV8hpJMAcj9i2waWxZRDEpC4b74Dv47JYZChvLUTDDbzwUcJC6auoWMa5MpPJ4PQCbAfw6SazPeeRCR1ho3uXyW",
+    "layer": "er",
+    "ms": 1286
+   },
+   {
+    "step": "move_claw",
+    "sig": "277VcVXo6yzaZGX6CfqMve21fhDrMGSRQmNBVXcwEKAgkBio94HoU5SGtUGJ42MdpUkpopW1aGobV57k3drAb978",
+    "layer": "er",
+    "ms": 837
+   },
+   {
+    "step": "move_claw",
+    "sig": "42pRm6hgxq99ukFGMwmwfT2t3jpNrr2mPo5nTzjicCFNqQJnpNvmeSEPifSepjfqk6TExNT33AqUfz8VxETFSKtf",
+    "layer": "er",
+    "ms": 1300
+   },
+   {
+    "step": "move_claw",
+    "sig": "36j6sUZeonJTeonxtQmmSHeSxcUW7Lt9g7jWW7nU8Tj7ZSkTcSUh27b5VPdNE81HhWdsqyYbUBQDHKQkVTc6W4Fw",
+    "layer": "er",
+    "ms": 1241
+   },
+   {
+    "step": "move_claw",
+    "sig": "5s8UwKVwG9tYK9PuL8SDssyJb6KNcwQYhuzf9foLczhNMznf2dkfZaWJkWbH1V3aSgqL31C9stvFiM6ofefi1bCv",
+    "layer": "er",
+    "ms": 1039
+   },
+   {
+    "step": "move_claw",
+    "sig": "5ssDSA29SyFYn1b4gyChugtxDN2ybWgWWhp3fhC6mL7p6z8BtPLcJc5mbXqMTJfCtnh6GBxDaxs2bKPPtcmoXXea",
+    "layer": "er",
+    "ms": 625
+   },
+   {
+    "step": "move_claw",
+    "sig": "43WNTxDSCy27Cc3c97MRpvSyFQhveVoGv9jRbSHyT8MngdUwBpVCe9BzDJcf9tiprbsbgfa7oxvkrrRvTLJqk2Hm",
+    "layer": "er",
+    "ms": 726
+   },
+   {
+    "step": "drop_claw",
+    "sig": "yRYLXm2H53oXqETpxTYBK1Qj4JFnNtKENQd2GyniXPw627cDtPxq2bhyWhbs9w27TRC6YPgtmD2c9q2p8Z39QEz",
+    "layer": "er",
+    "ms": 237
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:49:15.817Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 9,
+  "moveMs": 967,
+  "round": 9,
+  "target": {
+   "id": 8,
+   "kind": 2
+  },
+  "aim": {
+   "x": 825,
+   "z": 281
+  },
+  "capsuleId": 8,
+  "kind": 2,
+  "alignErrBps": 6000,
+  "gripBps": 4900,
+  "rollBps": 2563,
+  "outcome": "HELD",
+  "mint": "dGEM",
+  "amount": "200000000",
+  "tier": 2,
+  "vrfMs": 199,
+  "dropSig": "4igDvXrFEs7aj5AdpKoHQevR4JyTz6fyZG4G9zqn4GAYRy5WbEU8Rp6VHQQvUJvrzfxZPL1FtvTFcQGpJAuiw7ga",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "4ffNcg5i2d1yTfxFpYi91V2K7qFVcsPS5BH5xnhdHqXczYRjcRSYSoSXFhyaviJpyoe625WqczTTahijTcPEyCVD",
+    "layer": "er",
+    "ms": 1018
+   },
+   {
+    "step": "move_claw",
+    "sig": "nqZyoBUEv59t94QyngqWXtq9NBw388p8uvJ4qaLjLJQ6oiHyaKzcfLaHHcqTRNkZD6o85JnSY3avvBkDtA6CWGX",
+    "layer": "er",
+    "ms": 322
+   },
+   {
+    "step": "move_claw",
+    "sig": "LUz2KDsm3QKc8US5TTnEqwgLHFMcEVWdFN5TYMakhn5yC5ePMCgVPRYQEbfLno2svy3FtdtfoLBmQg7EKFivXAr",
+    "layer": "er",
+    "ms": 252
+   },
+   {
+    "step": "move_claw",
+    "sig": "JHGob4RZhA6EsteDrVDnzR7MU66sBdGPi5thKMs7a6ygqLHXZ8JETbJGrALGNz8goQxDBU9vpZKTwd18JwkgZUa",
+    "layer": "er",
+    "ms": 250
+   },
+   {
+    "step": "move_claw",
+    "sig": "VJzWYFoxKaxKSNymZsS9r3Xp4rHmQh6BNgLMYQey8WzFAUq8VfxmjvGJNYacx6WyMZFZhzL8iNqoDzvQrHvD6G2",
+    "layer": "er",
+    "ms": 301
+   },
+   {
+    "step": "move_claw",
+    "sig": "3J42xguX8TT8RTbiH6ekNnB4hxpEjd1zAh5e3CbZDSzPx9odERyU2XC3sp2KzkZBNUxoQTeP9ybEkMumFAeoFG7S",
+    "layer": "er",
+    "ms": 299
+   },
+   {
+    "step": "move_claw",
+    "sig": "5pRMV9tMdA7Cs9zds1GPi1HUgCE7tiXDMsD7KtwVEzLTunPrbugPjiVqKRhitDt3zKtmFe9z9yjTizmU3dfd61w5",
+    "layer": "er",
+    "ms": 213
+   },
+   {
+    "step": "move_claw",
+    "sig": "38kYPDGVo3Q5sij1A5LQ5sBvjbZJkT7hPPajrTA3WA5N5ZGcYTjfgpcrTj6A7hrJZrCkfKeVESBqjALXyBkBjdnz",
+    "layer": "er",
+    "ms": 355
+   },
+   {
+    "step": "move_claw",
+    "sig": "3TXkR2EDSQ8oyLx5HswFY2y18WTQn3n5t4ktM6msUXbZ8GqbKXY9NNKK4qiximQd39b3wjwKWqo59BLYTDgwrAZa",
+    "layer": "er",
+    "ms": 365
+   },
+   {
+    "step": "move_claw",
+    "sig": "3BkU5FRgfd7GwCyuMeDo8viB9338Tmz1y9f4G1kZDzuh9qgErd2UuaBcmM6eAwZtY4U2cb6yqedQkDcNu2ooQ7Mi",
+    "layer": "er",
+    "ms": 303
+   },
+   {
+    "step": "drop_claw",
+    "sig": "4igDvXrFEs7aj5AdpKoHQevR4JyTz6fyZG4G9zqn4GAYRy5WbEU8Rp6VHQQvUJvrzfxZPL1FtvTFcQGpJAuiw7ga",
+    "layer": "er",
+    "ms": 258
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:49:18.937Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 10,
+  "moveMs": 1680,
+  "round": 10,
+  "target": {
+   "id": 9,
+   "kind": 2
+  },
+  "aim": {
+   "x": 828,
+   "z": 886
+  },
+  "capsuleId": 9,
+  "kind": 2,
+  "alignErrBps": 10000,
+  "gripBps": 2500,
+  "rollBps": 4281,
+  "outcome": "MISS",
+  "mint": null,
+  "amount": "0",
+  "tier": 0,
+  "vrfMs": 107,
+  "dropSig": "5NafDuWjDNsP9NgGgnyZtckV6D3J3su7UXAopUq6Rha5YNju2JqjHt7FBFoyaX5jkHHAjc8iaqSZzRFwPUhJ6SNj",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "42fz3vcJe8oMCYE1RnXPd4UzcMqVmpuECPUrq5hp2uVMnJrEbKnkDHrzNYUhm7vhKz2NjzDmMnEsKPDBMXAov8N9",
+    "layer": "er",
+    "ms": 817
+   },
+   {
+    "step": "move_claw",
+    "sig": "4VMnD1nkUZqkhmgeg2H1yHzetyoTSLt8F5RpQxsmgYvewJ2MJSRpmc4wq5M86x5cnK8jtwi9AdJeWmrLtjsGbm2V",
+    "layer": "er",
+    "ms": 407
+   },
+   {
+    "step": "move_claw",
+    "sig": "5dBcxzFwkiTLhZVsaZXppBXpt4C6jWi6JbD5NNs9KqufzMGt68vBCvmqtcbAHnUPyjL7G6uspGCWwsntyWAcs3XS",
+    "layer": "er",
+    "ms": 364
+   },
+   {
+    "step": "move_claw",
+    "sig": "3xvBP5XP2q4qmQSodGtEQPugwcJZAWaVoFeP4PnmESDRVpCTn2NJ7QMQFJqgfNXyZBQAqfjVX2ygodb2j59xEJPn",
+    "layer": "er",
+    "ms": 361
+   },
+   {
+    "step": "move_claw",
+    "sig": "5tVvhxgV7gXHngVozkB3UwTnFEJcjTMC7Qk7n5RqctXMNP487im3GNspGqA5Vn1PVbxRjfwqNpCzYAtDCCCn3dti",
+    "layer": "er",
+    "ms": 412
+   },
+   {
+    "step": "move_claw",
+    "sig": "2UTKZBwPFJqWqzacExipgd4GKSW3A9strFrPxxdXMQdCsD1XCqfd5Z6VCAFD9bFv5MbRDQ4F7xrJpDMHxjSQM1uE",
+    "layer": "er",
+    "ms": 413
+   },
+   {
+    "step": "move_claw",
+    "sig": "4GdnnNHMtE7WyBVw8vvHNn1hCLx5QqsLEmNJ39LbSPe2KrFpWt3YiWHSHyX7TVqppZvg9ehKNPCzPxBBnjYBBWH",
+    "layer": "er",
+    "ms": 472
+   },
+   {
+    "step": "move_claw",
+    "sig": "TFkitVvY28xrez5HSHegsqMfb5hUakGMRn9Vrkq53fChFt7EUYbUjzrKnzUnoF9WE5vv43X8gxmfQnyA67m9QKx",
+    "layer": "er",
+    "ms": 506
+   },
+   {
+    "step": "move_claw",
+    "sig": "2pPW4AEomMzAJJAtkEAERvwW8MBmH8BtJdz7m6Qi5wnKhyh5srAmQz4RZWXURBwUrjF2MU1NytbbakowCjeuYAVz",
+    "layer": "er",
+    "ms": 512
+   },
+   {
+    "step": "move_claw",
+    "sig": "3WgbAHbkTRpwjNkTWcWzXsAhfmcqtgvP7aMgWvtCqwCKjJ6pKMnh6EeiFJU65TWErdiFQg6KYNoXBmrD9EFsTS6u",
+    "layer": "er",
+    "ms": 474
+   },
+   {
+    "step": "move_claw",
+    "sig": "2a84Xzv5YEviQjvD3aDHgE2eqm5XEC4vKL8CbrL8Vvrz8ri8QjpiX449YSSXm28pKKWggtkScmihuqtKAWV7VZ3F",
+    "layer": "er",
+    "ms": 1115
+   },
+   {
+    "step": "drop_claw",
+    "sig": "5NafDuWjDNsP9NgGgnyZtckV6D3J3su7UXAopUq6Rha5YNju2JqjHt7FBFoyaX5jkHHAjc8iaqSZzRFwPUhJ6SNj",
+    "layer": "er",
+    "ms": 246
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:49:22.470Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 6,
+  "moveMs": 1494,
+  "round": 11,
+  "target": {
+   "id": 4,
+   "kind": 0
+  },
+  "aim": {
+   "x": 560,
+   "z": 600
+  },
+  "capsuleId": 4,
+  "kind": 0,
+  "alignErrBps": 0,
+  "gripBps": 8500,
+  "rollBps": 3017,
+  "outcome": "HELD",
+  "mint": "dGEM",
+  "amount": "100000000",
+  "tier": 0,
+  "vrfMs": 100,
+  "dropSig": "5HjWH8jAStxRcn2L2T9QXR4kAeJEPX4qrA3sf2Xw256f5EySXNUMpvDJ8XZ6ZqsbewzKgWp4m5sb7F2dCucwnaWB",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "5B8yubjb1vxgtXVBmwHY8vHv4YLtgRFrQ5ajt3d9ZbqJ4EGbLvEpcaNFNezbTk9FnG6gW7UjBohEJwrUBciqQTe4",
+    "layer": "er",
+    "ms": 573
+   },
+   {
+    "step": "move_claw",
+    "sig": "3Vmons7bCv5au3jvuLVXKWyi7YqUTummAAS3eNzCqrqrn6qJJYE5qh154weZpesuVcSDbxCn3eMPWhCBg6emkdGw",
+    "layer": "er",
+    "ms": 1280
+   },
+   {
+    "step": "move_claw",
+    "sig": "5uY6dYHdTbqgf83sAvdCSUth1HJMy77GifrqFcH5TgtgS5FVfdoJYfgdM5yPkMMcrABZLuiUgZAMcUSHe7m93DcT",
+    "layer": "er",
+    "ms": 1186
+   },
+   {
+    "step": "move_claw",
+    "sig": "2xmq59rEQxFyUQLxHagFFf2UNiYYWE7WEMwoagAEHSEsECwsxTjqtoNexNk8E27ZptmCghih6g93hnmNjUf4bZ7e",
+    "layer": "er",
+    "ms": 1183
+   },
+   {
+    "step": "move_claw",
+    "sig": "tzsQVtWSPVLrs9EHLY83dwQtLWYK7QXrH47ZKoQHrWQsvMpndYiYFkhJnDeCStepZwZ6bFZ44r8bUEzwPDkrv2A",
+    "layer": "er",
+    "ms": 1135
+   },
+   {
+    "step": "move_claw",
+    "sig": "2W3YhVdz2W6Vd17hcuMud5D3uHKjYgk2DMHrTpukpNqzBtwmyqBYxhmcCSV9Se5QdZsSVcfKaFwAYJntL4tqrVrz",
+    "layer": "er",
+    "ms": 1286
+   },
+   {
+    "step": "move_claw",
+    "sig": "452cXgieHYPKTM2M6hkFFU7V2hsbNBtBuRyZCVUrhXbsfP5ZRjfdxawVvhY74AwvLaJP8HjNPcqvLJBwsdLyEvvo",
+    "layer": "er",
+    "ms": 718
+   },
+   {
+    "step": "drop_claw",
+    "sig": "5HjWH8jAStxRcn2L2T9QXR4kAeJEPX4qrA3sf2Xw256f5EySXNUMpvDJ8XZ6ZqsbewzKgWp4m5sb7F2dCucwnaWB",
+    "layer": "er",
+    "ms": 249
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:49:25.847Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "restockSig": "5cBE7s7w3A3EBgAzke97xbkwuirAvfJm5zBhUnkpNzF2CD4PSfrDmpZ6n3NauhLoPkCxWb9hAHMRWPmZQQshnuti",
+  "moves": 8,
+  "moveMs": 1954,
+  "round": 12,
+  "target": {
+   "id": 15,
+   "kind": 1
+  },
+  "aim": {
+   "x": 747,
+   "z": 520
+  },
+  "capsuleId": 15,
+  "kind": 1,
+  "alignErrBps": 2888,
+  "gripBps": 6768,
+  "rollBps": 7587,
+  "outcome": "SLIP",
+  "mint": null,
+  "amount": "0",
+  "tier": 0,
+  "vrfMs": 113,
+  "dropSig": "3d184ZW9eK5TaZjXsJCtxYvbi9s7oB2RttDTqnNDdoUNTq4Qq69RwTjw1PP4p32x4w1pz6hatBWPhSa3B6GMrFM1",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "5Gf2aRm6695caB29XznVutR5MVwjxuZGAGU9XPbP5TgdzQMf6Jy5bKnzdMben6HLZYzd5okrhEtLDFSeP3Nvg9kT",
+    "layer": "er",
+    "ms": 817
+   },
+   {
+    "step": "move_claw",
+    "sig": "WDdvmtuqb42MQg5V3yiUUyqkisqS9HetSch6aJmWJ8zgZwtuX8WM8xBzDioaNXzd8Fscz5aV2hHRjK8WHgZMhLV",
+    "layer": "er",
+    "ms": 322
+   },
+   {
+    "step": "move_claw",
+    "sig": "384R7xtYVQCHzn4bBfR8XQq4DFABWu833DfJ47XfiN86jqJz5WwETFNRJLd3XF2pSn8HVqyjbFjhywghC5YA4ekq",
+    "layer": "er",
+    "ms": 567
+   },
+   {
+    "step": "move_claw",
+    "sig": "4Phtwhx9QaeYUgmnjVxvHJEX644r5ATMEsKuBJvTmRBx6SVACZt6dohDzvM3ZaCA8ofm4Ch5UK2qEbRizKLMsu8y",
+    "layer": "er",
+    "ms": 685
+   },
+   {
+    "step": "move_claw",
+    "sig": "r429iCuttiBvYpfuiKyCh1DK6Y2kXG8QjrGVaJeFaD11wJbm41Dap6dkNdx4G7XA3uGgQssEAQRabk5BPc81kUB",
+    "layer": "er",
+    "ms": 812
+   },
+   {
+    "step": "move_claw",
+    "sig": "Zcqnkqby1LLbZSX95pyTuUPDdwo4Mba8JUWDpcDVRukoJJ3QaKm8fEDmcGBa5jTScRMi998HGjqJYHJDCNaDEiW",
+    "layer": "er",
+    "ms": 812
+   },
+   {
+    "step": "move_claw",
+    "sig": "2MPz8HzAcAp7dUiCrRmSqN8aeqthirvBDsDoyjdg1vsqbQYCzo4VTXJsFFE4JTJN9qLGHCDgsJxdAd4nkqnywUCp",
+    "layer": "er",
+    "ms": 867
+   },
+   {
+    "step": "move_claw",
+    "sig": "2zVTLwnqrWxMibpwSewqhax3LjT589YdRuWwnVSCSN5gAiZS2wJM8JuvQvt9BXiQCC7dBtjr7dVi52woh575q3hi",
+    "layer": "er",
+    "ms": 865
+   },
+   {
+    "step": "move_claw",
+    "sig": "5gx3xfP72VvdsMNexVgNthy8MxPkHSb26P7Etq5tFVTMuJMDHnkTFe5jSzyM1Cb89c5vazUNAMCgr5DRns1j9idy",
+    "layer": "er",
+    "ms": 1241
+   },
+   {
+    "step": "drop_claw",
+    "sig": "3d184ZW9eK5TaZjXsJCtxYvbi9s7oB2RttDTqnNDdoUNTq4Qq69RwTjw1PP4p32x4w1pz6hatBWPhSa3B6GMrFM1",
+    "layer": "er",
+    "ms": 1332
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:49:32.299Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 6,
+  "moveMs": 1271,
+  "round": 13,
+  "target": {
+   "id": 19,
+   "kind": 2
+  },
+  "aim": {
+   "x": 533,
+   "z": 447
+  },
+  "capsuleId": 19,
+  "kind": 2,
+  "alignErrBps": 5800,
+  "gripBps": 5020,
+  "rollBps": 6867,
+  "outcome": "SLIP",
+  "mint": null,
+  "amount": "0",
+  "tier": 0,
+  "vrfMs": 157,
+  "dropSig": "5n3xuXz3K2ZSK24w1TxmWR5oBwc7ema9tyRe95E2PCP7LyuZRup64V4DrBbLMyeHc61MpjRjkgXrD639tAHjkuMH",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "RZD65qHfVT4bHwYdCDKZ5eUnRf4XTt5ob2DYhUFq6ai87KcTe48dDXeVB28WbKmZ9qFTcs7kYJcir9xzTo7Jp3o",
+    "layer": "er",
+    "ms": 804
+   },
+   {
+    "step": "move_claw",
+    "sig": "4YUEeWuHH1PrhicBvvGX8uxtgHAehNQRwY8p68YEJdQgpKWCPoBmMxMYyaqDJqxQSgRUJMSPgdZTT8XBwYsrbLEC",
+    "layer": "er",
+    "ms": 916
+   },
+   {
+    "step": "move_claw",
+    "sig": "vdYz2kQnkrQmSapUAWAkC2Li79nYPoDwbXoJKbUts8FMZusA2U75B6iARiqZ8j3DtK3CnawiRRx3UXRQCEGmbTj",
+    "layer": "er",
+    "ms": 807
+   },
+   {
+    "step": "move_claw",
+    "sig": "4CdT313qs58LDX2gCchFpov9HyZKtpntvgVXrwrg87QdmTVAeHxRr8M5Gu339bMbH5jLX4BoowxBgXjHjrnNFfuD",
+    "layer": "er",
+    "ms": 773
+   },
+   {
+    "step": "move_claw",
+    "sig": "5eqJNGabHFoAkdfPUa431PXdSkKnP38C2fbh1ffbD26CEVeUP7jh8PuPKh4b27uBDhP3rg2piYguFiXCGLsN8XNe",
+    "layer": "er",
+    "ms": 960
+   },
+   {
+    "step": "move_claw",
+    "sig": "3Jyz3M4X8fcraJYXTvmBX8aEM6tWYLbjp1ZqEkYsumAqKB4qVwNtusMeSttFGF6sZYkxHQwkWNVNLu66P1jDoz9C",
+    "layer": "er",
+    "ms": 1017
+   },
+   {
+    "step": "move_claw",
+    "sig": "6q7Xt4u6kWDtmgC8dM76VCAiT81mWCUvqotycsfspukxvJ1PyNF2CTfoESMxQXviC2rsag5NQTCCCsXcZNHhxo8",
+    "layer": "er",
+    "ms": 633
+   },
+   {
+    "step": "drop_claw",
+    "sig": "5n3xuXz3K2ZSK24w1TxmWR5oBwc7ema9tyRe95E2PCP7LyuZRup64V4DrBbLMyeHc61MpjRjkgXrD639tAHjkuMH",
+    "layer": "er",
+    "ms": 548
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:49:35.827Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 7,
+  "moveMs": 1030,
+  "round": 14,
+  "target": {
+   "id": 14,
+   "kind": 0
+  },
+  "aim": {
+   "x": 620,
+   "z": 628
+  },
+  "capsuleId": 14,
+  "kind": 0,
+  "alignErrBps": 10000,
+  "gripBps": 2500,
+  "rollBps": 9265,
+  "outcome": "MISS",
+  "mint": null,
+  "amount": "0",
+  "tier": 0,
+  "vrfMs": 321,
+  "dropSig": "27iu1u4rvmNTLXxMUcZaCohRUb6LCugfQjKS27GjSpC9rSf9sGU83LVjuNzm2PCcF5dyKtTiF4avcprKjHAgExKV",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "2MxSWQPBVfKcS8vE2ap95aymKDdQUb7NvaSz2pLh7ssgmuB9cVux9rTa3MCH8c85Jg8EVBXZn1BZi5NbDJQo48cf",
+    "layer": "er",
+    "ms": 617
+   },
+   {
+    "step": "move_claw",
+    "sig": "46EJHqdvpbg8kfPTchQNAsi4afJ6JvQE21n9KkS1kXZxFzMAfX2GuGuhn12rDX8cWLSSDcE6vwRfjosZzPJHSVj9",
+    "layer": "er",
+    "ms": 269
+   },
+   {
+    "step": "move_claw",
+    "sig": "5ezdgr2wscbwxBgL9adfnMv4ZSZpTF9eMQjEjzkoN5no3vPfyMboMzBPKGRnQJphrTjsNj7i5FjqUQ2sdYAFEkMt",
+    "layer": "er",
+    "ms": 310
+   },
+   {
+    "step": "move_claw",
+    "sig": "2mxV8TJdasJz5NkebiZgcWBkM9o1Q5g4hUq8vbpWjDmKhCkEDDko2WcxYM5Larnh1kN9ATLonpfVncvsAk6tbJfp",
+    "layer": "er",
+    "ms": 349
+   },
+   {
+    "step": "move_claw",
+    "sig": "5XGE4EpE4UEjn2A5JYofXKjM8hhdQKySPmviZ1LzAi8i3mq2DaDCRjYhb9ARriXxVzk4xYqayCzpBCbmCbX4EYfR",
+    "layer": "er",
+    "ms": 318
+   },
+   {
+    "step": "move_claw",
+    "sig": "54yzKcg2r76FVitN3KctkdirUC41QKNATZaxBX8miWzTjzjqLdJn7Pz8vdpqXU8yW5CFEY7CJGXXcs9X1gLDYE9e",
+    "layer": "er",
+    "ms": 648
+   },
+   {
+    "step": "move_claw",
+    "sig": "3nvg79LKvEanPBMAMfp6XK4HizY9ZFS5oYRaWmqE7o6bLrxAUgPWMpUzvhEnoj3qJr6JveaEFqq14tYAzYvEvsef",
+    "layer": "er",
+    "ms": 458
+   },
+   {
+    "step": "move_claw",
+    "sig": "4AuWkV9dYLo2zoeE4FnVEqwiXoZbdWdzVWdswyCQpAbgomc4qrMFCCQb4Sk831oYJQVH1Sfhubbx3JXnpkzsZpG6",
+    "layer": "er",
+    "ms": 506
+   },
+   {
+    "step": "drop_claw",
+    "sig": "27iu1u4rvmNTLXxMUcZaCohRUb6LCugfQjKS27GjSpC9rSf9sGU83LVjuNzm2PCcF5dyKtTiF4avcprKjHAgExKV",
+    "layer": "er",
+    "ms": 249
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:49:38.958Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 5,
+  "moveMs": 1165,
+  "round": 15,
+  "target": {
+   "id": 18,
+   "kind": 0
+  },
+  "aim": {
+   "x": 120,
+   "z": 480
+  },
+  "capsuleId": 18,
+  "kind": 0,
+  "alignErrBps": 0,
+  "gripBps": 8500,
+  "rollBps": 3440,
+  "outcome": "HELD",
+  "mint": "dUSDC",
+  "amount": "500000",
+  "tier": 0,
+  "vrfMs": 109,
+  "dropSig": "57mPRHJrvFHgXwBRiLLDgAJRHxFnWH9FboZsUSFPuTKuABStwFCde4EPKrJD8E5bB4rqVqspxqvYj5KSZSGb4Krs",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "9fFup8AnXasbAHo4ZfJTqKLmARQhicuBV4EBPbFbs8tSk194PJmTdbQ8WeLNaH7GbfWsGhpXRRnfp1ShDtkDRPx",
+    "layer": "er",
+    "ms": 718
+   },
+   {
+    "step": "move_claw",
+    "sig": "uVuP6NvuxE5TeCVm8ia1Hdj2DU1fVyrMizqTA1gbAkyLsfft8exyk9RbUTBdh1qx1g9nfsqb3GaG6BEog9mfArt",
+    "layer": "er",
+    "ms": 1018
+   },
+   {
+    "step": "move_claw",
+    "sig": "3vVgVtVoQ7afmXhRj5obDXsVex8YWEovPEYCR2d1aixn5uDXU5CKqia3WTqv6S5mfTWLW1iuivuzCvrtneQ22xqR",
+    "layer": "er",
+    "ms": 963
+   },
+   {
+    "step": "move_claw",
+    "sig": "58LFmUXFLtULMYGc3jdtZ73zcFEgo6mZQQUXv24NprrvtumkeBMWPLrtBcWguGtbxhAoK17sky8Jjx8B5F3Womh2",
+    "layer": "er",
+    "ms": 904
+   },
+   {
+    "step": "move_claw",
+    "sig": "3ufqzrgsUpggChZVwVdgcs6DXSLmABzuy5RDu1hgraNaP5SXpPRmvH9b5ENhf6PMLPWuLBuwQZmYHkhCjYMaLgAy",
+    "layer": "er",
+    "ms": 802
+   },
+   {
+    "step": "move_claw",
+    "sig": "LmR5131yqT2pkNs9JfnReD6RPNWvUA7TwLStZYo6WC15GY8v7Gi6mfYCEkL7a98AudkWzmTy6uqBGcruoEz8s8h",
+    "layer": "er",
+    "ms": 859
+   },
+   {
+    "step": "drop_claw",
+    "sig": "57mPRHJrvFHgXwBRiLLDgAJRHxFnWH9FboZsUSFPuTKuABStwFCde4EPKrJD8E5bB4rqVqspxqvYj5KSZSGb4Krs",
+    "layer": "er",
+    "ms": 409
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:49:42.292Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 9,
+  "moveMs": 1454,
+  "round": 16,
+  "target": {
+   "id": 17,
+   "kind": 2
+  },
+  "aim": {
+   "x": 811,
+   "z": 206
+  },
+  "capsuleId": 17,
+  "kind": 2,
+  "alignErrBps": 2909,
+  "gripBps": 6755,
+  "rollBps": 1522,
+  "outcome": "HELD",
+  "mint": "dGEM",
+  "amount": "200000000",
+  "tier": 2,
+  "vrfMs": 97,
+  "dropSig": "2f7yPchUpFRVSU2VFG6Ha8HninNdeZffoJzsquciwgKDAC6HgpaHGXPnNj9DAs8DxPsQWZB6mQq1LJZasfP3NnzY",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "2bGbPtqpktC6ZwVKvPsf18LtWRAEQQPnfu5gMMqBeUPmh5wgPGiB2wJJZNR6wX2WKihzb6Bi7TT3D7oxfaijpLLx",
+    "layer": "er",
+    "ms": 963
+   },
+   {
+    "step": "move_claw",
+    "sig": "5jKkGDGztDvdLmetvL9nGWHLcjoMYZCBqR6ZEkq86wMKSgoKbPfMjEE4Ay92QgK5xzerMN6K4b6N7zpMx9oscA4y",
+    "layer": "er",
+    "ms": 1277
+   },
+   {
+    "step": "move_claw",
+    "sig": "4zMKZRErbvrz4p64ejkiypFSWBLPc2PgiSjigvmvyHeqA2X1eJosxFuFfSTMyHZ8TJPVWraDgafVyeW8Mjc3meGC",
+    "layer": "er",
+    "ms": 1176
+   },
+   {
+    "step": "move_claw",
+    "sig": "2GUB7f9TQeL69no4oKbSZuiyKx2xk4kEifoPnZMF4W19TAhdT7W8NjwhgP3TDJszVcvKpQddjC3yoduXh4Tt3r87",
+    "layer": "er",
+    "ms": 1130
+   },
+   {
+    "step": "move_claw",
+    "sig": "5pfMebcnCuMPQiGHFhV5pb5YgdWRA6p7D9cocAMsrGB9YEgqG3qxFc68HKVqZjfvsyyyhSmP84zLVTSCdsirboY3",
+    "layer": "er",
+    "ms": 1076
+   },
+   {
+    "step": "move_claw",
+    "sig": "5rcg6sUTTvW7oZseebEyRiSpN9GkauV7bw7x4JsU4agBKVLdB1tEWtnbV4vTuAiz8GQwSfMA66fy35pvS6XigskY",
+    "layer": "er",
+    "ms": 779
+   },
+   {
+    "step": "move_claw",
+    "sig": "4e2DpC7Uxm1QYTvjrVbrETvPYcceFikyWJhfQuJVJvnMpSPV1RGdnkRsM4M1fCUJaoCw9Caur7ahsX6ghJ4hNbdj",
+    "layer": "er",
+    "ms": 775
+   },
+   {
+    "step": "move_claw",
+    "sig": "2ZMPM6KxAbT2Cwgx4GXMiR7BMQ1CqfRsveSzaikVRrfSivZupd2H8EFo3uU5MeFpNCFNLwJBh7YEK6JLijRmyXFZ",
+    "layer": "er",
+    "ms": 1021
+   },
+   {
+    "step": "move_claw",
+    "sig": "2Yvebohw8R79Fwhb2yKgpzM16H8vF1Nxpvq7M2gCFUrzJfSbZnuaV61WgJAYWz4YpXjNV8qqdCro1Pmag7hsm1EW",
+    "layer": "er",
+    "ms": 838
+   },
+   {
+    "step": "move_claw",
+    "sig": "JdRNPE2yQqoq5XMFfS2DnHmwAJJbamZnjxyVJffA7F3psvCT4m4cMy3Z1RWNYCYan29dMKDPvXNPZscjT9RHY1g",
+    "layer": "er",
+    "ms": 413
+   },
+   {
+    "step": "drop_claw",
+    "sig": "2f7yPchUpFRVSU2VFG6Ha8HninNdeZffoJzsquciwgKDAC6HgpaHGXPnNj9DAs8DxPsQWZB6mQq1LJZasfP3NnzY",
+    "layer": "er",
+    "ms": 603
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:49:46.729Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 10,
+  "moveMs": 1763,
+  "round": 17,
+  "target": {
+   "id": 9,
+   "kind": 2
+  },
+  "aim": {
+   "x": 792,
+   "z": 844
+  },
+  "capsuleId": 9,
+  "kind": 2,
+  "alignErrBps": 5800,
+  "gripBps": 5020,
+  "rollBps": 6224,
+  "outcome": "SLIP",
+  "mint": null,
+  "amount": "0",
+  "tier": 0,
+  "vrfMs": 196,
+  "dropSig": "4z5c4XvVmYrTKra48SUUuS9AVM2RJ1k7gB3sdTZP6rUTiLySgbRTChBbaiLz7hD4T2KAhD3XrTgphxCYMYi9DbC7",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "4WrmficNfq1pCjjzKtemnd9fu8hYQ1xbz8zcWiuE9vh2ndJczKCREt3UVkRhBgckHjxgRTpKq5bPbCFwsiyU8Ddp",
+    "layer": "er",
+    "ms": 864
+   },
+   {
+    "step": "move_claw",
+    "sig": "3ZV6bw9KXCmJPj36cnKPDYNGD3RxesccsqFBxFmwk5XmRMpPpxnWkKbJgboKh3k6a61DTHiJjEQv4VN5x5CgbVJQ",
+    "layer": "er",
+    "ms": 1491
+   },
+   {
+    "step": "move_claw",
+    "sig": "3rbjEkQf8oRascfugcQUkX1FQdwxqJ72eSAqz7DP581BXPA5NKgRT4QahdegSf5JXAP6sSvfPBswPxADpd4DhT5T",
+    "layer": "er",
+    "ms": 1528
+   },
+   {
+    "step": "move_claw",
+    "sig": "5kBPeu9jomiGrLAGhq23BpFjzRkiYodxVAhygLxFV3StrRJnxj4wH7gs3FnAkvg3VyrynKmrSd5vpu5yGFeTDM3j",
+    "layer": "er",
+    "ms": 1289
+   },
+   {
+    "step": "move_claw",
+    "sig": "5EDp6J79WHi1Q5F6tRkxk4aY6vBx6zVrekedY8RbHHMLUqoTCDQ5LqnX44CXznfSyMrvzRt52iXzbMR8TJPgP8Ac",
+    "layer": "er",
+    "ms": 1218
+   },
+   {
+    "step": "move_claw",
+    "sig": "3vPMkyH7dcEFQAG6PhcQiHmKk1TW13U4CHmRtVqQDNLcqt5esDNXW7Hdw5yBNdKJh2nfLziUU6o2M6dckpRAiAaC",
+    "layer": "er",
+    "ms": 1275
+   },
+   {
+    "step": "move_claw",
+    "sig": "4rnZiPaQXiK1GfjLjLHC33RzDSYkx16ExpSpSXuatZEyKdZRh4gZwo1ASzS7uRBGCmkDEZT68pzvSUUnPsbqRJ64",
+    "layer": "er",
+    "ms": 1074
+   },
+   {
+    "step": "move_claw",
+    "sig": "5ysKQxbzmGRpJbENKBdVJqmV9bBCQdBpNood5v5bepY5muW36VDk3TB7Xn9aEN1d4oPLDFoYGmDsTn57uVeHxZfs",
+    "layer": "er",
+    "ms": 1043
+   },
+   {
+    "step": "move_claw",
+    "sig": "5fs4FX6uUUm9CydCuXWfzxg27MKi9ngmCZ4o9HMBAWEgJHbY1QR9QPwgbLGqswg8ykfh522U9hR3esuwKP3PDjhM",
+    "layer": "er",
+    "ms": 1040
+   },
+   {
+    "step": "move_claw",
+    "sig": "5yKdFoebdJVYq2D7qcNneX5qiM5QXDzvyboxHMYjpDhWHxp6LRn7DkdaL4zpJGP5SpCcY7q3HFmq6Eo4c1omQmFL",
+    "layer": "er",
+    "ms": 880
+   },
+   {
+    "step": "move_claw",
+    "sig": "4wby9X8GrGHsUUADSQNRRehr5k4svaT1nkMspPZ8YfVoN1RZPYGecKLpyTXE3LCYq9VAVEXqkUz3TxxkjLFkDpsC",
+    "layer": "er",
+    "ms": 874
+   },
+   {
+    "step": "drop_claw",
+    "sig": "4z5c4XvVmYrTKra48SUUuS9AVM2RJ1k7gB3sdTZP6rUTiLySgbRTChBbaiLz7hD4T2KAhD3XrTgphxCYMYi9DbC7",
+    "layer": "er",
+    "ms": 366
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:49:50.629Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 8,
+  "moveMs": 925,
+  "round": 18,
+  "target": {
+   "id": 15,
+   "kind": 1
+  },
+  "aim": {
+   "x": 755,
+   "z": 651
+  },
+  "capsuleId": 19,
+  "kind": 2,
+  "alignErrBps": 8200,
+  "gripBps": 3580,
+  "rollBps": 3915,
+  "outcome": "SLIP",
+  "mint": null,
+  "amount": "0",
+  "tier": 0,
+  "vrfMs": 170,
+  "dropSig": "4UAWeNE1H3Z8MkDcFjsnvKQjYcqxZ3ojCFPRSK9q1ydMSmHDdaCiTtzZqJsRtzgvVGKJhFHQv7y7wpNevQ8HwWXJ",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "2tcKhm1rPxUUTU8wQ5FkLbaNBRmVGfy1bX9PtoD1GGyT3RRmp4fDW2vVsYsjdvPijfv1UoaB6qbRZVX5AiZkECJn",
+    "layer": "er",
+    "ms": 780
+   },
+   {
+    "step": "move_claw",
+    "sig": "3tspbwqojUEay3bj3TUBSaotLb94PdAz1gLQa9Bszqu94mFUf1VpHy3Sn9p6EBBEUQMWXytYXWJr4W2EhyyK3B67",
+    "layer": "er",
+    "ms": 295
+   },
+   {
+    "step": "move_claw",
+    "sig": "426ty84wsFzCneqJS6xhaMqvd9EQfs2CGkzy2Pv3TLoXKmBLugiL2QidqwPNxjfovpVxhbMQ8uXkZRZ9U4zSnikA",
+    "layer": "er",
+    "ms": 310
+   },
+   {
+    "step": "move_claw",
+    "sig": "3FBtGfNHCtozszy7PNT3a4esbo8Nfe34F3F2j538y6R5zPGa1PG4bbapY2Zp41H77TSGYefvZvXjXGqD9VLzwyUp",
+    "layer": "er",
+    "ms": 362
+   },
+   {
+    "step": "move_claw",
+    "sig": "64Y5yqzqecjTnqSKY6bZdZ9TdxxrNaLS7Ug88EfiXHSepTZf9hd5UCxVVR3qAivZ95FL6xQokMssjeLofZFajoq",
+    "layer": "er",
+    "ms": 323
+   },
+   {
+    "step": "move_claw",
+    "sig": "5mKGWBZVqZnSZHWfaNLvh8Xx1JfFH3WQxqRhFfChL71iVGV1ZPSYLqMsQ9QGnEF6qtpa5jTyuWirgCgZYVtgHxXj",
+    "layer": "er",
+    "ms": 248
+   },
+   {
+    "step": "move_claw",
+    "sig": "VRcsZv2juW1KmVSuwhwnDEEsbbDUeLPcQBa35CxHH3cJB6Yd6x14yTMN4LcDBbqMeeA3htAnjfkQyfnUcthGCeX",
+    "layer": "er",
+    "ms": 245
+   },
+   {
+    "step": "move_claw",
+    "sig": "2uGa6GGKNvaMu3vMtF1fdRK71GsU99ZcrZtaKtUoaZw83N5sEGXEWUCTHf2uEuTCXZbzzjkeMKxTRC5kU6SxWo6N",
+    "layer": "er",
+    "ms": 381
+   },
+   {
+    "step": "move_claw",
+    "sig": "1sxSUr794RCQBtrCkt4FPPUtHbgWHcyr4GhCYLK5KU2tRwuVQMsphhLZqt5BdybVYvDm31MqCTR6pgcfE4DH2M2",
+    "layer": "er",
+    "ms": 273
+   },
+   {
+    "step": "drop_claw",
+    "sig": "4UAWeNE1H3Z8MkDcFjsnvKQjYcqxZ3ojCFPRSK9q1ydMSmHDdaCiTtzZqJsRtzgvVGKJhFHQv7y7wpNevQ8HwWXJ",
+    "layer": "er",
+    "ms": 319
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:49:53.564Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 9,
+  "moveMs": 7018,
+  "round": 19,
+  "target": {
+   "id": 16,
+   "kind": 2
+  },
+  "aim": {
+   "x": 460,
+   "z": 820
+  },
+  "capsuleId": 16,
+  "kind": 2,
+  "alignErrBps": 0,
+  "gripBps": 8500,
+  "rollBps": 8012,
+  "outcome": "HELD",
+  "mint": "dUSDC",
+  "amount": "500000",
+  "tier": 1,
+  "vrfMs": 258,
+  "dropSig": "5XZRGoFzbznGsdodF3V8swM1YSmQduqJMhdoxRzUC8hPF3LWbDyg6VrLek6CiSkoUYuacWu3ooxp1SWXuLYd9B9x",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "5eBVS9yaBJYp54thwh8vs6G76HRqbNRqGYZs154Df1RBHUidmprpDXf2K5YDRv5gAuLpK2AL7AkcZe6HoqSMxp9g",
+    "layer": "er",
+    "ms": 1498
+   },
+   {
+    "step": "move_claw",
+    "sig": "V8svyEnJetaHB466HmCobhpLbSomUq3HdizumHwod5SuqndaqbiF7wACBPs84CAcmLGT4PH6v8Zcgtx2zRUV1Yn",
+    "layer": "er",
+    "ms": 353
+   },
+   {
+    "step": "move_claw",
+    "sig": "XbLJSrVLh8MEWNwheuEbfnnKNvDrasmuQzHNQaHLdGL5NAXBZkwEpLN7ogrsNctmHumZHkLyEo7Yh45GN4BhYKK",
+    "layer": "er",
+    "ms": 259
+   },
+   {
+    "step": "move_claw",
+    "sig": "48ym8TbVtoyH6Rf8SFfwi84dEwDEwnGd3dnUXvRHwfV4KzDRJUM2qpHA3MuNvb4RYAJ4PgmtMNGDR3safLsxip1",
+    "layer": "er",
+    "ms": 330
+   },
+   {
+    "step": "move_claw",
+    "sig": "2DEekJjZ1h94MKm5hU4TPqccKn46dKcpmR4zSDRL61sEYsWKMexMBr6Ucr3D4e1fgRxkT8B5D9XWWCt2HJSP9WZq",
+    "layer": "er",
+    "ms": 364
+   },
+   {
+    "step": "move_claw",
+    "sig": "4XgCmVw2LXbc7SQMM8E2oFE9Mr4TQGgwcJmsuFMPeRMxyhybs9TKyFWpHqZecJwEofPx1nPPaQnCBPB7youEuNPa",
+    "layer": "er",
+    "ms": 332
+   },
+   {
+    "step": "move_claw",
+    "sig": "2Cc7mMrSwkFSyYCDhwhUc29gYUg1euEuecpY1Vtsj1uvb29GyGL8Wh6Dyf7U1vhnMeoRtEn3GJRg2woneAkLPvZQ",
+    "layer": "er",
+    "ms": 427
+   },
+   {
+    "step": "move_claw",
+    "sig": "3cfE4RpU3diMnKxqBoddt3d5oakBMScGYWU9xw1wEmzHPXHu7xnonv8KFmctEgDuD371wiSFk9EMZVoVVD3dxQfS",
+    "layer": "er",
+    "ms": 366
+   },
+   {
+    "step": "move_claw",
+    "sig": "31EJvvDEm2xfPEuSWaiU5HU1WFnpgC4GuLBRd7W3kjDhwMi4QaQWgD4UazafG83cXf74G3pJ7gnwbpdEvJX2yZra",
+    "layer": "er",
+    "ms": 341
+   },
+   {
+    "step": "move_claw",
+    "sig": "3Y2BDbNBj6EhUoVrtM9kaooXdyPgDb9WSjY1jK92rsSbTJgRYwqa42FktPKkDUSCgSQPGn5ynUv471FQcuF6snnf",
+    "layer": "er",
+    "ms": 6561
+   },
+   {
+    "step": "drop_claw",
+    "sig": "5XZRGoFzbznGsdodF3V8swM1YSmQduqJMhdoxRzUC8hPF3LWbDyg6VrLek6CiSkoUYuacWu3ooxp1SWXuLYd9B9x",
+    "layer": "er",
+    "ms": 1237
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:50:04.615Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 3,
+  "moveMs": 1267,
+  "round": 20,
+  "target": {
+   "id": 12,
+   "kind": 0
+  },
+  "aim": {
+   "x": 209,
+   "z": 286
+  },
+  "capsuleId": 12,
+  "kind": 0,
+  "alignErrBps": 2833,
+  "gripBps": 6801,
+  "rollBps": 2799,
+  "outcome": "HELD",
+  "mint": "dUSDC",
+  "amount": "1000000",
+  "tier": 0,
+  "vrfMs": 109,
+  "dropSig": "4yLrh4GVPvDq8TnyemkbFLH4VkCta9ks9rwypuBuLRymLEpyWACMerzcp98DYFJGWCSP1XiHhdgKya8GvfrTgtRD",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "3JWV4THiB9VjrJrsmoL7oP3T9xuKkgAXnyeKka8ncb69TyWvCtFDQDzh66cLGHHd83k5XqAgzWkPWXS2VDyRABk1",
+    "layer": "er",
+    "ms": 866
+   },
+   {
+    "step": "move_claw",
+    "sig": "5WFUsvgR8ggGLAiRXckdSzK2Fe1SMqRK9P2xxwQTf95vMj2bFYjqXaX1RztxeygjWN1c2zH1ucbAeXa2aUyjfqww",
+    "layer": "er",
+    "ms": 964
+   },
+   {
+    "step": "move_claw",
+    "sig": "5KgqhsmNmi8NbjoJTA9BtHZgrS9MjPMy5eEZEAc9s1Um5prKFtfVMf3Bai16auaQNAV2JK8ZkyGGqVjGa17XDGc5",
+    "layer": "er",
+    "ms": 1085
+   },
+   {
+    "step": "move_claw",
+    "sig": "4YantbTJT7mem4KPy99GrhwdT9ivhgKtUikVgZUWH5ABQVRZPwTHgX7fzMP5SMuKvYrJGYEyNtZS9cf6RH3NkspS",
+    "layer": "er",
+    "ms": 471
+   },
+   {
+    "step": "drop_claw",
+    "sig": "4yLrh4GVPvDq8TnyemkbFLH4VkCta9ks9rwypuBuLRymLEpyWACMerzcp98DYFJGWCSP1XiHhdgKya8GvfrTgtRD",
+    "layer": "er",
+    "ms": 264
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:50:08.296Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 9,
+  "moveMs": 1896,
+  "round": 21,
+  "target": {
+   "id": 19,
+   "kind": 2
+  },
+  "aim": {
+   "x": 761,
+   "z": 768
+  },
+  "capsuleId": 19,
+  "kind": 2,
+  "alignErrBps": 6000,
+  "gripBps": 4900,
+  "rollBps": 9858,
+  "outcome": "SLIP",
+  "mint": null,
+  "amount": "0",
+  "tier": 0,
+  "vrfMs": 310,
+  "dropSig": "5VWVnSTmkDPuFvWH4AgZT1kebiNS4qU6PhBe2RYqqSiPhphMycfCpVy7Loy8jjwr3gaJM5cbg7fPKDzafHWd73Zt",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "5o9y1Tf3TJimgDahkzpQDeKT65M9i7NmRiwoPcPuf9a4wZ9jCT6Gp6CZFMTQqPuwzfWQtPLvsMoBddf4ane8PdAt",
+    "layer": "er",
+    "ms": 819
+   },
+   {
+    "step": "move_claw",
+    "sig": "2GrY5c7WmCJ6iET4QYZidHZ6oLMSVYzkUC5oNU9XYYkqgP2QM4PyUnnfdsNHarP9jgr8DuVd7yCShTh4pYZEaKda",
+    "layer": "er",
+    "ms": 1187
+   },
+   {
+    "step": "move_claw",
+    "sig": "21YytRZ5DNv6co3ivZ1QGGKHdpzSYm6R21Enyfzn6y3viAuNqmby82bSFBu3Eg5GCQpyy2k9kofsKE3oDR9keq4g",
+    "layer": "er",
+    "ms": 1015
+   },
+   {
+    "step": "move_claw",
+    "sig": "5NYYoTfNfxvWvMMYADznGLWNzyVGXbEDCvQAi71b6kKzGmSefu9uVp4PkHXRhyuVJEgYGcRcfKXiA2uaRPLrwmJa",
+    "layer": "er",
+    "ms": 779
+   },
+   {
+    "step": "move_claw",
+    "sig": "2XGFNqZhBAVo2Q4EKwrtBu2jWYJzf6h1R58GnEpW9BMAzCj42qzJg5Z6VNKaJHvBKwZ5SPmUiPcLeZw3SmJRK1xX",
+    "layer": "er",
+    "ms": 1069
+   },
+   {
+    "step": "move_claw",
+    "sig": "5N9ZS5PRgSEkH33umLDuFG1gj3dZ6ZnddiTozxKSWkAL9GVxjzhGr8ZnKaEUK81GGJn4FzxTQ2o4JyhTU5ZuDjR9",
+    "layer": "er",
+    "ms": 1088
+   },
+   {
+    "step": "move_claw",
+    "sig": "2fzcNsxW3PNtcRFcpXTPQJaKgqxEQEQ1kkLVMSMsyPwxJHty8kQv1B7rv17ruiV2PU74hcvY1H8fLD9RhH4Kx3Yc",
+    "layer": "er",
+    "ms": 1340
+   },
+   {
+    "step": "move_claw",
+    "sig": "221pJ4MwQUSEfAWhDSfzYCgrw21Xd9d2r4HeX2VfB1eFVR61H5gdLHwP5ejkZPiYeVVtSFaxLheyUTucin8SSXKV",
+    "layer": "er",
+    "ms": 1381
+   },
+   {
+    "step": "move_claw",
+    "sig": "34ePofYRaAmJzo5KZ1NZ9PFNq1TsAr8fQUtaHg9VMzn8VzDLUndfZ6NzdoCLUtM5C2mH6trngG8DaabTAgQAj4J1",
+    "layer": "er",
+    "ms": 624
+   },
+   {
+    "step": "move_claw",
+    "sig": "3Jx65Q6rNA5egxrs1fa9eqYAZvL1eHjRvJQimkuXpVGvWoyaYNbb1vGVifEfoCndJMDnk6zXLEWxf2uWqSnYK2yJ",
+    "layer": "er",
+    "ms": 571
+   },
+   {
+    "step": "drop_claw",
+    "sig": "5VWVnSTmkDPuFvWH4AgZT1kebiNS4qU6PhBe2RYqqSiPhphMycfCpVy7Loy8jjwr3gaJM5cbg7fPKDzafHWd73Zt",
+    "layer": "er",
+    "ms": 386
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:50:12.739Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 6,
+  "moveMs": 1706,
+  "round": 22,
+  "target": {
+   "id": 2,
+   "kind": 0
+  },
+  "aim": {
+   "x": 590,
+   "z": 353
+  },
+  "capsuleId": 2,
+  "kind": 0,
+  "alignErrBps": 10000,
+  "gripBps": 2500,
+  "rollBps": 6727,
+  "outcome": "MISS",
+  "mint": null,
+  "amount": "0",
+  "tier": 0,
+  "vrfMs": 221,
+  "dropSig": "3Mmy4JgDm4qDKZbCGB41xEn6V9uj4vtf9m4YKJkGULgXmHiuuK9CAeeWFwoDXHu1yuu7U7J2QnkoQPZZHo3FmK5R",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "5YfcDMJQR2Br1zQABhCrVS91TySCNb7x4QGu1GnD1A7UK9WiovyGoMcgrjSzoRuYCHvxxTt3Dpj54UAHbE4wGB8o",
+    "layer": "er",
+    "ms": 919
+   },
+   {
+    "step": "move_claw",
+    "sig": "3wyVb15m6GGojN5zZh5KjtVXF9LnwBNxTixuJXfXAps9MeSnJWMK14euWZmWrFMd6vuJakFrbTDPgyMdRZHMMQBi",
+    "layer": "er",
+    "ms": 1427
+   },
+   {
+    "step": "move_claw",
+    "sig": "HfK6Q9CtJQffqGgTVdrURTtmVKfMVoZMJV6RKvkijkB2RAXZkkeyjzpdqXiv86MT2biyngHhnJwJEwtkEBT68WE",
+    "layer": "er",
+    "ms": 1437
+   },
+   {
+    "step": "move_claw",
+    "sig": "5vBdpwtUxzEcd8dLMJmCbhQeFYAfuvmSdc2NisGJzWr5Xa1aZYPBhmdCNvasRp8foV6d86Ntp4ubpUH7B47ar9Mj",
+    "layer": "er",
+    "ms": 1435
+   },
+   {
+    "step": "move_claw",
+    "sig": "2VvbXLVvA1yXXzcvDRjeaXWHuJhkyHNtMr9krLsVGeaw1i1pqg5pery15o4TH91S528B4pkM9uQ2stQkTNtH9Nay",
+    "layer": "er",
+    "ms": 1399
+   },
+   {
+    "step": "move_claw",
+    "sig": "2LpVrQRK4dDojfcUcoGfDRaiCsfsQsTz3wPPR1kRsM6JrtXKp1snTbVMVRvnCpdRaZiMoexyaVQYdsRh274S31Kn",
+    "layer": "er",
+    "ms": 1285
+   },
+   {
+    "step": "move_claw",
+    "sig": "3RWrFmLTUgXd94sRrePfuCMNiEo1D9wPwHi1SxpsqAHZmHGKpE5s4kwoc5u5Kw7tHAdfWid7xKP8G8yu6cEby2ao",
+    "layer": "er",
+    "ms": 1338
+   },
+   {
+    "step": "drop_claw",
+    "sig": "3Mmy4JgDm4qDKZbCGB41xEn6V9uj4vtf9m4YKJkGULgXmHiuuK9CAeeWFwoDXHu1yuu7U7J2QnkoQPZZHo3FmK5R",
+    "layer": "er",
+    "ms": 911
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:50:17.668Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 6,
+  "moveMs": 1213,
+  "round": 23,
+  "target": {
+   "id": 14,
+   "kind": 0
+  },
+  "aim": {
+   "x": 521,
+   "z": 595
+  },
+  "capsuleId": 14,
+  "kind": 0,
+  "alignErrBps": 0,
+  "gripBps": 8500,
+  "rollBps": 3538,
+  "outcome": "HELD",
+  "mint": "dGEM",
+  "amount": "100000000",
+  "tier": 0,
+  "vrfMs": 194,
+  "dropSig": "1N9pT3vjUKiu7fjie2UipP9ueEgQRXYxwjcp8hLjc25QaaJUdH1RFUKPMYg9vSh9Luex1Qe3wyYZ2nPT43gSodN",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "4Jft18RgFbLX4BYNb8395PQerft7Bb6KYG9oyfTebcQcaJQ5hTJgfiYwoiyKpzv8ySMSfxbNPVENgyezfWqbUyc",
+    "layer": "er",
+    "ms": 1283
+   },
+   {
+    "step": "move_claw",
+    "sig": "2wK8Pc16SABbc5Bh91BLHnL5QLVn5gTN61hL87r2wuJPLESiZUy3MyVJCYRUanLvDvvHUWvGpV1wV63XtnvimPMX",
+    "layer": "er",
+    "ms": 909
+   },
+   {
+    "step": "move_claw",
+    "sig": "31isjNgD6qLKgyZBytc5BVUBTnVJ7PBmS7EQuxiPpc3fsfXpeGXRNUsNnfZsKcXA5276VTc3yakkMTdpR4do5uqT",
+    "layer": "er",
+    "ms": 876
+   },
+   {
+    "step": "move_claw",
+    "sig": "UL5gAYabSZzEdtYXVSNbkCXV4N27jZhQy2NfHuRe57zcrxfBmXLh4N6rpuNLw2puKQKwdsrNc2dR7qGNpmF6rjw",
+    "layer": "er",
+    "ms": 819
+   },
+   {
+    "step": "move_claw",
+    "sig": "4i6ArDX1pYquSCMUxXwzuCdW4i4QSTvknJdentyKVHXFyTsHsCYFNQMpJ6YTKQR4o7nmzXV1rmZXrNL2jvunchV9",
+    "layer": "er",
+    "ms": 722
+   },
+   {
+    "step": "move_claw",
+    "sig": "4dF9gwG8TUipmqFiyqURbWFwMQMw6EEkcvnMp3aPFJAo91DPtLpiRTbzzqV52Nm4txo4KTXag6BCaDgVHAMrPChf",
+    "layer": "er",
+    "ms": 928
+   },
+   {
+    "step": "move_claw",
+    "sig": "2QuwJQXHz7BstwMGsw9iKNQziFHED671URyAVug88hJtupxdXwWuwcSGH5tkiUtFfTrZstyYdu12hiANCwPWXYwn",
+    "layer": "er",
+    "ms": 721
+   },
+   {
+    "step": "drop_claw",
+    "sig": "1N9pT3vjUKiu7fjie2UipP9ueEgQRXYxwjcp8hLjc25QaaJUdH1RFUKPMYg9vSh9Luex1Qe3wyYZ2nPT43gSodN",
+    "layer": "er",
+    "ms": 256
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:50:21.237Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 6,
+  "moveMs": 1998,
+  "round": 24,
+  "target": {
+   "id": 13,
+   "kind": 0
+  },
+  "aim": {
+   "x": 317,
+   "z": 565
+  },
+  "capsuleId": 13,
+  "kind": 0,
+  "alignErrBps": 2833,
+  "gripBps": 6801,
+  "rollBps": 2703,
+  "outcome": "HELD",
+  "mint": "dGEM",
+  "amount": "50000000",
+  "tier": 0,
+  "vrfMs": 198,
+  "dropSig": "yFZB25cwhMnjgnoAkqK51mnPAUxxSjEoCdFMgCgSv8reSppwMd7bVnsNkcJoMBHaoMbtWjjuQqc9x74qDN16J8b",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "53Wk2stWQNGVpBGMHb5Hx8Zug35BfEDYr3rUCy7FcrWQUuju2SPydwAWuZVSRQ1D3X7M4m98MzWQgLsJaTtnj474",
+    "layer": "er",
+    "ms": 818
+   },
+   {
+    "step": "move_claw",
+    "sig": "3f2TuuVDcQrGBCw9AMQpx5uV4K52cKqVX1FeGEWDx6RB6o4PxpzENEMJCg9GXM2ZkSmTZKz7S7GrkzaQcyHj8Y2t",
+    "layer": "er",
+    "ms": 1535
+   },
+   {
+    "step": "move_claw",
+    "sig": "51JjJvwuv6SB1zmaGfXQ1YJ8VQxRY9162awdQGdENSHryJaPbbdSHXvQWxKuiMBjHvwKidA9zoowBw3DNDJEQKgb",
+    "layer": "er",
+    "ms": 1528
+   },
+   {
+    "step": "move_claw",
+    "sig": "48gSjzjsbhNLin9vbLM3JAXa8uAT1kKArkriCjcuQ3tLPhBto2RbnY4aDrKg23LdMxccLPWYMbF1gvhSiN9gCGJd",
+    "layer": "er",
+    "ms": 1487
+   },
+   {
+    "step": "move_claw",
+    "sig": "wgQ9wJktPpowBftX1iQGqF61cVU53AnA4n3n2fUiYYvh3Zn1d1EroLvSa88gjf3gSc5LwLcYRswftEDVa3dFsqu",
+    "layer": "er",
+    "ms": 1328
+   },
+   {
+    "step": "move_claw",
+    "sig": "5P6RQxZNfFzio1ZBfaRoZzxBudgCATGXHFe8Vc1iW9YEZHZvK1gKA8pnBroPmAKuLkW8TEVwN7GJyATED87MXMSU",
+    "layer": "er",
+    "ms": 1632
+   },
+   {
+    "step": "move_claw",
+    "sig": "4MyAAtpg7UkhLfHz5WD9d1PWrxre6QJfuXBSnExZCDVvSAzXj8bxqrwARdYF3Qz15BEfkD33qeyDBiAUnn3h8dLJ",
+    "layer": "er",
+    "ms": 1473
+   },
+   {
+    "step": "drop_claw",
+    "sig": "yFZB25cwhMnjgnoAkqK51mnPAUxxSjEoCdFMgCgSv8reSppwMd7bVnsNkcJoMBHaoMbtWjjuQqc9x74qDN16J8b",
+    "layer": "er",
+    "ms": 220
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:50:25.343Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 10,
+  "moveMs": 1642,
+  "round": 25,
+  "target": {
+   "id": 9,
+   "kind": 2
+  },
+  "aim": {
+   "x": 815,
+   "z": 907
+  },
+  "capsuleId": 9,
+  "kind": 2,
+  "alignErrBps": 6000,
+  "gripBps": 4900,
+  "rollBps": 1440,
+  "outcome": "HELD",
+  "mint": "dUSDC",
+  "amount": "10000000",
+  "tier": 3,
+  "vrfMs": 117,
+  "dropSig": "4iB7YJWLyJfNpcpL3DFxA32FSA2ULkGzGoe748TJrtQKoDDycHo5oCWkjhrYipye4z2kAHFeqVeMXUW1gzaRKnA1",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "kvzJvSwWmAsERB1FtzFcUELvKXAbiVX288Uggs5Zovo32o3cbSk4NMRuPVnoMUrv46Kro55mwh9LY4Upqy8yHAL",
+    "layer": "er",
+    "ms": 610
+   },
+   {
+    "step": "move_claw",
+    "sig": "4RANhk34UAkDmze8axaj2RCPZWWHrXtbQZ3gW5JZxXq1GW87JXm4aHCXvPuq6SJVpkg68CSsqdZ9qf7TcXAtonth",
+    "layer": "er",
+    "ms": 218
+   },
+   {
+    "step": "move_claw",
+    "sig": "vzRTXCrPr6yHEfx92oBCbab9X81Z1FsowYsiXrrk6Nhv2cDCxpR6CDeVntFfk59sw8ZsAFG7ujR1Adc3zVSwiRE",
+    "layer": "er",
+    "ms": 250
+   },
+   {
+    "step": "move_claw",
+    "sig": "5EGABnbHitay5erUxqTdLtTt5DiUKgFn7w3rmwQ86sQZiKq9KrMfpcDNBkY9bjBnfPfYzFAbj2oqDd4cTicqdpxv",
+    "layer": "er",
+    "ms": 221
+   },
+   {
+    "step": "move_claw",
+    "sig": "3xpBNsC342wA6RGaLSs8jRz5CGxemrcTGZup5bVhtQAzwPeMmYdtttYHbkJQJsupSDUjdqfxSmoLxPc5L6LGozQK",
+    "layer": "er",
+    "ms": 261
+   },
+   {
+    "step": "move_claw",
+    "sig": "rncpqMcWDqVbtwkFQnnUTofNJfc9cbuWeKi2cCpVSBnjjxYn9436ooEbDh5ygeFGesh1GFAtpjGxxMjj6yD5E3T",
+    "layer": "er",
+    "ms": 313
+   },
+   {
+    "step": "move_claw",
+    "sig": "gb5PX3T4f4nFojK7mf9RvpY1zS3jL1H38Bu9VqGVgSTiv974ZeStvbEXi5jdkyxik28yt5w412C83pkXF6nem89",
+    "layer": "er",
+    "ms": 477
+   },
+   {
+    "step": "move_claw",
+    "sig": "3tv6pfAbk4ni1B3zFK51nq5nzTxvtbFNGhShcxFWHdP9AXSTu4DtPQozNHtarEJbNcnybqE7GwC8trUiehcPRnFB",
+    "layer": "er",
+    "ms": 572
+   },
+   {
+    "step": "move_claw",
+    "sig": "5tVmTcpyG91pxvSfyfnkFYw9GH4qzmQ1qsQrwXRfDAre3YzAg6aEc2aji3XEvCVAouWUFUziUTVrAeRxEVr1gztw",
+    "layer": "er",
+    "ms": 810
+   },
+   {
+    "step": "move_claw",
+    "sig": "4JUB2fZFqnaxJxFq9WfvxDiWhDikSDhEhFjazYN7q7ksyY43E9wEGvMLvvC64THnr8yyP4Ahxi6NFVeXWG82cNkg",
+    "layer": "er",
+    "ms": 1184
+   },
+   {
+    "step": "move_claw",
+    "sig": "5C6fjY65zXRR1NkmVABWRaZnPxXH9JJJTeFrPS6PCzJj2JrwePN2aj96uuMQmXytXRfZY8E3SUrDdiVm1P9PjvKC",
+    "layer": "er",
+    "ms": 1088
+   },
+   {
+    "step": "drop_claw",
+    "sig": "4iB7YJWLyJfNpcpL3DFxA32FSA2ULkGzGoe748TJrtQKoDDycHo5oCWkjhrYipye4z2kAHFeqVeMXUW1gzaRKnA1",
+    "layer": "er",
+    "ms": 207
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:50:28.629Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 9,
+  "moveMs": 1738,
+  "round": 26,
+  "target": {
+   "id": 6,
+   "kind": 1
+  },
+  "aim": {
+   "x": 131,
+   "z": 803
+  },
+  "capsuleId": 6,
+  "kind": 1,
+  "alignErrBps": 10000,
+  "gripBps": 2500,
+  "rollBps": 2508,
+  "outcome": "MISS",
+  "mint": null,
+  "amount": "0",
+  "tier": 0,
+  "vrfMs": 119,
+  "dropSig": "3NZTFq3HNDFa3xEgRWACwS9pdZms1cZeA2dDKRJ8ncyZwxg74Ccrda4rCTj52RRtkLczhya29TMuuMFmpnLttFFW",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "5gkrQGhQzbxxkNHm2XGFQJT68kmi6u35uSpwkhdsgHqDoFrtTDHE5MCPyvxve7NH6L5K41CXszKjXNMiQErvXiSz",
+    "layer": "er",
+    "ms": 1944
+   },
+   {
+    "step": "move_claw",
+    "sig": "3fD3KFNxbSN8s2iqwTSDhxz1fxFRargU4h56crGZrgSyr1pWFdRPSeFmMqJsVasc35D2pD3VDSPWPsZnKGtAHBXW",
+    "layer": "er",
+    "ms": 1262
+   },
+   {
+    "step": "move_claw",
+    "sig": "4F9avbpiDdPMdZXSRebEgfvku1BWF1KvbTa2f3Z7khd21z3ndV71jEyKGHTXJnZE8AXsTWrwVf4UTUL5YCLkFXba",
+    "layer": "er",
+    "ms": 1244
+   },
+   {
+    "step": "move_claw",
+    "sig": "eLBPCaxCob19eKonVkYmEBVSQ6MJjVksGo72cYBpaMpjRTVUUB3pd6qtJRrvuBN93VCGNVph8ErCcU7E4Z7oaaY",
+    "layer": "er",
+    "ms": 925
+   },
+   {
+    "step": "move_claw",
+    "sig": "3cj7PsTjaCG4MrpHYY8fKJ86yXCPeAbB7JLRiJKp2yvRJa1d1Yv1q5p6jtMY3RomBgw8JBsQRuoDf2BjEFZRU2AV",
+    "layer": "er",
+    "ms": 1332
+   },
+   {
+    "step": "move_claw",
+    "sig": "5bHouSpG6gzDmH32YQcS5ezNB1RxA2CyA1shMR4GVjJHZDn48PGr5c38YcjmNsCXaGe6qWDbU2sx2Tacy3YbAQQo",
+    "layer": "er",
+    "ms": 1020
+   },
+   {
+    "step": "move_claw",
+    "sig": "2W5PC9Td6WYXGjSdyJRs8nFyMoKLuxLrWkwQZA4U7pAsGtWRBhNW3kkUANZNRbz2vrcV59rsxWgRbUzQTgMVDXTB",
+    "layer": "er",
+    "ms": 1388
+   },
+   {
+    "step": "move_claw",
+    "sig": "3o3VGCrzPHvzNZLDpfDEQjX4vGPVAego3S3pf8zgjyLyybg1W6brHhh9CpgjBjQjqZHbVMP3XZtbtm2b9QcZ6m7G",
+    "layer": "er",
+    "ms": 1384
+   },
+   {
+    "step": "move_claw",
+    "sig": "oEq3en2Hw6xgynJHR121c7ifome2UkRhDaPFKS3TXPVXM2gkJyqQDKEkn8Rre2DDYZBXReXoiDM8PeTPTxPXd5b",
+    "layer": "er",
+    "ms": 1276
+   },
+   {
+    "step": "move_claw",
+    "sig": "4J1NLBCj2rQ77socq8e7E2kwtd1xMNv3Qb8hRrCaBtNnUqkT7Et696oJPkzoY8bkm2MZSSTTQX9bqu7Q6pzDFKMe",
+    "layer": "er",
+    "ms": 1018
+   },
+   {
+    "step": "drop_claw",
+    "sig": "3NZTFq3HNDFa3xEgRWACwS9pdZms1cZeA2dDKRJ8ncyZwxg74Ccrda4rCTj52RRtkLczhya29TMuuMFmpnLttFFW",
+    "layer": "er",
+    "ms": 223
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:50:33.646Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 10,
+  "moveMs": 2654,
+  "round": 27,
+  "target": {
+   "id": 19,
+   "kind": 2
+  },
+  "aim": {
+   "x": 844,
+   "z": 830
+  },
+  "capsuleId": 19,
+  "kind": 2,
+  "alignErrBps": 0,
+  "gripBps": 8500,
+  "rollBps": 1228,
+  "outcome": "HELD",
+  "mint": "KOI",
+  "amount": "1",
+  "tier": 2,
+  "vrfMs": 109,
+  "dropSig": "z4MBejEXxv8XJBCq7pXw9hxCaCMZxgQYuHceGY3VeEn79wfg3Lhyjq2EB77VtmMetGuhCchcKPwPH8z7p8T5meW",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "3VZjV9M49VmWJ4mJM1yvgCP6N1SQ1digCrDsEnZcV2k5eniSki4fYdo1Hs6qXgmoNE93tPtZFZQRxvbucpe5Rns2",
+    "layer": "er",
+    "ms": 922
+   },
+   {
+    "step": "move_claw",
+    "sig": "VbD14sitziNQ7RhorDmnLyiXp58ijX5iqoGqXYYD4EDXT5YnkAaEidLLsi6sMx94caM2mM6DP6oC83uRD1s8XWC",
+    "layer": "er",
+    "ms": 353
+   },
+   {
+    "step": "move_claw",
+    "sig": "5bHcZd9o9ZpRiyjk5vNcvAx6YQH8fz9Ac38vdQ21RsciTYsgSqBCndiGtQtAt1hLAgPUoy2QUzL9kdKYdf1reDgf",
+    "layer": "er",
+    "ms": 443
+   },
+   {
+    "step": "move_claw",
+    "sig": "5uy2XcmZk6hh1kyRzMgzcYD5Y5UFiPy5GCKqcZdHdvjCScu4kp2YFfX34VN4VhxvFgMjBdw29WTQ5a8rogi2hL6",
+    "layer": "er",
+    "ms": 271
+   },
+   {
+    "step": "move_claw",
+    "sig": "4k9rPRBoqLoC1rZH2FXsniuRcveA9txHpszajYYPerJWhbpgDb6o3oi41SLH7tnY1KKXonpR5gEbTbTsMs3cBaT8",
+    "layer": "er",
+    "ms": 466
+   },
+   {
+    "step": "move_claw",
+    "sig": "fkgGAvkH1GfUzxbP42Z6rKd2XsPdQg9b913nGUvjqJ3fEXWBXVW5AQTUSSvT4b2kiMUnNoycXFiqR2oMTHLpt4n",
+    "layer": "er",
+    "ms": 433
+   },
+   {
+    "step": "move_claw",
+    "sig": "iC7ZDQ3buuqKRnURU4vC5jynq3KNBdk2EtQBNKR5ZJqCsExKsP2ABApyMyR4x6fQPCB73uA1wYRrGKGJoodLrvo",
+    "layer": "er",
+    "ms": 589
+   },
+   {
+    "step": "move_claw",
+    "sig": "3i1nhqKchi2fzBHihQC4ZjR9HgRrxD6kCgVbng28jrpdNaMUky1MFx2z6f6WK9BTvabFQVBeosLwJ1CCTdM49hGL",
+    "layer": "er",
+    "ms": 506
+   },
+   {
+    "step": "move_claw",
+    "sig": "ZVdfb1QJHGhHdJDs6fuDKGZBdWrJ8tBh5pgcMVPwG3MMVwzqpBiif33XidCqQozjZQieF9Q1urizX4TzRdeQKMG",
+    "layer": "er",
+    "ms": 307
+   },
+   {
+    "step": "move_claw",
+    "sig": "5uAAC2igY2t67XoTzmqAdLEHuKbUzTBUzbg4jcRVJHAwtqPZfb4157EGzXArFihuFAp4zyDf4ygL5ajshDun486h",
+    "layer": "er",
+    "ms": 919
+   },
+   {
+    "step": "move_claw",
+    "sig": "5TJBnf8yVnMPA3dW86479Aihyfn95n1Jn2GVNQvGNfWnduAVG6TwuJLfwQdix2C1tZ5XW7mp9nT2fNU6GRMxwebz",
+    "layer": "er",
+    "ms": 2037
+   },
+   {
+    "step": "drop_claw",
+    "sig": "z4MBejEXxv8XJBCq7pXw9hxCaCMZxgQYuHceGY3VeEn79wfg3Lhyjq2EB77VtmMetGuhCchcKPwPH8z7p8T5meW",
+    "layer": "er",
+    "ms": 301
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:50:38.354Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "restockSig": "4d4BrjvCmkdKN8YqwzhRpcquD7To98SWXNFdhLLgsY1UpcjE2xnCYVfwFH5dWqmRJZWKPzZWcFkd1sTT9EqztJSs",
+  "moves": 5,
+  "moveMs": 1593,
+  "round": 28,
+  "target": {
+   "id": 27,
+   "kind": 2
+  },
+  "aim": {
+   "x": 513,
+   "z": 407
+  },
+  "capsuleId": 27,
+  "kind": 2,
+  "alignErrBps": 2800,
+  "gripBps": 6820,
+  "rollBps": 1336,
+  "outcome": "HELD",
+  "mint": "KOI",
+  "amount": "1",
+  "tier": 2,
+  "vrfMs": 227,
+  "dropSig": "3x8a5xntyMBVyZBWo6C7yojtq7Vzv39iztvXGdrfCKqHEJcEd7enhRsJexXwAfxtTThQdJt5DPs7nYVLHKeyUT1D",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "3eqqUK9UcVf7EbpVgzt6bEEBavofUyxpZyyNMbQSDxMqubdSD36UZttr2ikcRLTbeyvgB7hBPf3MowfsMZpef7Vz",
+    "layer": "er",
+    "ms": 739
+   },
+   {
+    "step": "move_claw",
+    "sig": "2d8Dq4f4wt7TxVjsnFDGai3GXHbQkrv3Yo8JvXTcZpZrpFcNoNcA6iu8GRPPqAsS3Xw4ER31v7rBP82Uh6mN9AG8",
+    "layer": "er",
+    "ms": 1395
+   },
+   {
+    "step": "move_claw",
+    "sig": "2UN6pDxBiCfque3z7BWAFKL3DvDEe6FGbQ4hFx6doYXAfAjQ2doYgVCWbzSP3gYt1GQyUz9YxoHb8DSDcyf1QV22",
+    "layer": "er",
+    "ms": 1330
+   },
+   {
+    "step": "move_claw",
+    "sig": "4QbJgiMmsPGmD7shDyuAwfFnqaHDkjyUDKttKn6MXT4drFhoNHu7kMu3DudBFn6YogkTSbgfLid2wrXX7e9WfQuB",
+    "layer": "er",
+    "ms": 1334
+   },
+   {
+    "step": "move_claw",
+    "sig": "4B87bXxmJ8S97mdnpaYPhE9DUJfSkCZXAQq8dqsme7oyPcM8PMJMdhum845e2RNQgP9bzqk9iYyNzhqJdbe3ihw7",
+    "layer": "er",
+    "ms": 577
+   },
+   {
+    "step": "move_claw",
+    "sig": "48ZSR1QGTZ2JBJzDBXuCJMd9FvLhH1n9m1QFVFn4fxDBwp7trFpmXvxw5Yi2qKqbKrXLqNxyfJrLM1quigspRy5N",
+    "layer": "er",
+    "ms": 376
+   },
+   {
+    "step": "drop_claw",
+    "sig": "3x8a5xntyMBVyZBWo6C7yojtq7Vzv39iztvXGdrfCKqHEJcEd7enhRsJexXwAfxtTThQdJt5DPs7nYVLHKeyUT1D",
+    "layer": "er",
+    "ms": 278
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:50:44.179Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 9,
+  "moveMs": 4029,
+  "round": 29,
+  "target": {
+   "id": 25,
+   "kind": 2
+  },
+  "aim": {
+   "x": 682,
+   "z": 790
+  },
+  "capsuleId": 25,
+  "kind": 2,
+  "alignErrBps": 6000,
+  "gripBps": 4900,
+  "rollBps": 3669,
+  "outcome": "HELD",
+  "mint": "dUSDC",
+  "amount": "10000000",
+  "tier": 3,
+  "vrfMs": 186,
+  "dropSig": "4iokwbUweFnFjimCkNZTHNjczcbmtHorSjBZ7jC2pSqfMxfeyznZ6p1vDhEk1sVuyy8RHi2P1b66frh7XYkDqwM5",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "boc4KueiWduQMYkYeTLWPcYhBPtgTegFT4QvAB15Dqysm5K1xYHnJcZ6a9v6PkrbG2j3bFvpUm6iHAKDZ6xt3Ka",
+    "layer": "er",
+    "ms": 1285
+   },
+   {
+    "step": "move_claw",
+    "sig": "34p3ze3KuQpKLZF6EC6tLzdMScBrSsX9FgZUxS7Hv325Fn6K9YN9tnxSKd9fNyxxu7bZLsM4hKYCob6E89zABwdA",
+    "layer": "er",
+    "ms": 390
+   },
+   {
+    "step": "move_claw",
+    "sig": "4QxXmt9WhDzq9k7dZAj3WcLpNjGesCRa3Xxo2BbnhGFFkQY4PUYJ7UfqH1kWWS6eht2a8dxERPPaQUMfQ9jrqcbH",
+    "layer": "er",
+    "ms": 412
+   },
+   {
+    "step": "move_claw",
+    "sig": "2bxtVkYpRb9RfCRDwvwG4G5RqNjA2VHE2aCuRog6VBUjCBBkiTGZ3H7NBnjyZ3rSD5og6zrmTd3aqMMAHFsxBj2f",
+    "layer": "er",
+    "ms": 398
+   },
+   {
+    "step": "move_claw",
+    "sig": "2a4YddZDjwpGFfrEEVGo9WfNLtCfB8WHNqygWmH5MftGFDdXYYTBQpPVt6yDDRDsnBPpMhqzc35fbd7FVJMsrZ5W",
+    "layer": "er",
+    "ms": 1076
+   },
+   {
+    "step": "move_claw",
+    "sig": "9gaBLk4hg69ybxe1h6zhZkpXxM3Fic5C5LBJQgpV5xW1nK2LsNkLTLxiDAWfPa6FrCbbf1FGQtXVN9X83iZQD5r",
+    "layer": "er",
+    "ms": 1454
+   },
+   {
+    "step": "move_claw",
+    "sig": "qyMet7tJSbcxUtMq8XQSFDj8aFqNJDQ5xFRijvtPQ9EM3oT3Qyn5UM8hWvxZyJAoMaMdZw4DEbxp948FBed19mH",
+    "layer": "er",
+    "ms": 1268
+   },
+   {
+    "step": "move_claw",
+    "sig": "2iwygabvS47LrRqEu83wM5qbqcYmkfQ7rvBwi5U4991tqjRNEMYM1bBkS2L9Z2UnAThhNYqVwxQqxiG5RqkxiSya",
+    "layer": "er",
+    "ms": 1071
+   },
+   {
+    "step": "move_claw",
+    "sig": "239MEiFLXze7eMYvK73TzH58HG8xDEVhXzNcmGWsRZhaTEDqMdfSDX5n4qpxL6fYEiEaS6nXzJ35ojfVd7Hc7hbL",
+    "layer": "er",
+    "ms": 1068
+   },
+   {
+    "step": "move_claw",
+    "sig": "4JRL2UEMWwsyA24FEdRi3KZiB7mwiA6fcMnUqF9QGKy1VnPB3gyeZuGYTAPLDV6gUx7KqidY5zyRc2cjuGBADXwj",
+    "layer": "er",
+    "ms": 3421
+   },
+   {
+    "step": "drop_claw",
+    "sig": "4iokwbUweFnFjimCkNZTHNjczcbmtHorSjBZ7jC2pSqfMxfeyznZ6p1vDhEk1sVuyy8RHi2P1b66frh7XYkDqwM5",
+    "layer": "er",
+    "ms": 221
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:50:50.935Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 8,
+  "moveMs": 2142,
+  "round": 30,
+  "target": {
+   "id": 6,
+   "kind": 1
+  },
+  "aim": {
+   "x": 209,
+   "z": 734
+  },
+  "capsuleId": 6,
+  "kind": 1,
+  "alignErrBps": 10000,
+  "gripBps": 2500,
+  "rollBps": 4920,
+  "outcome": "MISS",
+  "mint": null,
+  "amount": "0",
+  "tier": 0,
+  "vrfMs": 766,
+  "dropSig": "2m43ZS9WyuWdr3dGHFcKv8XCwXmBrSMTfSsw8igxLAAaY2dHJ4UxnWoagpzfnTQAxcKpmAnicWzs84FG3U6tbHe3",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "3zNUh8jx2ANYgyeiTBCi3qzdhNzptrJqrdQCYojScMW5SazAnGGHv66Qvj94vG2fF4azVPoN7a9rVVQFuiccwZpg",
+    "layer": "er",
+    "ms": 1126
+   },
+   {
+    "step": "move_claw",
+    "sig": "51EVZ8PjYKZHwjegLdURzFP5qxUonu87uLANKXxWoeW9EHSrUiZtVEdRpx4cQHoy6AdvgSGQpzR8hZVm3gMhumJX",
+    "layer": "er",
+    "ms": 278
+   },
+   {
+    "step": "move_claw",
+    "sig": "4JYfF9FnJG438wYDC3CZ7s86hd11oHx1CxafJtT3WSoNHbkCT8K1EKqqN71tdCn7K4Ch1sbWNxaJzrkJidvaaNQE",
+    "layer": "er",
+    "ms": 622
+   },
+   {
+    "step": "move_claw",
+    "sig": "G5g8TWxkDAkxDU8ZpbXPsKaXmZpKF1uKgNkG5RKQ8k6gNX4njHGd3X1nLzwEwmbnFsGRzKiPWVnp3tFjWXasjdQ",
+    "layer": "er",
+    "ms": 983
+   },
+   {
+    "step": "move_claw",
+    "sig": "5XjZqMrTYvTAtprQEsHFaZhmdQKKvv1so1jWH43mooho6RG1s8Rg5K49HhiiU7pw6qoTTErU8exVMgmMKDVoKjDt",
+    "layer": "er",
+    "ms": 1131
+   },
+   {
+    "step": "move_claw",
+    "sig": "4fKzWnZCbC6ELaQEwstJxWYJLUEtYr2RVPJtfhGbeYgs3vBxyv2Yot6BBfK9VGUVvxwZM5gCHCzWpEsf67Tj7G1R",
+    "layer": "er",
+    "ms": 1093
+   },
+   {
+    "step": "move_claw",
+    "sig": "54UWPv4FXzBdnhBNBtByoG5WSstMUzowqpA53cK8Jd7UzUwbTnviFvgMhY95dk9iMTnuaU5kxYeGsnDywiQtodTP",
+    "layer": "er",
+    "ms": 657
+   },
+   {
+    "step": "move_claw",
+    "sig": "3o2QNP6GyvC7LGhHZNQEgQFLQbEQbHR1eVAdTZvdFtpQL5Wk6FSbB2yc2KMw1UYTNg21zyGVe9c7g9kRcFgKVoji",
+    "layer": "er",
+    "ms": 1537
+   },
+   {
+    "step": "move_claw",
+    "sig": "2CsvBLCozhinEBZ4UmbyCgPSVVHNyAZL8CTMX8oXEZqL3VwFa1chbZPYoBL7pCZeMgX8x2mrh1S8WgPCKkuTYHTt",
+    "layer": "er",
+    "ms": 1545
+   },
+   {
+    "step": "drop_claw",
+    "sig": "2m43ZS9WyuWdr3dGHFcKv8XCwXmBrSMTfSsw8igxLAAaY2dHJ4UxnWoagpzfnTQAxcKpmAnicWzs84FG3U6tbHe3",
+    "layer": "er",
+    "ms": 397
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:50:56.566Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 7,
+  "moveMs": 1185,
+  "round": 31,
+  "target": {
+   "id": 2,
+   "kind": 0
+  },
+  "aim": {
+   "x": 608,
+   "z": 320
+  },
+  "capsuleId": 2,
+  "kind": 0,
+  "alignErrBps": 0,
+  "gripBps": 8500,
+  "rollBps": 6726,
+  "outcome": "HELD",
+  "mint": "dUSDC",
+  "amount": "3000000",
+  "tier": 0,
+  "vrfMs": 114,
+  "dropSig": "4jpWtPL9hSxZyCgL6se3QjQTXwpfByZuRVUxW9KkqFPt1HTG5UriH5vwCYKS4ESk8zRrfjWKHSpyDJi9ANoa3nbT",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "44C5NYyGDnUutPj1oh2YJKkzfJDGM5h3nerBgGApfWHho8JRab1d6hd9QjwuYWttQCuZHkDVFtA5cqGNjRwjTRvt",
+    "layer": "er",
+    "ms": 619
+   },
+   {
+    "step": "move_claw",
+    "sig": "3YwgoPvwA1LTKYRuRgexghB3QKG8zXHrArgvymRr2HY2dKSqxJC1nFaye5GULHfLymfAMNSW9EV5Um93ZzUsezuu",
+    "layer": "er",
+    "ms": 307
+   },
+   {
+    "step": "move_claw",
+    "sig": "4PVw9FG8EMGqMFARUfRxcoyfDcJyex8ew8BKoofaiJgfeWBxZqhYNhbaEaQXBvd6jwRV9Hy9f3iqpyWHqitow7tk",
+    "layer": "er",
+    "ms": 296
+   },
+   {
+    "step": "move_claw",
+    "sig": "2vBv2CgcHaFhgerdRv4FU7dUjZc3Wsm6VhwjYTGahdG5wkBGTLG3EYPrZvvAfsQNf2N78aV6R3HYr2y5TeYFpmEB",
+    "layer": "er",
+    "ms": 354
+   },
+   {
+    "step": "move_claw",
+    "sig": "2Z3PjHT4cs1MWNFygAtWp7KbjqsGkAwENLdXKcn3D24RUzU2qb7JGpsTtcGgX8fSDxqyiAaQc1azHRDjbijoSWjm",
+    "layer": "er",
+    "ms": 400
+   },
+   {
+    "step": "move_claw",
+    "sig": "5BiKXapErtszVCSv19tuuA1cDj23iQFc8k4VNaMHLjLQJpkkoqsxL1bzyKNm84RyDepPzr35ziEyk49pbkkghpEp",
+    "layer": "er",
+    "ms": 392
+   },
+   {
+    "step": "move_claw",
+    "sig": "4D4nwG44dp4y3y4Q43e4NpWSfVcf1fMAxpDiXovQK7UwdYovoYFvU4VbrAggVMyrps6zTcTRuyEszDVT7ei2wLuw",
+    "layer": "er",
+    "ms": 723
+   },
+   {
+    "step": "move_claw",
+    "sig": "3AieGFBeH3hzUJZC5GcA1MzYQgbEfjWK1XAdbd43cJPXdgTYisABhevmk4qCvmLgW3LzNW2NdM9Q4UgMnkC5i1FL",
+    "layer": "er",
+    "ms": 531
+   },
+   {
+    "step": "drop_claw",
+    "sig": "4jpWtPL9hSxZyCgL6se3QjQTXwpfByZuRVUxW9KkqFPt1HTG5UriH5vwCYKS4ESk8zRrfjWKHSpyDJi9ANoa3nbT",
+    "layer": "er",
+    "ms": 910
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:51:00.166Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 6,
+  "moveMs": 1326,
+  "round": 32,
+  "target": {
+   "id": 21,
+   "kind": 0
+  },
+  "aim": {
+   "x": 312,
+   "z": 547
+  },
+  "capsuleId": 21,
+  "kind": 0,
+  "alignErrBps": 2833,
+  "gripBps": 6801,
+  "rollBps": 7006,
+  "outcome": "SLIP",
+  "mint": null,
+  "amount": "0",
+  "tier": 0,
+  "vrfMs": 145,
+  "dropSig": "3mXifgywuNBouQ18P56wxLzosw61BvSicE1iuy6PCFSy4A9EZZ5PkCRkyfvm5GtPZEfnFdS9haVTU4LHqsVC2xBs",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "4xuoRtgvBJWwPNdoXz4taGouXadh4ZC5qvPjQKd5uvoQTGprDRKSeVM3yjZEu1GZACu2PYJidyHzoKKZLSJdRVpJ",
+    "layer": "er",
+    "ms": 857
+   },
+   {
+    "step": "move_claw",
+    "sig": "3ppv6zyuDp24AcsQcS2EeFRikJ4izhfXFavD2q5KAn4ASSFZtDrr1JxncBZSJihDRYZf2dafNbp55K9GZxqHEHgp",
+    "layer": "er",
+    "ms": 290
+   },
+   {
+    "step": "move_claw",
+    "sig": "4qJVY7MoE4b1ggC492cNWTjcJQXN8PQhjhZ4AxHRMgC5JErYPAndxx7bKdNf6SbWUZCQni5aSF21Ecfxv1pvFPjL",
+    "layer": "er",
+    "ms": 308
+   },
+   {
+    "step": "move_claw",
+    "sig": "5wDkyTh7vVkAN98U4dctkvj8uHyjJJ5uja67Gf3pqJ6nKvrh1GZsnJwscAUXGmWDDkyM6McHS1PMkg4McagHrEwk",
+    "layer": "er",
+    "ms": 419
+   },
+   {
+    "step": "move_claw",
+    "sig": "vmibLRiXmxeWjwWAJ3q86Gjnhuc9TVEFSYf7YLmP9ABPLjFEZ9cTXtCz8vDkcSbeQVSyopWccYvzwDVqBoUXd2S",
+    "layer": "er",
+    "ms": 652
+   },
+   {
+    "step": "move_claw",
+    "sig": "47sn4J8hjoBU71Ps8Qy2f8a6nN8x8EHYxbQXT4Rv4HXy56ofUZh5Qpv8tEEHXJBCDsi5JqVGAnYoUZDqG4SuUkou",
+    "layer": "er",
+    "ms": 714
+   },
+   {
+    "step": "move_claw",
+    "sig": "2pdYoaA7V2jJvi9Aj7ox9aTWvMq1j7AHiZzESccXqeQi7GzUTS42u7qkTUCHZUfzHrCCbU3R3VvQFPoYv7oBdPyy",
+    "layer": "er",
+    "ms": 868
+   },
+   {
+    "step": "drop_claw",
+    "sig": "3mXifgywuNBouQ18P56wxLzosw61BvSicE1iuy6PCFSy4A9EZZ5PkCRkyfvm5GtPZEfnFdS9haVTU4LHqsVC2xBs",
+    "layer": "er",
+    "ms": 313
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:51:03.587Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 4,
+  "moveMs": 808,
+  "round": 33,
+  "target": {
+   "id": 1,
+   "kind": 0
+  },
+  "aim": {
+   "x": 430,
+   "z": 189
+  },
+  "capsuleId": 1,
+  "kind": 0,
+  "alignErrBps": 5818,
+  "gripBps": 5010,
+  "rollBps": 583,
+  "outcome": "HELD",
+  "mint": "dUSDC",
+  "amount": "2000000",
+  "tier": 0,
+  "vrfMs": 108,
+  "dropSig": "2xe9BWyYxhw2m9Wk3orNrA28NQtLKiHutAyL1QqVJ562HZQx5Cpked6oxRLXDzhBtzJeHxgVqv9C29E5MF2PBjvJ",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "4RADuBSrqBmsaDz4aBa3qFhgifz2Q53F2z9xGxCndKeT1LFrTo63QkVvYA2y9DoHV2CUQAU4euNwfeT6SE35SR3G",
+    "layer": "er",
+    "ms": 880
+   },
+   {
+    "step": "move_claw",
+    "sig": "3xsS4KFNbqwxA7TxBURmwXP4d3izj8ud8XtEPuy6YffPNbLtowH7pyMQ3dGFfNwTfre2hgUT65RXS6t3six8Tn82",
+    "layer": "er",
+    "ms": 305
+   },
+   {
+    "step": "move_claw",
+    "sig": "jzzMPPZ37SLpdXPhsn9TAMxUX8f2Qr6iEKXd1FaB1boa4tSRWW1JPADzytEf4fs3Syut423XwLGtJKUeiH9asoq",
+    "layer": "er",
+    "ms": 290
+   },
+   {
+    "step": "move_claw",
+    "sig": "2Qf9aK1Q7yS2HoSicrvCCT8Q36Ln7t3bLG42LXPARc7aGfEev1pi3ZpvNWXiTvXehv5n3E48TNzYDRh5kLdFN862",
+    "layer": "er",
+    "ms": 285
+   },
+   {
+    "step": "move_claw",
+    "sig": "614KbuLpACWtSeoXDMVYw8TacCYV3W95YJ1nSrNrtPKTuhdzTmDgS8rXLWzLQcFzeFUDGgX46cbEYjCFSDy7WikP",
+    "layer": "er",
+    "ms": 446
+   },
+   {
+    "step": "drop_claw",
+    "sig": "2xe9BWyYxhw2m9Wk3orNrA28NQtLKiHutAyL1QqVJ562HZQx5Cpked6oxRLXDzhBtzJeHxgVqv9C29E5MF2PBjvJ",
+    "layer": "er",
+    "ms": 285
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:51:06.298Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 8,
+  "moveMs": 1480,
+  "round": 34,
+  "target": {
+   "id": 21,
+   "kind": 0
+  },
+  "aim": {
+   "x": 484,
+   "z": 683
+  },
+  "capsuleId": 21,
+  "kind": 0,
+  "alignErrBps": 10000,
+  "gripBps": 2500,
+  "rollBps": 9761,
+  "outcome": "MISS",
+  "mint": null,
+  "amount": "0",
+  "tier": 0,
+  "vrfMs": 116,
+  "dropSig": "2HqjamPnR3PfGaRVmPavKcsb2jBrDfQVv6c1jxRQyuooEtQMZddLWZCMT4VYayb2jYm9hZEoTkPV1uJvTyVbzSED",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "3X9ednx6nHPcFazyemMpzMymRip7TyUecytsvAERy238VxdqHQHEJ6FitkpwUV4LkVdwX7TfArDQcMtjH2V6PTpv",
+    "layer": "er",
+    "ms": 723
+   },
+   {
+    "step": "move_claw",
+    "sig": "2xQcUSfW4gziVekteQozdb7X43D9WDRpZ72W1kHs42uMscLE5rXR7ANU9QymJzdhhQeZx5qmPPqYoMr2XDJmEDJK",
+    "layer": "er",
+    "ms": 1266
+   },
+   {
+    "step": "move_claw",
+    "sig": "64JDNTWoBgwD7i1UUvwEHePp7tTwEeakvZrs65ADDk7PyrPCYeEP4o7fBc5tqy8V6A9iguKCL4C5bEFJKMaN9Ra1",
+    "layer": "er",
+    "ms": 1183
+   },
+   {
+    "step": "move_claw",
+    "sig": "5uDdAj86uJ9ce6SXa7PDDH5Mbhpkf2yGZQVAoXDAL6x6oECBE4A8cj9PcWxYUcQGqieqvCEtznkstWg25AoeSoni",
+    "layer": "er",
+    "ms": 1085
+   },
+   {
+    "step": "move_claw",
+    "sig": "3JHmeNYbKWhUNj37aAYcfk8iqNw6n7oaYZ81yW2uyNF4Lw5S8HiR12WcaUHCQsG21j78dtiXFNqD81Qhpj9n52VM",
+    "layer": "er",
+    "ms": 1037
+   },
+   {
+    "step": "move_claw",
+    "sig": "3buFpKDKLxstwmmMaZLsfEgA2oR1S7DtVJdstboHR3vu1rT9pDpcQD4i7EFdCmWeVGc2BFmyf9XD5moVyHtcYm52",
+    "layer": "er",
+    "ms": 904
+   },
+   {
+    "step": "move_claw",
+    "sig": "3aeDVLPDcE6XTMeK2PJrUWztqUqy7NH7GMyeJ7o1CH75xQ71x2Mrmsabxbk2Nz6n4AYvz4tskLUfrupKJwcjQ1uc",
+    "layer": "er",
+    "ms": 902
+   },
+   {
+    "step": "move_claw",
+    "sig": "3UAZXFWkjrZbJ5HGp7XyrbDBXPQfvsH6NXZsV9j7pxTph3NVDRKsYRiGeGMsBcCumBKzzyVY5aj2YBgCNqVD3GJ9",
+    "layer": "er",
+    "ms": 1224
+   },
+   {
+    "step": "move_claw",
+    "sig": "7B1B3WZsYSPj1iCDPcTKGFPc7ubZ9BuaZbaaNABkiDxQZaCaTA8rz4sNLMA13JX6nJQRzRhZsbBQ9w8fGcrNe4u",
+    "layer": "er",
+    "ms": 811
+   },
+   {
+    "step": "drop_claw",
+    "sig": "2HqjamPnR3PfGaRVmPavKcsb2jBrDfQVv6c1jxRQyuooEtQMZddLWZCMT4VYayb2jYm9hZEoTkPV1uJvTyVbzSED",
+    "layer": "er",
+    "ms": 753
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:51:10.404Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "moves": 7,
+  "moveMs": 1366,
+  "round": 35,
+  "target": {
+   "id": 21,
+   "kind": 0
+  },
+  "aim": {
+   "x": 564,
+   "z": 665
+  },
+  "capsuleId": 21,
+  "kind": 0,
+  "alignErrBps": 0,
+  "gripBps": 8500,
+  "rollBps": 2940,
+  "outcome": "HELD",
+  "mint": "dGEM",
+  "amount": "50000000",
+  "tier": 0,
+  "vrfMs": 203,
+  "dropSig": "5qmnQzbc6zg17Yti5BxBZweHfMqJngmhAL8wd1vUx63D4c9jxZa1NrQDvMKvs2V3XHzQe3uWWK2szTP6YdJdHaaG",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "5fjZ6RNSRyoZA8AV4ZEUgD8zaqpDER988fvn9mA4BcpMzWBm25yvLN21wC953LsQSa2VfUBCy3snX6ZLnZVfcQ55",
+    "layer": "er",
+    "ms": 719
+   },
+   {
+    "step": "move_claw",
+    "sig": "2QuXsxU7QWaq7kvy7Vie677yhMDiCg8g9dRvUEP6uPr3hzcJbNzErK2Hh82tfNjAD4C91dkdK8eiK9rhKy1vGL44",
+    "layer": "er",
+    "ms": 1107
+   },
+   {
+    "step": "move_claw",
+    "sig": "2csAVRssrbejAdWXHYnGN4EG3CNWCX9b4M17xVfGoUTKCJCHscqH6ijhkjS3RK1wMZdF3kw7MTJUnZkYTpgKLxvP",
+    "layer": "er",
+    "ms": 1016
+   },
+   {
+    "step": "move_claw",
+    "sig": "2MszWpZE2w3rsDmyfHPB9ur5efus94c6Z6Eq5rP4jTrmHNNcAWK7rCJqfBX9eQiws8pqfTsRYZb4JCnaRKipjuEX",
+    "layer": "er",
+    "ms": 1013
+   },
+   {
+    "step": "move_claw",
+    "sig": "5SfB2fGdpip4gnCvJogmMNdEMmB4RAQN1KRGYgzJvjYK17MFpKvekgXLKThmfDKgjNKuwBWoACXAa4cnVfcKjGSp",
+    "layer": "er",
+    "ms": 711
+   },
+   {
+    "step": "move_claw",
+    "sig": "vEPEn1h4jznQSWp19ZJRrcN7fkpHYPUTEyyowERmfsqhVmp83hcDVKR8Rt6zWdL76yT1vkdsDJeYgB3aXEGjEjN",
+    "layer": "er",
+    "ms": 792
+   },
+   {
+    "step": "move_claw",
+    "sig": "2rvGWehV3yBBuoNeGPvPioN5AYDdhYPgjyqghPmVA8ykHTQhei9QCqf6S12dTTpGMWFGE6ZaJLi2bFFqTVYEeC3Q",
+    "layer": "er",
+    "ms": 753
+   },
+   {
+    "step": "move_claw",
+    "sig": "4Yqzeav1p6JSLtRESM7RhyzTkXeycoaH4XbZ56xooGy6Wq7LoRzmXU61kuaSCrrNmBKcHf969yWpJGNKuFBskbp6",
+    "layer": "er",
+    "ms": 711
+   },
+   {
+    "step": "drop_claw",
+    "sig": "5qmnQzbc6zg17Yti5BxBZweHfMqJngmhAL8wd1vUx63D4c9jxZa1NrQDvMKvs2V3XHzQe3uWWK2szTP6YdJdHaaG",
+    "layer": "er",
+    "ms": 1066
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:51:15.006Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "moves": 3,
+  "moveMs": 565,
+  "round": 36,
+  "target": {
+   "id": 20,
+   "kind": 0
+  },
+  "aim": {
+   "x": 233,
+   "z": 288
+  },
+  "capsuleId": 20,
+  "kind": 0,
+  "alignErrBps": 2833,
+  "gripBps": 6801,
+  "rollBps": 2326,
+  "outcome": "HELD",
+  "mint": "dUSDC",
+  "amount": "1000000",
+  "tier": 0,
+  "vrfMs": 109,
+  "dropSig": "3FCmZ55RAZw2KdkV5PW26JKjUZ7DLqWUJ2p1RURVcivkRyDFy4F7ezgCjbao3DDnZaihpN41qzgxxnzSjjHrpiQk",
+  "ok": true,
+  "txs": [
+   {
+    "step": "join_queue",
+    "sig": "5qNPwT6qZPPHpzm9e4HE7shLrNMv1vWnZGRPRBQMYgK8Qaosc7caqf7npYHBbEpGyae991BoLEb3iro3P6mfmw2u",
+    "layer": "er",
+    "ms": 933
+   },
+   {
+    "step": "move_claw",
+    "sig": "4kbnCfGJthbZFptd9N8oKyhxVwYWbcEBkRyLXkR71u5nE3jZCK65wETGjFM18rM48vFUzjbrW4vPYJR2MTyYaZ5E",
+    "layer": "er",
+    "ms": 374
+   },
+   {
+    "step": "move_claw",
+    "sig": "26rs373gYC4i8WS4b5nj7CUYduM3jvHiRhT8TL3cMBgU6LN8nfZyAiYh5Qiw8RhZUwruoj71R6BqFcKtqWxEwJ8q",
+    "layer": "er",
+    "ms": 259
+   },
+   {
+    "step": "move_claw",
+    "sig": "65kgtRCHmsZij49EQv1VXnx24XJBsBKoXFdzcScfDNQLghKrXior8xLe6N27vjhR827sAuniCpsxKrViN4rmb11W",
+    "layer": "er",
+    "ms": 265
+   },
+   {
+    "step": "drop_claw",
+    "sig": "3FCmZ55RAZw2KdkV5PW26JKjUZ7DLqWUJ2p1RURVcivkRyDFy4F7ezgCjbao3DDnZaihpN41qzgxxnzSjjHrpiQk",
+    "layer": "er",
+    "ms": 1217
+   }
+  ]
+ },
+ {
+  "at": "2026-11-26T21:51:23.801Z",
+  "player": "7TBv3DCsAXDB7qxJk1X7Z9uc9pfdrjQPzcrpMLfF5jLc",
+  "settlement": {
+   "cashOut": {
+    "erSig": "s9kzhGQ6FQNGsVrae1Lfy5aZ7DSczWNJHRF2P4G8t7KRzggFKeGzK6umaDU3jAzUSLofqHDooy5jFJQzr5ke5HZ",
+    "baseSig": "3KSMjF3XFPcQLEez1jguUCmsJ2FXmBivtXHVwiaLE9U7MC3nVU3PzZmmawVKpHyrfraeTna4c7md6CohsQnNADM"
+   },
+   "claims": [
+    {
+     "mint": "dUSDC",
+     "amount": "27500000",
+     "sig": "55TWC9Eci8YpD8XzHGV9BPDjT6cZnFYCws1VeKVBNUacZC8suVJM2XGeoE9fQ6MQZq6Wz8cLmKvk3WrD5yts24Ld"
+    },
+    {
+     "mint": "dGEM",
+     "amount": "500000000",
+     "sig": "435iQEzJMGk4sTXpy9xELkiQL5JrSEEVBP4bTq858w3aVPYguDbpBTHEmegmrgEP76FWBeDBhJHPtFAX4M46Y5gL"
+    },
+    {
+     "mint": "KOI",
+     "amount": "1",
+     "sig": "5osEpmP89ZQaiMCkVoMm1hab49CTu6g9gVkbLZrDRCxD24aWve4baEbx82igDym5BXB8m1xix9zMno8gnsTUHWM4"
+    }
+   ]
+  },
+  "ok": true
+ },
+ {
+  "at": "2026-11-26T21:51:58.787Z",
+  "player": "CChxUEUDTJi32TNsQHVN3YbEZxKXbkJR3x3CfUJRehGA",
+  "settlement": {
+   "cashOut": {
+    "erSig": "4ieGfSJeNDRSkQmxwiv8fxmJksTRSU3pgitLHM7jK1AW1FBEdawXeb7BbcyRgfrzQ5HS1whCAt9cvM5Dcx9PZ17J",
+    "baseSig": "2nByURRD2Domf9dAecAcMhmeE6xxkqikFVt2E2GpScQCvn1zjR5NY4keN1JxNnJoWps6arN3ieavAQx4Mq3fbUi5"
+   },
+   "claims": [
+    {
+     "mint": "dUSDC",
+     "amount": "2500000",
+     "sig": "58bcUxptZqvpngYa5CXZCLwnT1XRhS7emQeoe21qWikj1DZ2jWCMBFZbGukzRjBBd7dD99G9vVR1k4UqQs2sCXL6"
+    },
+    {
+     "mint": "dGEM",
+     "amount": "250000000",
+     "sig": "3KJn4P9XpDzYMk5t2N8kms8PSzftuTS7Nk6WJD7d4NSQhpR587QQfpkFXHZgyfPhx5xgVb4je4DcXUqGqzDz2fw2"
+    },
+    {
+     "mint": "KOI",
+     "amount": "1",
+     "sig": "2gURqKsvNF4HuqCF3npFdbpPZPpeQjJxUYsESRpWTvZTTVA4ZrdytawgBB4QF2aGtidzZ444jN8CFzJNafuKxBia"
+    }
+   ]
+  },
+  "ok": true
+ }
+]

@@ -1,0 +1,19 @@
+[toolchain]
+anchor_version = "1.2.1"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+clawrush = "9UwwBZu55wdbjQm3LdDKLHck79Sr95EPZsS5zRuvkKNs"
+
+[programs.devnet]
+clawrush = "9UwwBZu55wdbjQm3LdDKLHck79Sr95EPZsS5zRuvkKNs"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "npx tsx node_modules/.bin/mocha -t 1000000 tests/**/*.ts"

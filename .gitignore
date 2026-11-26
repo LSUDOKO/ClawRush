@@ -1,0 +1,23 @@
+# secrets — never commit
+keys/
+*keypair*.json
+id.json
+.env*
+!.env.example
+*.pem
+# build
+node_modules/
+target/
+.anchor/
+out/
+.next/
+test-ledger/
+dist/
+.wrangler/
+.reanimate/
+*.tsbuildinfo
+# local artifacts
+.DS_Store
+app/test-results/
+app/playwright-report/
+scripts/.state.local.json

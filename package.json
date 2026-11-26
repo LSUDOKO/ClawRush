@@ -1,0 +1,27 @@
+{
+  "name": "clawrush",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:anchor": "anchor test --skip-deploy",
+    "setup": "tsx scripts/setup_devnet.ts",
+    "ev": "tsx scripts/ev_simulation.ts",
+    "rounds": "tsx scripts/devnet_rounds.ts"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "0.32.1",
+    "@magicblock-labs/ephemeral-rollups-sdk": "0.18.0",
+    "@solana/spl-token": "0.4.14",
+    "@solana/web3.js": "1.98.4",
+    "bs58": "6.0.0"
+  },
+  "devDependencies": {
+    "@types/chai": "4.3.20",
+    "@types/mocha": "10.0.10",
+    "@types/node": "26.6.11",
+    "chai": "4.5.0",
+    "mocha": "12.0.3",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2"
+  }
+}

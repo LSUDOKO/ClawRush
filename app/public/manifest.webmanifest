@@ -1,0 +1,1 @@
+{ "name": "ClawRush", "short_name": "ClawRush", "start_url": "/", "display": "standalone", "orientation": "portrait", "background_color": "#0b0216", "theme_color": "#ff3dbd", "icons": [{ "src": "/icon.png", "sizes": "512x512", "type": "image/png" }] }

@@ -1,0 +1,7 @@
+2026-11-26T22:52:42.482Z http://localhost:4321
+result: You: MISS
+cash_out: commit + undelegate profile (ER) https://explorer.solana.com/tx/LeK38f4PdJLm3esvzeELfKfsQHVBHEj6uMYbCg66Zg6wNKz36aQ77oMVdWDhbTUEbK7ddj89B6uHzXd2FGNS9Uq?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
+drop_claw → VRF request (ER) https://explorer.solana.com/tx/EezhoMey7Keu9ZxkX4VwKDHnQDWPZjqyxgLeW4Gota1tEMZ1u4WqFvBTJY9y91L9RF7fPrBymrz81UDzDoPQ7qP?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
+join_queue (session key, ER) https://explorer.solana.com/tx/343az9HhuZtYVYQhtSUv2ry6cZwzarZrTBXVDDQjPbC2XneTLBz4bmExbCiJYYu1TDEwfdrqy1ezjySFZJUYpVjh?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
+Session start: buy credits + session key + delegate (L1) https://explorer.solana.com/tx/2NGgvMESwWvRSQyaPkNoobGDjt3sEHJZ6ohSNPV91uBPTjyxQ6rCY63NMDR64G7DTfxDQdKUirqb3jxd4YBCXQT?cluster=devnet
+2FzY…2G7v https://explorer.solana.com/tx/2FzY9oJrQXab58GSnLmjZ6ShPzQnAnvi4zkzxRKjLLSkd4LGGMqU4vX2WctvvKXxmZyXv5dgELXfNk1cHpWN2G7v?cluster=devnet

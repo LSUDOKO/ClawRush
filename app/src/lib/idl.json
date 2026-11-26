@@ -1,0 +1,3002 @@
+{
+  "address": "9UwwBZu55wdbjQm3LdDKLHck79Sr95EPZsS5zRuvkKNs",
+  "metadata": {
+    "name": "clawrush",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "ClawRush: shared skill x VRF claw cabinet on MagicBlock Ephemeral Rollups"
+  },
+  "instructions": [
+    {
+      "name": "admin_undelegate",
+      "discriminator": [
+        65,
+        251,
+        115,
+        130,
+        115,
+        221,
+        64,
+        136
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "cabinet",
+          "writable": true
+        },
+        {
+          "name": "mystery",
+          "writable": true
+        },
+        {
+          "name": "permission",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  101,
+                  114,
+                  109,
+                  105,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  58
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mystery"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                136,
+                161,
+                10,
+                196,
+                33,
+                152,
+                1,
+                214,
+                246,
+                106,
+                29,
+                60,
+                6,
+                152,
+                192,
+                102,
+                169,
+                175,
+                212,
+                217,
+                180,
+                252,
+                231,
+                71,
+                151,
+                141,
+                209,
+                5,
+                168,
+                212,
+                103,
+                82
+              ]
+            }
+          }
+        },
+        {
+          "name": "permission_program",
+          "address": "ACLseoPoyC3cBqoUtkbjZ4aDrkurZW86v19pXz2XQnp1"
+        },
+        {
+          "name": "ephemeral_vault",
+          "writable": true,
+          "address": "MagicVau1t999999999999999999999999999999999"
+        },
+        {
+          "name": "magic_program",
+          "address": "Magic11111111111111111111111111111111111111"
+        },
+        {
+          "name": "magic_context",
+          "writable": true,
+          "address": "MagicContext1111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "buy_credits",
+      "discriminator": [
+        14,
+        173,
+        58,
+        38,
+        248,
+        235,
+        115,
+        102
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "profile",
+          "writable": true
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "player_ata",
+          "writable": true
+        },
+        {
+          "name": "vault"
+        },
+        {
+          "name": "vault_ata",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "n",
+          "type": "u32"
+        }
+      ]
+    },
+    {
+      "name": "cash_out",
+      "discriminator": [
+        1,
+        110,
+        57,
+        58,
+        159,
+        157,
+        243,
+        192
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "profile",
+          "writable": true
+        },
+        {
+          "name": "magic_program",
+          "address": "Magic11111111111111111111111111111111111111"
+        },
+        {
+          "name": "magic_context",
+          "writable": true,
+          "address": "MagicContext1111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "claim_prize",
+      "discriminator": [
+        157,
+        233,
+        139,
+        121,
+        246,
+        62,
+        234,
+        235
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true
+        },
+        {
+          "name": "profile",
+          "writable": true
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "vault"
+        },
+        {
+          "name": "vault_ata",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "player_ata",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "mint_idx",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "delegate_cabinet",
+      "discriminator": [
+        110,
+        39,
+        168,
+        233,
+        240,
+        219,
+        5,
+        54
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "buffer_cabinet",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  117,
+                  102,
+                  102,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "cabinet"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                126,
+                6,
+                74,
+                161,
+                121,
+                22,
+                90,
+                141,
+                243,
+                19,
+                47,
+                123,
+                166,
+                174,
+                185,
+                105,
+                246,
+                153,
+                111,
+                142,
+                57,
+                48,
+                25,
+                145,
+                214,
+                182,
+                162,
+                187,
+                132,
+                31,
+                49,
+                132
+              ]
+            }
+          }
+        },
+        {
+          "name": "delegation_record_cabinet",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  101,
+                  108,
+                  101,
+                  103,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "cabinet"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "delegation_program"
+            }
+          }
+        },
+        {
+          "name": "delegation_metadata_cabinet",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  101,
+                  108,
+                  101,
+                  103,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110,
+                  45,
+                  109,
+                  101,
+                  116,
+                  97,
+                  100,
+                  97,
+                  116,
+                  97
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "cabinet"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "delegation_program"
+            }
+          }
+        },
+        {
+          "name": "cabinet",
+          "writable": true
+        },
+        {
+          "name": "buffer_mystery",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  117,
+                  102,
+                  102,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mystery"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                126,
+                6,
+                74,
+                161,
+                121,
+                22,
+                90,
+                141,
+                243,
+                19,
+                47,
+                123,
+                166,
+                174,
+                185,
+                105,
+                246,
+                153,
+                111,
+                142,
+                57,
+                48,
+                25,
+                145,
+                214,
+                182,
+                162,
+                187,
+                132,
+                31,
+                49,
+                132
+              ]
+            }
+          }
+        },
+        {
+          "name": "delegation_record_mystery",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  101,
+                  108,
+                  101,
+                  103,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mystery"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "delegation_program"
+            }
+          }
+        },
+        {
+          "name": "delegation_metadata_mystery",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  101,
+                  108,
+                  101,
+                  103,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110,
+                  45,
+                  109,
+                  101,
+                  116,
+                  97,
+                  100,
+                  97,
+                  116,
+                  97
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mystery"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "delegation_program"
+            }
+          }
+        },
+        {
+          "name": "mystery",
+          "writable": true
+        },
+        {
+          "name": "owner_program",
+          "address": "9UwwBZu55wdbjQm3LdDKLHck79Sr95EPZsS5zRuvkKNs"
+        },
+        {
+          "name": "delegation_program",
+          "address": "DELeGGvXpWV2fqJUhqcF5ZSYMS4JTLjteaAMARRSaeSh"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "delegate_player",
+      "discriminator": [
+        235,
+        159,
+        245,
+        102,
+        161,
+        199,
+        254,
+        89
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "buffer_profile",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  117,
+                  102,
+                  102,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "profile"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                126,
+                6,
+                74,
+                161,
+                121,
+                22,
+                90,
+                141,
+                243,
+                19,
+                47,
+                123,
+                166,
+                174,
+                185,
+                105,
+                246,
+                153,
+                111,
+                142,
+                57,
+                48,
+                25,
+                145,
+                214,
+                182,
+                162,
+                187,
+                132,
+                31,
+                49,
+                132
+              ]
+            }
+          }
+        },
+        {
+          "name": "delegation_record_profile",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  101,
+                  108,
+                  101,
+                  103,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "profile"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "delegation_program"
+            }
+          }
+        },
+        {
+          "name": "delegation_metadata_profile",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  101,
+                  108,
+                  101,
+                  103,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110,
+                  45,
+                  109,
+                  101,
+                  116,
+                  97,
+                  100,
+                  97,
+                  116,
+                  97
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "profile"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "delegation_program"
+            }
+          }
+        },
+        {
+          "name": "profile",
+          "writable": true
+        },
+        {
+          "name": "owner_program",
+          "address": "9UwwBZu55wdbjQm3LdDKLHck79Sr95EPZsS5zRuvkKNs"
+        },
+        {
+          "name": "delegation_program",
+          "address": "DELeGGvXpWV2fqJUhqcF5ZSYMS4JTLjteaAMARRSaeSh"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "drop_claw",
+      "discriminator": [
+        176,
+        101,
+        112,
+        189,
+        15,
+        40,
+        96,
+        244
+      ],
+      "accounts": [
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "profile",
+          "writable": true
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "cabinet",
+          "writable": true
+        },
+        {
+          "name": "mystery"
+        },
+        {
+          "name": "oracle_queue",
+          "writable": true
+        },
+        {
+          "name": "program_identity",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  100,
+                  101,
+                  110,
+                  116,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "vrf_program",
+          "address": "Vrf1RNUjXmQGjmQrQLvJHs9SNkvDJEsRVFPkfSQUwGz"
+        },
+        {
+          "name": "slot_hashes",
+          "address": "SysvarS1otHashes111111111111111111111111111"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "client_seed",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "expire_turn",
+      "discriminator": [
+        129,
+        137,
+        37,
+        125,
+        78,
+        220,
+        237,
+        28
+      ],
+      "accounts": [
+        {
+          "name": "signer",
+          "signer": true
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "cabinet",
+          "writable": true
+        },
+        {
+          "name": "profile",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "faucet",
+      "discriminator": [
+        0,
+        98,
+        59,
+        30,
+        144,
+        142,
+        113,
+        12
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "profile",
+          "writable": true
+        },
+        {
+          "name": "mint",
+          "writable": true
+        },
+        {
+          "name": "faucet_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  117,
+                  99,
+                  101,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_ata",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "init_cabinet",
+      "discriminator": [
+        107,
+        31,
+        225,
+        247,
+        92,
+        193,
+        37,
+        135
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true
+        },
+        {
+          "name": "cabinet",
+          "writable": true
+        },
+        {
+          "name": "mystery",
+          "writable": true
+        },
+        {
+          "name": "vault"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "cabinet_id",
+          "type": "u8"
+        },
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "CabinetParams"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "init_player",
+      "discriminator": [
+        114,
+        27,
+        219,
+        144,
+        50,
+        15,
+        228,
+        66
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "profile",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "join_queue",
+      "discriminator": [
+        157,
+        115,
+        48,
+        109,
+        65,
+        86,
+        203,
+        238
+      ],
+      "accounts": [
+        {
+          "name": "signer",
+          "signer": true
+        },
+        {
+          "name": "profile",
+          "writable": true
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "cabinet",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "move_claw",
+      "discriminator": [
+        203,
+        22,
+        32,
+        45,
+        79,
+        124,
+        91,
+        113
+      ],
+      "accounts": [
+        {
+          "name": "signer",
+          "signer": true
+        },
+        {
+          "name": "profile"
+        },
+        {
+          "name": "cabinet",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "dx",
+          "type": "i32"
+        },
+        {
+          "name": "dz",
+          "type": "i32"
+        },
+        {
+          "name": "seq",
+          "type": "u32"
+        }
+      ]
+    },
+    {
+      "name": "process_undelegation",
+      "discriminator": [
+        196,
+        28,
+        41,
+        206,
+        48,
+        37,
+        51,
+        167
+      ],
+      "accounts": [
+        {
+          "name": "base_account",
+          "writable": true
+        },
+        {
+          "name": "buffer",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  100,
+                  101,
+                  108,
+                  101,
+                  103,
+                  97,
+                  116,
+                  101,
+                  45,
+                  98,
+                  117,
+                  102,
+                  102,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "base_account"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                181,
+                183,
+                0,
+                225,
+                242,
+                87,
+                58,
+                192,
+                204,
+                6,
+                34,
+                1,
+                52,
+                74,
+                207,
+                151,
+                184,
+                53,
+                6,
+                235,
+                140,
+                229,
+                25,
+                152,
+                204,
+                98,
+                126,
+                24,
+                147,
+                128,
+                167,
+                62
+              ]
+            }
+          }
+        },
+        {
+          "name": "payer",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "account_seeds",
+          "type": {
+            "vec": "bytes"
+          }
+        }
+      ]
+    },
+    {
+      "name": "register_session_key",
+      "discriminator": [
+        69,
+        94,
+        60,
+        44,
+        49,
+        199,
+        183,
+        233
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true
+        },
+        {
+          "name": "profile",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "key",
+          "type": "pubkey"
+        },
+        {
+          "name": "expires_at",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "restock",
+      "discriminator": [
+        189,
+        179,
+        131,
+        99,
+        3,
+        202,
+        65,
+        195
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "cabinet",
+          "writable": true
+        },
+        {
+          "name": "mystery",
+          "writable": true
+        },
+        {
+          "name": "vault"
+        },
+        {
+          "name": "vault0"
+        },
+        {
+          "name": "vault1"
+        },
+        {
+          "name": "vault2"
+        },
+        {
+          "name": "vault3"
+        }
+      ],
+      "args": [
+        {
+          "name": "specs",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "CapsuleSpec"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "seal_mystery",
+      "discriminator": [
+        173,
+        186,
+        4,
+        240,
+        72,
+        4,
+        108,
+        99
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "mystery",
+          "writable": true
+        },
+        {
+          "name": "permission",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  101,
+                  114,
+                  109,
+                  105,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  58
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mystery"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                136,
+                161,
+                10,
+                196,
+                33,
+                152,
+                1,
+                214,
+                246,
+                106,
+                29,
+                60,
+                6,
+                152,
+                192,
+                102,
+                169,
+                175,
+                212,
+                217,
+                180,
+                252,
+                231,
+                71,
+                151,
+                141,
+                209,
+                5,
+                168,
+                212,
+                103,
+                82
+              ]
+            }
+          }
+        },
+        {
+          "name": "permission_program",
+          "address": "ACLseoPoyC3cBqoUtkbjZ4aDrkurZW86v19pXz2XQnp1"
+        },
+        {
+          "name": "ephemeral_vault",
+          "writable": true,
+          "address": "MagicVau1t999999999999999999999999999999999"
+        },
+        {
+          "name": "magic_program",
+          "address": "Magic11111111111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "vrf_grip_callback",
+      "discriminator": [
+        190,
+        203,
+        202,
+        235,
+        179,
+        149,
+        140,
+        96
+      ],
+      "accounts": [
+        {
+          "name": "vrf_program_identity",
+          "docs": [
+            "Signer only the VRF program can produce (scoped to this program)."
+          ],
+          "signer": true,
+          "address": "3vReerVW1nAhwCFXvQr9T14DPPzSjdAmEsAdfNoz4BZj"
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "cabinet",
+          "writable": true
+        },
+        {
+          "name": "profile",
+          "writable": true
+        },
+        {
+          "name": "mystery",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "randomness",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "nonce",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "CabinetConfig",
+      "discriminator": [
+        107,
+        19,
+        210,
+        4,
+        232,
+        62,
+        103,
+        18
+      ]
+    },
+    {
+      "name": "CabinetState",
+      "discriminator": [
+        93,
+        54,
+        40,
+        13,
+        32,
+        213,
+        238,
+        83
+      ]
+    },
+    {
+      "name": "MysteryVault",
+      "discriminator": [
+        112,
+        201,
+        214,
+        206,
+        72,
+        96,
+        248,
+        33
+      ]
+    },
+    {
+      "name": "PlayerProfile",
+      "discriminator": [
+        82,
+        226,
+        99,
+        87,
+        164,
+        130,
+        181,
+        80
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "CabinetRestocked",
+      "discriminator": [
+        34,
+        227,
+        90,
+        60,
+        104,
+        48,
+        139,
+        200
+      ]
+    },
+    {
+      "name": "CapsuleSlipped",
+      "discriminator": [
+        255,
+        34,
+        156,
+        48,
+        108,
+        82,
+        153,
+        20
+      ]
+    },
+    {
+      "name": "CapsuleWon",
+      "discriminator": [
+        54,
+        57,
+        14,
+        185,
+        253,
+        194,
+        179,
+        238
+      ]
+    },
+    {
+      "name": "ClawMoved",
+      "discriminator": [
+        163,
+        31,
+        245,
+        251,
+        0,
+        254,
+        40,
+        70
+      ]
+    },
+    {
+      "name": "DropInitiated",
+      "discriminator": [
+        196,
+        132,
+        135,
+        219,
+        239,
+        5,
+        111,
+        41
+      ]
+    },
+    {
+      "name": "GripResolved",
+      "discriminator": [
+        246,
+        87,
+        50,
+        30,
+        95,
+        144,
+        22,
+        236
+      ]
+    },
+    {
+      "name": "MysteryRevealed",
+      "discriminator": [
+        183,
+        107,
+        152,
+        10,
+        134,
+        188,
+        230,
+        227
+      ]
+    },
+    {
+      "name": "PrizeSettled",
+      "discriminator": [
+        26,
+        7,
+        8,
+        51,
+        72,
+        213,
+        33,
+        150
+      ]
+    },
+    {
+      "name": "QueueJoined",
+      "discriminator": [
+        56,
+        81,
+        235,
+        53,
+        196,
+        128,
+        138,
+        193
+      ]
+    },
+    {
+      "name": "TurnExpired",
+      "discriminator": [
+        166,
+        240,
+        171,
+        57,
+        70,
+        145,
+        22,
+        168
+      ]
+    },
+    {
+      "name": "TurnStarted",
+      "discriminator": [
+        191,
+        141,
+        29,
+        203,
+        188,
+        149,
+        147,
+        41
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "NotYourTurn",
+      "msg": "Not your turn"
+    },
+    {
+      "code": 6001,
+      "name": "TurnExpired",
+      "msg": "Turn has expired"
+    },
+    {
+      "code": 6002,
+      "name": "TurnNotExpired",
+      "msg": "Turn has not expired yet"
+    },
+    {
+      "code": 6003,
+      "name": "VrfPending",
+      "msg": "A VRF grip roll is pending"
+    },
+    {
+      "code": 6004,
+      "name": "NoVrfPending",
+      "msg": "No VRF roll is pending"
+    },
+    {
+      "code": 6005,
+      "name": "StaleVrfCallback",
+      "msg": "VRF callback does not match the pending drop"
+    },
+    {
+      "code": 6006,
+      "name": "SessionKeyNotAllowed",
+      "msg": "Signer is neither the player nor a valid session key"
+    },
+    {
+      "code": 6007,
+      "name": "SessionExpired",
+      "msg": "Session key expired"
+    },
+    {
+      "code": 6008,
+      "name": "SessionTooLong",
+      "msg": "Session duration too long"
+    },
+    {
+      "code": 6009,
+      "name": "NoCredits",
+      "msg": "Not enough credits"
+    },
+    {
+      "code": 6010,
+      "name": "AlreadyQueued",
+      "msg": "Already queued"
+    },
+    {
+      "code": 6011,
+      "name": "QueueFull",
+      "msg": "Queue is full"
+    },
+    {
+      "code": 6012,
+      "name": "StillQueued",
+      "msg": "Player is still queued or playing"
+    },
+    {
+      "code": 6013,
+      "name": "VaultInsolvent",
+      "msg": "Vault would be insolvent"
+    },
+    {
+      "code": 6014,
+      "name": "PayoutTooLarge",
+      "msg": "Prize exceeds max payout per round"
+    },
+    {
+      "code": 6015,
+      "name": "NothingToClaim",
+      "msg": "Nothing to claim"
+    },
+    {
+      "code": 6016,
+      "name": "InvalidCapsule",
+      "msg": "Invalid capsule spec"
+    },
+    {
+      "code": 6017,
+      "name": "NoFreeSlot",
+      "msg": "No free capsule slot"
+    },
+    {
+      "code": 6018,
+      "name": "WrongMint",
+      "msg": "Wrong mint or token account"
+    },
+    {
+      "code": 6019,
+      "name": "InvalidParams",
+      "msg": "Invalid parameters"
+    },
+    {
+      "code": 6020,
+      "name": "FaucetCooldown",
+      "msg": "Faucet cooldown"
+    },
+    {
+      "code": 6021,
+      "name": "Unauthorized",
+      "msg": "Unauthorized"
+    },
+    {
+      "code": 6022,
+      "name": "NotSealed",
+      "msg": "Mystery vault not sealed"
+    },
+    {
+      "code": 6023,
+      "name": "WrongCabinet",
+      "msg": "Profile belongs to another cabinet"
+    },
+    {
+      "code": 6024,
+      "name": "Overflow",
+      "msg": "Arithmetic overflow"
+    }
+  ],
+  "types": [
+    {
+      "name": "CabinetConfig",
+      "docs": [
+        "L1, never delegated. Cabinet parameters + mint registry + claimed totals."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "cabinet_id",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "vault_bump",
+            "type": "u8"
+          },
+          {
+            "name": "validator",
+            "docs": [
+              "ER validator the cabinet is delegated to (TEE validator for the private mystery vault)."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "play_price",
+            "docs": [
+              "Credit price in base units of mints[0] (demo USDC)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "turn_secs",
+            "type": "u16"
+          },
+          {
+            "name": "grip_max_bps",
+            "type": "u16"
+          },
+          {
+            "name": "grip_min_bps",
+            "type": "u16"
+          },
+          {
+            "name": "max_payout_per_round",
+            "type": {
+              "array": [
+                "u64",
+                4
+              ]
+            }
+          },
+          {
+            "name": "restock_threshold",
+            "type": "u8"
+          },
+          {
+            "name": "mints",
+            "docs": [
+              "mints[0] is the payment mint (demo USDC). All four are prize mints."
+            ],
+            "type": {
+              "array": [
+                "pubkey",
+                4
+              ]
+            }
+          },
+          {
+            "name": "total_claimed",
+            "docs": [
+              "Monotonic total paid out on L1 by `claim_prize`, per mint. Used in the solvency rule."
+            ],
+            "type": {
+              "array": [
+                "u64",
+                4
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "CabinetParams",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "validator",
+            "type": "pubkey"
+          },
+          {
+            "name": "play_price",
+            "type": "u64"
+          },
+          {
+            "name": "turn_secs",
+            "type": "u16"
+          },
+          {
+            "name": "grip_max_bps",
+            "type": "u16"
+          },
+          {
+            "name": "grip_min_bps",
+            "type": "u16"
+          },
+          {
+            "name": "max_payout_per_round",
+            "type": {
+              "array": [
+                "u64",
+                4
+              ]
+            }
+          },
+          {
+            "name": "restock_threshold",
+            "type": "u8"
+          },
+          {
+            "name": "mints",
+            "type": {
+              "array": [
+                "pubkey",
+                4
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "CabinetRestocked",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "added",
+            "type": "u8"
+          },
+          {
+            "name": "active",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CabinetState",
+      "docs": [
+        "Delegated to the ER. Everything here is public: claw, capsules, turn, queue, last result."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "cabinet_id",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "claw_x",
+            "type": "i32"
+          },
+          {
+            "name": "claw_z",
+            "type": "i32"
+          },
+          {
+            "name": "move_seq",
+            "docs": [
+              "Last client move sequence number (makes otherwise identical move txs unique)."
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "capsules",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "Capsule"
+                  }
+                },
+                12
+              ]
+            }
+          },
+          {
+            "name": "next_capsule_id",
+            "type": "u16"
+          },
+          {
+            "name": "turn_owner",
+            "docs": [
+              "Pubkey::default() when no turn is active."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "turn_started_at",
+            "type": "i64"
+          },
+          {
+            "name": "turn_expires_at",
+            "type": "i64"
+          },
+          {
+            "name": "round",
+            "type": "u64"
+          },
+          {
+            "name": "pending_vrf",
+            "type": "bool"
+          },
+          {
+            "name": "vrf_nonce",
+            "docs": [
+              "Incremented on every drop; the callback must echo it back."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "drop_at",
+            "type": "i64"
+          },
+          {
+            "name": "drop_capsule",
+            "type": "u8"
+          },
+          {
+            "name": "drop_align_bps",
+            "type": "u16"
+          },
+          {
+            "name": "queue",
+            "type": {
+              "array": [
+                "pubkey",
+                16
+              ]
+            }
+          },
+          {
+            "name": "q_head",
+            "type": "u8"
+          },
+          {
+            "name": "q_len",
+            "type": "u8"
+          },
+          {
+            "name": "total_won",
+            "docs": [
+              "Monotonic total won on the ER, per mint (claimed or not)."
+            ],
+            "type": {
+              "array": [
+                "u64",
+                4
+              ]
+            }
+          },
+          {
+            "name": "plays",
+            "type": "u64"
+          },
+          {
+            "name": "wins",
+            "type": "u64"
+          },
+          {
+            "name": "slips",
+            "type": "u64"
+          },
+          {
+            "name": "misses",
+            "type": "u64"
+          },
+          {
+            "name": "expired",
+            "type": "u64"
+          },
+          {
+            "name": "last",
+            "type": {
+              "defined": {
+                "name": "LastResult"
+              }
+            }
+          },
+          {
+            "name": "recent_wins",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "WinRecord"
+                  }
+                },
+                5
+              ]
+            }
+          },
+          {
+            "name": "recent_head",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Capsule",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "u16"
+          },
+          {
+            "name": "x",
+            "type": "i32"
+          },
+          {
+            "name": "z",
+            "type": "i32"
+          },
+          {
+            "name": "radius",
+            "type": "u16"
+          },
+          {
+            "name": "active",
+            "type": "bool"
+          },
+          {
+            "name": "kind",
+            "type": "u8"
+          },
+          {
+            "name": "mint_idx",
+            "docs": [
+              "Index into config.mints. For Mystery capsules this is 0 and `amount` is 0 until revealed."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "slip_count",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CapsuleSlipped",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "capsule_id",
+            "type": "u16"
+          },
+          {
+            "name": "x",
+            "type": "i32"
+          },
+          {
+            "name": "z",
+            "type": "i32"
+          },
+          {
+            "name": "slip_count",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CapsuleSpec",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "x",
+            "type": "i32"
+          },
+          {
+            "name": "z",
+            "type": "i32"
+          },
+          {
+            "name": "radius",
+            "type": "u16"
+          },
+          {
+            "name": "kind",
+            "type": "u8"
+          },
+          {
+            "name": "mint_idx",
+            "type": "u8"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "tier",
+            "docs": [
+              "Mystery only: tier label 1 = dust, 2 = mid, 3 = jackpot."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CapsuleWon",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "capsule_id",
+            "type": "u16"
+          },
+          {
+            "name": "kind",
+            "type": "u8"
+          },
+          {
+            "name": "mint_idx",
+            "type": "u8"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ClawMoved",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "x",
+            "type": "i32"
+          },
+          {
+            "name": "z",
+            "type": "i32"
+          },
+          {
+            "name": "seq",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DropInitiated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "round",
+            "type": "u64"
+          },
+          {
+            "name": "x",
+            "type": "i32"
+          },
+          {
+            "name": "z",
+            "type": "i32"
+          },
+          {
+            "name": "capsule_id",
+            "type": "u16"
+          },
+          {
+            "name": "align_err_bps",
+            "type": "u16"
+          },
+          {
+            "name": "vrf_nonce",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GripResolved",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "round",
+            "type": "u64"
+          },
+          {
+            "name": "capsule_id",
+            "type": "u16"
+          },
+          {
+            "name": "align_err_bps",
+            "type": "u16"
+          },
+          {
+            "name": "grip_bps",
+            "type": "u16"
+          },
+          {
+            "name": "roll_bps",
+            "type": "u16"
+          },
+          {
+            "name": "outcome",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LastResult",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "round",
+            "type": "u64"
+          },
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "capsule_id",
+            "type": "u16"
+          },
+          {
+            "name": "kind",
+            "type": "u8"
+          },
+          {
+            "name": "claw_x",
+            "type": "i32"
+          },
+          {
+            "name": "claw_z",
+            "type": "i32"
+          },
+          {
+            "name": "align_err_bps",
+            "type": "u16"
+          },
+          {
+            "name": "grip_bps",
+            "type": "u16"
+          },
+          {
+            "name": "roll_bps",
+            "type": "u16"
+          },
+          {
+            "name": "outcome",
+            "type": "u8"
+          },
+          {
+            "name": "mint_idx",
+            "type": "u8"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "tier",
+            "type": "u8"
+          },
+          {
+            "name": "ts",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MysteryEntry",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "set",
+            "type": "bool"
+          },
+          {
+            "name": "mint_idx",
+            "type": "u8"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "tier",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MysteryRevealed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "capsule_id",
+            "type": "u16"
+          },
+          {
+            "name": "mint_idx",
+            "type": "u8"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "tier",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MysteryVault",
+      "docs": [
+        "Delegated to the TEE ER with a private EphemeralPermission (no members):",
+        "nobody can read it through the RPC; only program instructions executing inside the TEE.",
+        "entries[i] belongs to cabinet.capsules[i] when that capsule is a Mystery capsule."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "cabinet_id",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "sealed",
+            "type": "bool"
+          },
+          {
+            "name": "entries",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "MysteryEntry"
+                  }
+                },
+                12
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "PlayerProfile",
+      "docs": [
+        "L1 home; delegated to the ER while the player is playing, undelegated to cash out."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "cabinet_id",
+            "docs": [
+              "Profiles are per cabinet: credits and pending prizes belong to one cabinet's mints and vault."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "credits",
+            "type": "u32"
+          },
+          {
+            "name": "plays",
+            "type": "u32"
+          },
+          {
+            "name": "wins",
+            "type": "u32"
+          },
+          {
+            "name": "session_key",
+            "docs": [
+              "Scoped session key: may sign join_queue / move_claw / drop_claw only."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "session_expires_at",
+            "type": "i64"
+          },
+          {
+            "name": "in_queue",
+            "type": "bool"
+          },
+          {
+            "name": "pending",
+            "docs": [
+              "Won but not yet claimed on L1, per mint index."
+            ],
+            "type": {
+              "array": [
+                "u64",
+                4
+              ]
+            }
+          },
+          {
+            "name": "faucet_last",
+            "type": "i64"
+          },
+          {
+            "name": "last_round",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PrizeSettled",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "winner",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "QueueJoined",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "position",
+            "type": "u8"
+          },
+          {
+            "name": "credits_left",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TurnExpired",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "round",
+            "type": "u64"
+          },
+          {
+            "name": "vrf_cancelled",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TurnStarted",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "round",
+            "type": "u64"
+          },
+          {
+            "name": "expires_at",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WinRecord",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint_idx",
+            "type": "u8"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "kind",
+            "type": "u8"
+          },
+          {
+            "name": "ts",
+            "type": "i64"
+          }
+        ]
+      }
+    }
+  ]
+}
