@@ -1,6 +1,6 @@
 # 07 — Submission
 
-Submit at https://build.magicblock.app/?stage=blitz#submit (Telegram login).
+Submit at https://build.magicblock.app/?stage=blitz#submit (Telegram login). **Prepared, not submitted**: submission needs the user's Telegram login.
 
 ## Form — prepared answers
 
@@ -9,15 +9,15 @@ Submit at https://build.magicblock.app/?stage=blitz#submit (Telegram login).
 | Project name | ClawRush |
 | Description | ClawRush is a live multiplayer claw machine you play from your phone. One shared cabinet on a MagicBlock Ephemeral Rollup: everyone sees every move live, capsules stay where they land, and your aim sets your grip chance before MagicBlock VRF rolls it. Jackpot "mystery capsules" are sealed in a Private Ephemeral Rollup so bots can't snipe them, and wins settle real tokens and collectibles to your wallet on Solana. |
 | Categories | Games, Consumer, Privacy |
-| Website | deployed app URL |
-| GitHub | public repo URL (check it opens logged-out) |
-| Pitch + demo | video link (YouTube unlisted / X / Loom) |
-| Explorer link | a VRF callback or delegation tx on the explorer |
-| Program address | ClawRush program ID |
-| Wallet address | cabinet authority wallet |
-| Fee vault address | CabinetVault address |
-| X account | your handle |
-| Team Telegram | teammates' handles |
+| Website | https://clawrush.adoranto737.workers.dev |
+| GitHub | https://github.com/LSUDOKO/ClawRush |
+| Pitch + demo | **NOT COMPLETED**: record the video (script below) and paste the link |
+| Explorer link | https://explorer.solana.com/tx/2FzY9oJrQXab58GSnLmjZ6ShPzQnAnvi4zkzxRKjLLSkd4LGGMqU4vX2WctvvKXxmZyXv5dgELXfNk1cHpWN2G7v?cluster=devnet (cabinet delegation to the TEE ER; VRF callbacks are redacted by the TEE because they write the sealed vault) |
+| Program address | 9UwwBZu55wdbjQm3LdDKLHck79Sr95EPZsS5zRuvkKNs |
+| Wallet address | 5XPdQGRroRqUycg4rCsLV5ir7owe87jLn7vDGXjkpFqH (cabinet + program upgrade authority) |
+| Fee vault address | 7FYk2SBgXR3uM7YtdP5Kg9qMF1D1T5zKF8QFGvRMojf2 (vault authority PDA; dUSDC ATA 8KARifuHeMqHxX3arzsAVbMsbyDfcXNxfhJwg3LdTob6) |
+| X account | **user to fill** |
+| Team Telegram | **user to fill** |
 
 ## README outline (judges and AI evaluators read this first)
 
@@ -51,9 +51,9 @@ Submit at https://build.magicblock.app/?stage=blitz#submit (Telegram login).
 
 ## Final checklist
 
-- [ ] App URL works on a phone, logged-out visitor can watch the cabinet
-- [ ] Repo public, README complete, proof table links all open
-- [ ] 30+ real devnet rounds played
-- [ ] Video uploaded and viewable without login
-- [ ] All optional form fields filled
-- [ ] Submitted before the deadline; confirmation seen
+- [x] App URL serves; a real round was played from it in a 390×844 browser (burner wallet). Not yet checked on a physical phone.
+- [x] Repo public, README complete (proof links checked: L1 links open; ER links for public txs open via the TEE custom RPC)
+- [x] 30+ real devnet rounds played (30 completed + 4 recorded failures on the current build; 34 on the earlier build)
+- [ ] Video uploaded and viewable without login (user)
+- [ ] X account + Telegram handles filled (user)
+- [ ] Submitted before the deadline via Telegram login; confirmation seen (user; not submitted by the agent)

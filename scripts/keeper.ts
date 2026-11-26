@@ -12,6 +12,7 @@ const NO_TURN = PublicKey.default.toBase58();
 const er = await erConn(authority);
 const pe = program(er, authority) as any;
 console.log("keeper running for cabinet", st.cabinet);
+process.on("unhandledRejection", (e: any) => console.log(new Date().toISOString(), "background rpc error ignored:", String(e?.message ?? e).slice(0, 120)));
 for (;;) {
   try {
     const c = await pe.account.cabinetState.fetch(cabinetPda());

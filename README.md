@@ -5,74 +5,210 @@
 ClawRush is a live multiplayer claw machine you play from your phone, built on Solana with
 [MagicBlock](https://docs.magicblock.gg). Everyone plays the **same cabinet** in real time, capsules
 **stay where they land**, your **aim sets your grip chance** before MagicBlock VRF rolls it, and jackpot
-**mystery capsules are sealed** in a Private Ephemeral Rollup so bots can't snipe them. Wins settle
-real tokens and collectibles to your wallet.
+**mystery capsules are sealed** inside MagicBlock's TEE-backed Private Ephemeral Rollup so bots can't read
+them. Wins settle devnet tokens and collectibles to your wallet on Solana.
 
-Built for **MagicBlock Solana Blitz v10 — Entertainment Finance**.
+Built for **MagicBlock Solana Blitz v10 (Entertainment Finance)**. Everything below runs on **Solana devnet**
+and the **MagicBlock devnet TEE validator**. Tokens are demo devnet tokens with no value.
 
-> 🚧 Work in progress — sections marked TODO get filled as the build lands.
+<p align="center"><img src="app/e2e/shots/04-aiming-side-390.png" width="260" alt="Aiming in side view"> <img src="app/e2e/shots/05-result-390.png" width="260" alt="Drop result"> <img src="app/e2e/shots/06-proof-390.png" width="260" alt="Live proof drawer"></p>
 
 ## ▶️ Try it
 
-- Live app: TODO
-- Demo video: TODO
+- **Live app:** https://clawrush.adoranto737.workers.dev (phone, portrait)
+- **Demo video:** NOT COMPLETED (to be recorded)
 
-1. Connect a wallet and sign once (creates a scoped session key: no more popups).
-2. Buy credits and join the queue.
-3. Steer, switch front/side view to judge depth, and **DROP**.
+1. Connect a devnet wallet (Phantom / Solflare, or Mobile Wallet Adapter on Android). For a quick look, the
+   app offers an opt-in, clearly labelled **devnet burner** wallet kept only in your browser. The burner path is
+   tested end-to-end in a browser; the Phantom / Solflare / MWA path is built but **not yet tested on a device**.
+2. **Start session**: one approval buys credits (free demo dUSDC from the faucet in the same transaction),
+   registers a scoped session key, and moves your profile onto the Ephemeral Rollup.
+3. **Insert credit** to join the shared queue. On your turn (15 s) steer with the joystick, switch
+   **FRONT / SIDE** view to judge depth, and **DROP**. No wallet popups while playing.
+4. **Cash out**: one approval commits your profile back to Solana and pays every prize to your wallet.
 
 ## Why ClawRush
 
-| | Typical on-chain claw | ClawRush |
+| | Typical on-chain claw (e.g. arclaw) | ClawRush |
 |---|---|---|
-| Skill matters | No, RNG only | **Aim × VRF grip** |
-| Players | One at a time, isolated | **Shared live cabinet** |
-| Persistent state | Fresh box every play | **Capsules stay where they slip** |
-| Hidden jackpots | Public or none | **Sealed in a Private ER** |
-| Fairness proof | VRF | VRF + live proof drawer + payout simulation |
+| Skill matters | No, the claw is "the show", RNG decides | **Aim × VRF grip**: 85% dead centre → 25% at the edge |
+| Players per cabinet | One at a time, isolated | **One shared live cabinet**, queue + 15 s turns |
+| Persistent state | Fresh box each play | **Capsules stay where they land**; slips move them toward the chute for the next player |
+| Hidden prizes | Box contents | **Mystery capsules sealed in a Private ER**, unreadable even to the operator's RPC token |
+| Fairness proof | VRF | VRF + on-screen proof drawer + Monte Carlo payout simulation + devnet invariant tests |
 
 ## How MagicBlock powers it
 
+Only primitives that are actually integrated and exercised on devnet are listed.
+
 | Primitive | Used for | What breaks without it |
 |---|---|---|
-| Ephemeral Rollup | Live shared cabinet, every claw move | L1 is too slow, and every move would cost a fee and a wallet popup |
-| VRF | Grip roll on every drop | The operator or a validator could rig the grip |
-| Private Ephemeral Rollup | Sealed mystery capsule contents | Bots read the jackpot location from public account data |
-| Commit / Magic Actions | Prize settlement to Solana | Prizes never leave the rollup |
+| **Ephemeral Rollup** (TEE validator `MTEWGuqx…`, `devnet-tee.magicblock.app`) | The cabinet account and player profiles are delegated; queue, every claw move, drop and turn expiry run there. Move confirmations measured ~380–780 ms from the browser. | L1 is too slow for a joystick, and every move would cost a fee and a wallet popup. |
+| **VRF** (`ephemeral_vrf_sdk`, ephemeral queue) | `drop_claw` requests randomness; `vrf_grip_callback` rolls the grip, the slip distance and miss nudges. Callback seen a median 205 ms after the drop confirmed (30 devnet rounds; max 6.5 s on a slow link). | The operator or validator could choose who wins. |
+| **Private ER / permission program** | `seal_mystery` puts a private permission with zero members on the mystery vault. The TEE RPC returns `null` for it to everyone and redacts transactions that list it (verified for restock and drop; no readable callback ever appeared either). | Bots read which `?` capsule holds the jackpot and snipe it. |
+| **Commit + undelegate** | `cash_out` (wallet-signed, on the ER) commits and undelegates the profile; `claim_prize` on L1 pays from the vault exactly once. | Prizes would stay in the rollup and never reach the wallet. |
 
-## Grip math
+We did **not** use MagicBlock Session Keys: ClawRush registers its own scoped session key in the player profile
+(see Security). Magic Actions are not used.
+
+## Architecture
+
+```mermaid
+flowchart LR
+  subgraph L1["Solana devnet"]
+    CFG[CabinetConfig + vault ATAs]
+    PROF1[PlayerProfile<br/>credits, session key, pending prizes]
+  end
+  subgraph ER["MagicBlock TEE Ephemeral Rollup"]
+    CAB[CabinetState<br/>claw, 12 capsules, queue, turn, last result]
+    PROF2[PlayerProfile delegated]
+    MYS[(MysteryVault<br/>private permission)]
+    VRF[VRF oracle]
+  end
+  PROF1 -- "delegate_player" --> PROF2
+  PROF2 -- "join_queue / move_claw / drop_claw<br/>(session key)" --> CAB
+  CAB -- "request randomness" --> VRF
+  VRF -- "vrf_grip_callback" --> CAB
+  VRF -. "reveal on win" .-> MYS
+  PROF2 -- "cash_out: commit + undelegate" --> PROF1
+  PROF1 -- "claim_prize (exactly once)" --> CFG
+```
+
+```mermaid
+sequenceDiagram
+  participant P as Player (session key)
+  participant ER as TEE Ephemeral Rollup
+  participant V as MagicBlock VRF
+  P->>ER: join_queue (turn starts if idle, else queued)
+  loop up to 15 s, ~8 Hz
+    P->>ER: move_claw(dx, dz, seq)
+  end
+  P->>ER: drop_claw(seed): pending_vrf, nonce++
+  ER->>V: request randomness (callback metas: config, cabinet, profile, mystery)
+  V->>ER: vrf_grip_callback(randomness, nonce)
+  Note over ER: align → grip → roll → HELD / SLIP / MISS<br/>HELD: prize added to profile.pending<br/>mystery capsule: contents read inside the TEE
+  ER-->>P: next queued player's turn starts
+```
+
+## Grip math (integer only, `programs/clawrush/src/math.rs`)
 
 ```
-alignment error = distance(claw, capsule) / capsule radius
-grip chance     = 85% at dead centre → 25% at the edge
-VRF roll < grip → HELD → WIN
-else            → SLIP: capsule drops part-way toward the chute and stays there
+nearest capsule c to the claw (x, z), d = isqrt(dx² + dz²)
+align_err_bps = min(10_000, d · 10_000 / c.radius)        ≥ 10_000 → MISS (claw outside the capsule)
+grip_bps      = grip_max − (grip_max − grip_min) · align_err_bps / 10_000     85% centre → 25% edge
+roll_bps      = u16(randomness[0..2]) % 10_000
+roll < grip   → HELD: prize to the player's pending balance, capsule removed
+otherwise     → SLIP: capsule moves toward the chute by u16(randomness[2..4]) % 10_000 of the way, slip_count += 1
+MISS          → up to 2 nearby capsules nudged by small offsets from randomness[4..8]
 ```
 
-## Economics
+All of it is bps and integer grid units (0–1000), unit-tested in Rust (`cargo test -p clawrush --lib`, 15 tests),
+and ported to TypeScript (`scripts/lib/math.ts`) with the same test vectors.
 
-TODO: `scripts/ev_simulation.ts` results (beginner / skilled / perfect bot EV, vault never insolvent).
+## Economics and solvency
+
+Monte Carlo over the same integer math (`scripts/ev_simulation.ts`, 100,000 turns per population; full table in
+[`scripts/ev_results.md`](scripts/ev_results.md)):
+
+| Player | Return to player | HELD | SLIP | MISS |
+|---|---|---|---|---|
+| Beginner (random target, sloppy aim) | 33.0% | 36.5% | 38.4% | 25.1% |
+| Skilled | 78.0% | 77.7% | 22.3% | 0.0% |
+| Perfect aim-bot | 86.2% | 86.3% | 13.7% | 0.0% |
+
+Skill raises returns, but even a perfect bot stays below 100% because visible prizes are capped near one play and
+jackpots live only in sealed mystery capsules (mystery EV ≈ 1 play). On chain, `restock` rejects any stock the
+vault can't cover (`VaultInsolvent`); in simulation the vault never went below its live liability.
+
+## Security model
+
+- **Session key scope.** `register_session_key` (wallet-signed, L1, ≤ 24 h) stores one key. It is accepted only by
+  `join_queue`, `move_claw`, `drop_claw`. Every other instruction derives the profile from the signing wallet.
+- **Per-cabinet profiles**: `["player", cabinet_id, wallet]`, so a prize from one cabinet can't be claimed from another
+  cabinet's vault.
+- **VRF**: only the VRF program identity can sign the callback; `pending_vrf` + a per-drop nonce allow one callback per
+  drop; a stuck VRF is cancelled after 30 s by `expire_turn`, which refunds the credit.
+
+The 7 invariants from `docs/03-ARCHITECTURE.md` are tested with **real devnet / TEE transactions** on a separate test
+cabinet with a 3 dUSDC vault: [`tests/invariants.ts`](tests/invariants.ts) → [`docs/INVARIANTS.md`](docs/INVARIANTS.md),
+**23/23 checks pass**.
+
+| # | Invariant | Tested by (expected rejection) |
+|---|---|---|
+| 1 | Only the turn owner or their valid session key can move / drop | other player's key → `NotYourTurn`; unregistered key → `SessionKeyNotAllowed`; expired session → `SessionExpired` |
+| 2 | Session key can't buy, claim, cash out, restock | `ConstraintSeeds` ×3, `ConstraintHasOne`; session > 24 h → `SessionTooLong` |
+| 3 | Only the VRF identity can call the callback; one callback per drop | forged callback → `Unauthorized`; each drop resolved by exactly one callback |
+| 4 | `expire_turn` works for anyone after expiry, never before | early → `TurnNotExpired`; after expiry an unrelated key clears it |
+| 5 | Restock can't break solvency | over-stock → `VaultInsolvent`; solvent restock accepted |
+| 6 | A prize is paid exactly once | claim while delegated → `AccountOwnedByWrongProgram`; first claim pays; second → `NothingToClaim`; cabinet-1 profile on cabinet 2 → `ConstraintSeeds` |
+| 7 | Mystery vault unreadable | `getAccountInfo` returns `null` with no token, a stranger's token and the authority's token |
+
+Shared queue behaviour (B queues during A's turn, B's turn starts when A's VRF result lands, timeouts) is tested by
+[`scripts/e2e_two_player.ts`](scripts/e2e_two_player.ts) → [`docs/E2E_TWO_PLAYER.md`](docs/E2E_TWO_PLAYER.md), **8/8**.
 
 ## On-chain proof (devnet)
 
 | Item | Link |
 |---|---|
-| Program ID | TODO |
-| Cabinet account | TODO |
-| Vault | TODO |
-| Delegation tx | TODO |
-| VRF request / callback | TODO |
-| Mystery reveal | TODO |
-| Commit + payout | TODO |
+| Program | [`9UwwBZu55wdbjQm3LdDKLHck79Sr95EPZsS5zRuvkKNs`](https://explorer.solana.com/address/9UwwBZu55wdbjQm3LdDKLHck79Sr95EPZsS5zRuvkKNs?cluster=devnet) · [latest deploy](https://explorer.solana.com/tx/MhDJFzv8Dz9rhgfKMQKFEeRu6WdFiiYwv1Dh8vfrTsfNMrL8Hr43iCo23M8JW8mkQVZhc32XBX7KitYPGb4EqTe?cluster=devnet) |
+| Cabinet config (L1) | [`CLaFhSGw…`](https://explorer.solana.com/address/CLaFhSGwWV96RqhR49LoWyxfrJo9e7jQGbeDWTdckWDv?cluster=devnet) · [init_cabinet tx](https://explorer.solana.com/tx/4nAPxqpwKGe27hHYs7qgHnV5Cb4apEjhhFD1K3zsuqLJqbsLurNfjZ7MX31D8PAiysj9gMszQwtGU5PBadF1A7CB?cluster=devnet) |
+| Cabinet state (delegated) | [`EUK77P9z…`](https://explorer.solana.com/address/EUK77P9zFtQDdivoMEcktcGfs9wHPdyydbtiG1P62w5S?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app) on the TEE ER |
+| Delegation to the TEE ER | [delegate_cabinet tx](https://explorer.solana.com/tx/2FzY9oJrQXab58GSnLmjZ6ShPzQnAnvi4zkzxRKjLLSkd4LGGMqU4vX2WctvvKXxmZyXv5dgELXfNk1cHpWN2G7v?cluster=devnet) |
+| Prize vault (authority PDA) | [`7FYk2SBg…`](https://explorer.solana.com/address/7FYk2SBgXR3uM7YtdP5Kg9qMF1D1T5zKF8QFGvRMojf2?cluster=devnet) · [dUSDC vault ATA](https://explorer.solana.com/address/8KARifuHeMqHxX3arzsAVbMsbyDfcXNxfhJwg3LdTob6?cluster=devnet) |
+| Player session start (buy credits, session key, delegate) | [buy_credits](https://explorer.solana.com/tx/2MWZDtPEuU1xN4YQQSNn7rTVGFDFVxuQaaVfuKniQtC99K4i2Q9hBvrkp5mHtaQ51qWW2MYrirqJtYNaX1AcjxJJ?cluster=devnet) · [register_session_key](https://explorer.solana.com/tx/2XfZwLabdThUYDed5gu8oSkBLYBDsxhD52x7JTq2ze5c8sDwDKCK24rrWkxCd5tun5yFUtJQHCBJr3GvqpFTW9UX?cluster=devnet) · [delegate_player](https://explorer.solana.com/tx/3WZTo93oLX9EkRG9KZgAFrcsgmwbXuU96XVrbJAZ8JQVV198Anq6jEtaoEHH2T77EXQwUw2fvQQtkkn3NpkXMKVB?cluster=devnet) |
+| Queue + claw moves on the ER (public) | [join_queue](https://explorer.solana.com/tx/5YVKpXCc7WBBCbv5uZmTRqRBjrmahPtdxkY3aqK8nbKcrHe3Z7BHfvhvXR33MQ1pApQmwgASPZxhVinESN7PsreH?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app) · [move_claw](https://explorer.solana.com/tx/5bjqZesyUdyan4CPhKdt9gRFCTb8DbpzTh6bKSNnTpqtREKbcghidCi3rbk3f6yRQdm7TrNBb3tQyze71peA9cQr?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app) · [expire_turn](https://explorer.solana.com/tx/4rQf8824sYxLVToTDWvckw9YXY9ZbVxEsWXF8ULEeZ9hhzywtQ7mJSRQeuRSL6zsuofCqVasJSdsMDmH8GD6GKcc?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app) |
+| VRF request (drop_claw) | [drop_claw](https://explorer.solana.com/tx/2StUx3hxkW25qT8fPCcSZMQqebv43yCbN2kCFoJeFfthEKs76uG1gmeVhPjswsu4PyHp1ruSjzsR3zmP8SaJMA1p?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app): **contents redacted by the TEE** (it lists the sealed mystery vault) |
+| VRF callback / mystery reveal | NOT COMPLETED as a public link: callback transactions write the sealed vault and never appear readable on the TEE RPC. The result is public in the cabinet account's `last` field (round, align, grip, roll, outcome, prize) and shown in the app's proof drawer. |
+| Commit back to Solana (cash_out) | [ER cash_out](https://explorer.solana.com/tx/4YqD5r8d2NEf4vbcjwec5HWrJMXrNqMkoVf9x337Ryd9aDXXeT96KcqZcjaUKh6Qai52syK6mA1mcSTRtiAx17s7?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app) → [L1 commit + undelegate](https://explorer.solana.com/tx/4Uhei7iDrD45vqoh3L2JNuCQ2ChrnB137yoy8er1GBYACBNhHRTouFFUJ6Yfg2uchdfWWyx5E1bjBkuy4T3bBeys?cluster=devnet) |
+| Prize payout (claim_prize, L1) | [5 dUSDC to playerA](https://explorer.solana.com/tx/5Z7gTStyPDucoquKDvk8qKuHcuFAgTyMgzgWeG6MiR1cxByNCRK5mSWhWaxUEFAqiPz6vu4WqYPF2NfqAARKMVPS?cluster=devnet) after its [L1 commit](https://explorer.solana.com/tx/5SrdtUc7YSbMCXgqeEo5UuhoWnkGs8gfho18WyWoPAnQbHvkahZBmpeSRCMAbyKco43A1xm53A4jkbh3vFaYvpCJ?cluster=devnet); every claim is listed in [`docs/DEVNET_ROUNDS.md`](docs/DEVNET_ROUNDS.md) |
+| Real rounds | 34 attempts on the current build: **30 completed** (HELD 17 · SLIP 5 · MISS 8), **4 failed and recorded** (3 × `TurnExpired` when a slow link pushed the drop past 15 s, 1 script crash on a TEE connect timeout). Median VRF callback 205 ms. [`docs/DEVNET_ROUNDS.md`](docs/DEVNET_ROUNDS.md). Plus 34/34 on the earlier build: [`docs/DEVNET_ROUNDS.v1.md`](docs/DEVNET_ROUNDS.v1.md) |
+
+ER transaction links open Solana Explorer pointed at the TEE RPC (`customUrl`). Transactions that only touch public
+accounts (join, move, expire, cash out) are fully readable there. Anything touching the sealed vault comes back as an
+empty stub, which is the privacy guarantee working (checked with a control tx in
+[`scripts/check_tx_privacy.ts`](scripts/check_tx_privacy.ts), decision 14 in [`docs/DECISIONS.md`](docs/DECISIONS.md)).
+
+## On-chain vs client-side
+
+On chain: queue and turns, every claw position, drop, VRF roll, grip/slip/miss resolution, capsule positions and slip
+counts, mystery contents and reveal, credits, pending prizes, payouts, solvency checks.
+
+Client-side only: the 3D-ish canvas, claw sway and drop/lift animation, sounds and haptics, the joystick's
+predicted claw position between confirmations (it snaps to chain state), and the devnet burner wallet.
+
+Operator process: [`scripts/keeper.ts`](scripts/keeper.ts) restocks when capsules run low (restock writes the private
+vault, so only the cabinet authority can do it) and clears expired turns (also permissionless, and the app does it
+too). It runs on the operator's machine, not as a hosted service.
 
 ## Run locally
 
 ```bash
-anchor build && anchor test
-anchor deploy --provider.cluster devnet
-npx ts-node scripts/setup_devnet.ts
-cd app && npm install && npm run dev
+# program
+anchor build
+cargo test -p clawrush --lib                     # 15 math unit tests
+solana program deploy target/deploy/clawrush.so --program-id <your program keypair> --url devnet
+
+# devnet setup (mints, cabinet, delegation, sealed mystery vault, stock, two test players)
+npm install
+npx tsx scripts/setup_devnet.ts
+npx tsx scripts/lib/math.test.ts                 # TS port matches the Rust vectors
+npx tsx scripts/ev_simulation.ts                 # writes scripts/ev_results.md
+ROUNDS=32 PLAYERS=playerA,playerB npx tsx scripts/devnet_rounds.ts
+npx tsx scripts/e2e_two_player.ts
+CABINET_ID=2 SMALL_VAULT=1 npx tsx scripts/setup_devnet.ts && CABINET_ID=2 npx tsx tests/invariants.ts
+npx tsx scripts/keeper.ts                         # keep the cabinet stocked
+
+# app
+cd app && npm install && npm run dev             # npm run build → static export in app/out
 ```
+
+Toolchain and every design decision with its trade-off: [`docs/DECISIONS.md`](docs/DECISIONS.md).
+
+## What's next
+
+- Pass the mystery vault to `drop_claw` as a derived address instead of an account, so drop transactions stay public.
+- Spectator count and a second camera angle; real collectible NFTs (Metaplex) instead of demo collectible tokens.
+- Host the keeper (restock + turn clearing) instead of running it locally.
 
 ## License
 

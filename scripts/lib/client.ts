@@ -117,7 +117,9 @@ export class Player {
       const dx = Math.max(-80, Math.min(80, tx - x));
       const dz = Math.max(-80, Math.min(80, tz - z));
       x += dx; z += dz;
-      sends.push(this.move(dx, dz));
+      const m = this.move(dx, dz);
+      m.catch(() => {}); // handled by Promise.all below; avoids an unhandled rejection while later moves are still being sent
+      sends.push(m);
       await sleep(60);
     }
     await Promise.all(sends);
