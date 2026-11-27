@@ -104,8 +104,12 @@ const pe = program(erAdmin, admin);
 let cab = await pe.account.cabinetState.fetch(cabinetPda());
 const vaultBal = (await getAccount(base, vaultAta(0))).amount;
 const tooMuch = vaultBal - liability0(cab) + U; // 1 dUSDC more than the vault can cover
-await rejects("5", `restock of a ${Number(tooMuch) / 1e6} dUSDC capsule into a ${Number(vaultBal) / 1e6} dUSDC vault is rejected`, ["VaultInsolvent"], async () =>
-  sendTx(erAdmin, [await restockIx(admin.publicKey, [{ x: 300, z: 300, radius: 60, kind: 0, mintIdx: 0, amount: tooMuch, tier: 0 }])], [admin]));
+// Split across capsules of at most 20 dUSDC so each stays under the per-capsule payout cap and the
+// solvency check (not PayoutTooLarge) is what rejects the batch.
+const parts = Number((tooMuch + 20n * U - 1n) / (20n * U));
+const each = (tooMuch + BigInt(parts) - 1n) / BigInt(parts);
+await rejects("5", `restock of ${parts} capsule(s) totalling ${Number(each * BigInt(parts)) / 1e6} dUSDC into a ${Number(vaultBal) / 1e6} dUSDC vault is rejected`, ["VaultInsolvent"], async () =>
+  sendTx(erAdmin, [await restockIx(admin.publicKey, Array.from({ length: parts }, (_, i) => ({ x: 300 + 120 * i, z: 300, radius: 60, kind: 0, mintIdx: 0, amount: each, tier: 0 })))], [admin]));
 if (!cab.capsules.some((c: any) => c.active && c.kind === 0 && c.mintIdx === 0)) {
   try {
     const r = await sendTx(erAdmin, [await restockIx(admin.publicKey, [{ x: 500, z: 500, radius: 60, kind: 0, mintIdx: 0, amount: U / 2n, tier: 0 }])], [admin]);

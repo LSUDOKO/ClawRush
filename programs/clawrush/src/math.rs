@@ -332,4 +332,126 @@ mod tests {
         assert!(is_solvent(u64::MAX, u64::MAX, u64::MAX, u64::MAX)); // no overflow
         assert!(!is_solvent(0, 0, u64::MAX, 1));
     }
+
+    // ── Added for TESTING.md: edge cases at the grid and radius limits ──
+
+    /// Deployed cabinets use grip_max_bps = 8_500 and grip_min_bps = 2_500 (scripts/setup_devnet.ts).
+    const DEPLOYED_GRIP_MAX: u16 = 8_500;
+    const DEPLOYED_GRIP_MIN: u16 = 2_500;
+
+    #[test]
+    fn miss_threshold_is_the_capsule_edge_for_every_radius() {
+        for r in MIN_RADIUS..=MAX_RADIUS {
+            let inside = align_err_bps(r as u64 - 1, r);
+            let edge = align_err_bps(r as u64, r);
+            assert!(inside < BPS as u16, "r={r}");
+            assert_eq!(edge, BPS as u16, "r={r}");
+            // Just inside the edge still grips at no less than grip_min; at the edge it is always a MISS.
+            let g = grip_bps(inside, DEPLOYED_GRIP_MAX, DEPLOYED_GRIP_MIN);
+            assert!(g >= DEPLOYED_GRIP_MIN && g <= DEPLOYED_GRIP_MAX);
+            assert_ne!(outcome(inside, g, 0), OUTCOME_MISS);
+            for roll in [0u16, 4_999, 9_999] {
+                assert_eq!(outcome(edge, grip_bps(edge, DEPLOYED_GRIP_MAX, DEPLOYED_GRIP_MIN), roll), OUTCOME_MISS);
+            }
+        }
+    }
+
+    #[test]
+    fn grip_stays_between_deployed_endpoints_over_the_whole_grid() {
+        // Claw anywhere on the grid (step 50), capsule at every corner/centre, min/mid/max radius.
+        let caps = [(0, 0), (GRID, 0), (0, GRID), (GRID, GRID), (500, 500)];
+        for &(cx, cz) in caps.iter() {
+            for r in [MIN_RADIUS, 60, MAX_RADIUS] {
+                for x in (0..=GRID).step_by(50) {
+                    for z in (0..=GRID).step_by(50) {
+                        let e = align_err_bps(distance(x, z, cx, cz), r);
+                        let g = grip_bps(e, DEPLOYED_GRIP_MAX, DEPLOYED_GRIP_MIN);
+                        assert!((DEPLOYED_GRIP_MIN..=DEPLOYED_GRIP_MAX).contains(&g));
+                        if e == 0 {
+                            assert_eq!(g, DEPLOYED_GRIP_MAX);
+                        }
+                        if e as u64 >= BPS {
+                            assert_eq!(g, DEPLOYED_GRIP_MIN);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn distance_and_alignment_at_grid_corners_with_max_radius() {
+        let corners = [(0, 0), (GRID, 0), (0, GRID), (GRID, GRID)];
+        for &(ax, az) in corners.iter() {
+            for &(bx, bz) in corners.iter() {
+                let d = distance(ax, az, bx, bz);
+                assert!(d <= 1414);
+                assert_eq!(d, distance(bx, bz, ax, az));
+                let e = align_err_bps(d, MAX_RADIUS);
+                assert!(e as u64 <= BPS);
+                assert_eq!(e == 0, d == 0);
+            }
+        }
+        // Any claw-to-capsule distance across the grid is far outside the largest capsule.
+        assert_eq!(align_err_bps(distance(0, 0, GRID, GRID), MAX_RADIUS), BPS as u16);
+    }
+
+    #[test]
+    fn slip_from_every_grid_edge_stays_on_grid_and_out_of_the_chute() {
+        let mut starts = vec![];
+        for v in (0..=GRID).step_by(100) {
+            starts.extend_from_slice(&[(v, 0), (v, GRID), (0, v), (GRID, v)]);
+        }
+        starts.extend_from_slice(&[(CHUTE_X, CHUTE_Z), (CHUTE_X + 1, CHUTE_Z), (CHUTE_X, CHUTE_Z - 1)]);
+        // Interior points near the chute, where the keep-out push-back actually fires (within ~300 units).
+        for x in (600..=GRID).step_by(20) {
+            for z in (600..=GRID).step_by(20) {
+                starts.push((x, z));
+            }
+        }
+        // Every fraction slip_frac_bps can produce (plus 0). A 100% pull (unreachable on-chain) can land
+        // 2 units inside the keep-out because the push-back divides by a floored distance.
+        let fracs: Vec<u16> = std::iter::once(0).chain((SLIP_MIN_BPS..SLIP_MIN_BPS + SLIP_SPAN_BPS).map(|f| f as u16)).collect();
+        for &(x, z) in starts.iter() {
+            let d0 = distance(x, z, CHUTE_X, CHUTE_Z);
+            for &f in fracs.iter() {
+                let (nx, nz) = slip_toward_chute(x, z, f);
+                assert!((0..=GRID).contains(&nx) && (0..=GRID).contains(&nz), "({x},{z}) f={f}");
+                let d1 = distance(nx, nz, CHUTE_X, CHUTE_Z);
+                // Never inside the keep-out (1 unit of integer rounding allowed) ...
+                assert!(d1 + 1 >= CHUTE_KEEP_OUT as u64, "({x},{z}) f={f} d1={d1}");
+                // ... and never pushed further away, unless it started inside the keep-out.
+                if d0 >= CHUTE_KEEP_OUT as u64 {
+                    assert!(d1 <= d0, "({x},{z}) f={f}");
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn slip_moves_by_the_rolled_fraction_of_the_path() {
+        // Far from the chute the keep-out never applies, so the move is exactly frac of the vector.
+        let (x, z) = (0, 0);
+        for f in [1_500u16, 3_000, 6_499] {
+            let (nx, nz) = slip_toward_chute(x, z, f);
+            assert_eq!(nx, (CHUTE_X as i64 * f as i64 / BPS as i64) as i32);
+            assert_eq!(nz, (CHUTE_Z as i64 * f as i64 / BPS as i64) as i32);
+        }
+    }
+
+    #[test]
+    fn move_and_nudge_never_leave_the_grid_from_any_corner() {
+        let corners = [(0, 0), (GRID, 0), (0, GRID), (GRID, GRID)];
+        for &(x, z) in corners.iter() {
+            for d in [-MAX_STEP - 1, -MAX_STEP, 0, MAX_STEP, MAX_STEP + 1, i32::MIN, i32::MAX] {
+                let (nx, nz) = apply_move(x, z, d, d);
+                assert!((0..=GRID).contains(&nx) && (0..=GRID).contains(&nz));
+                assert!((nx - x).abs() <= MAX_STEP && (nz - z).abs() <= MAX_STEP);
+            }
+            for b in 0..=255u8 {
+                let v = clamp_grid(x + nudge_offset(b));
+                assert!((0..=GRID).contains(&v));
+            }
+        }
+    }
 }
