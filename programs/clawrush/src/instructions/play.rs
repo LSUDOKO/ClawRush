@@ -55,9 +55,10 @@ pub fn join_queue(ctx: Context<JoinQueue>) -> Result<()> {
     let now = Clock::get()?.unix_timestamp;
     let p = &mut ctx.accounts.profile;
     authorize(p, &ctx.accounts.signer.key(), now)?;
-    require!(!p.in_queue, ClawError::AlreadyQueued);
     require!(p.credits > 0, ClawError::NoCredits);
     let cab = &mut ctx.accounts.cabinet;
+    // `in_queue` may be stale after the crank ended this player's turn; trust the cabinet.
+    require!(!p.in_queue || !crate::instructions::auto::is_queued(cab, &p.authority), ClawError::AlreadyQueued);
     let turn_secs = ctx.accounts.config.turn_secs;
     let position;
     if !cab.has_turn() {
