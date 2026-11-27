@@ -23,6 +23,9 @@ A live multiplayer claw machine you play from your phone, on Solana + MagicBlock
   <img src="app/e2e/shots/09-orbit-390.png" width="190" alt="Orbit spectator view">
 </p>
 
+**[Watch the gameplay video (4:34, recorded on a real Android phone)](demo/clawrush_phone_gameplay.mp4)**: every move,
+drop, VRF roll and payout in it is a real devnet transaction.
+
 Built for **MagicBlock Solana Blitz v10 · Entertainment Finance**, answering MagicBlock's own prompt:
 *"An arcade claw you play from your phone, stocked with collectibles and tokens instead of plush toys."*
 
@@ -54,8 +57,11 @@ Rollup so bots can't read them. Wins pay devnet tokens and collectibles to your 
 **https://clawrush.pages.dev** — phone, portrait.
 
 1. **Connect** a devnet wallet: Phantom, Solflare, or Mobile Wallet Adapter on Android. An opt-in, clearly labelled
-   **devnet burner** wallet (stored only in your browser) is there for a quick look. The burner path is tested
-   end-to-end in a browser; the Phantom / Solflare / MWA path is built but **not yet tested on a real device**.
+   **devnet burner** wallet (stored only in your browser) is there for a quick look. Tested on a real Android phone:
+   the burner path end to end, and Solflare (devnet) for connect, session start and play. **Known limitation:**
+   Solflare mobile refuses to sign the cash-out, because that transaction goes to the Ephemeral Rollup and carries an
+   ER blockhash it reports as "network mismatch". A Solflare session can play but not cash out yet; use the burner
+   or a desktop wallet to see the payout.
    You need a little devnet SOL for fees (https://faucet.solana.com).
 2. **Start session** — one approval buys credits (free demo dUSDC from the on-chain faucet in the same transaction),
    registers a scoped session key, and moves your profile onto the Ephemeral Rollup.
@@ -243,6 +249,7 @@ ER links open Solana Explorer pointed at the TEE RPC.
 | Commit back to Solana (earlier build) | [ER cash_out](https://explorer.solana.com/tx/4YqD5r8d2NEf4vbcjwec5HWrJMXrNqMkoVf9x337Ryd9aDXXeT96KcqZcjaUKh6Qai52syK6mA1mcSTRtiAx17s7?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app) → [L1 commit + undelegate](https://explorer.solana.com/tx/4Uhei7iDrD45vqoh3L2JNuCQ2ChrnB137yoy8er1GBYACBNhHRTouFFUJ6Yfg2uchdfWWyx5E1bjBkuy4T3bBeys?cluster=devnet) |
 | Prize payout (fallback claim) | [5 dUSDC to a player](https://explorer.solana.com/tx/5Z7gTStyPDucoquKDvk8qKuHcuFAgTyMgzgWeG6MiR1cxByNCRK5mSWhWaxUEFAqiPz6vu4WqYPF2NfqAARKMVPS?cluster=devnet); every claim in [`docs/DEVNET_ROUNDS.md`](docs/DEVNET_ROUNDS.md) |
 | Metaplex Token Metadata | [dGEM](https://explorer.solana.com/tx/45VpQq6cqM25xbyLxWmHtkkVBc3P2W5qh7ft5rzGkoLF76QpRrjDM1pHPk7uA4rLeoy2nxfoJhNryam2WxqeGY8g?cluster=devnet) · [KOI](https://explorer.solana.com/tx/bCWqCStTSpUMpVQZdE7MCw6NiPMzc97Kmoxm7ZXaMxkCYRvA1WTMCMMeU8XzPbRqPnjSxCdKLP96AeLx8cw7Bmr?cluster=devnet) · [ROBO](https://explorer.solana.com/tx/5xuaQGX6pdphrVicPyaLMsfzrjcZm2dQJ7utgnwEuvR5sWAegoVjS6fyGpgemSXV8xgvz5JMmQ9t5u29Xk22SGCQ?cluster=devnet) |
+| Phone gameplay (burner, Chrome on Android) | [L1 commit + undelegate + settle_prizes](https://explorer.solana.com/tx/5uehoYGrCnNN6obWDi7jrcYunLKzaXwwUDp2KWLE8yxP27LemTe2kDECePG8vn2iVGNpkwnavbe47bhJQfvFM4Vg?cluster=devnet): 1.1 dUSDC + 75 dGEM won on the phone (incl. a mystery capsule) and paid in one settlement. Shown in the [video](demo/clawrush_phone_gameplay.mp4). |
 | Real rounds | 34 attempts on the measured build: **30 completed** (HELD 17 · SLIP 5 · MISS 8), **4 failed and recorded** (3 × `TurnExpired` on a slow link, 1 TEE connect timeout). [`docs/DEVNET_ROUNDS.md`](docs/DEVNET_ROUNDS.md) |
 
 KOI and ROBO have 0 decimals, so Token Metadata classes them as `FungibleAsset` collectibles (not 1-of-1 NFTs).
@@ -308,8 +315,9 @@ docs/                 hackathon brief, product, architecture, economics, decisio
 
 - Restock from the crank as well (needs mystery contents sealed by a program-held secret instead of an operator key).
 - Real 1-of-1 collectible NFTs (Metaplex Core) minted on win, alongside the fungible prize tokens.
-- Test the Phantom / Solflare / Mobile Wallet Adapter path on real phones.
-- More cabinets with different prize pools, and a demo video.
+- Let Solflare mobile cash out: replace the wallet-signed ER cash-out with a wallet-signed message the program
+  verifies, so no ER-blockhash transaction needs a wallet signature. Test Phantom and MWA on phones too.
+- More cabinets with different prize pools.
 
 ## License
 

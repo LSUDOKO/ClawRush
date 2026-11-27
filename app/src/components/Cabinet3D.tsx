@@ -19,7 +19,6 @@ const CAMS: Record<Exclude<View, "orbit">, { pos: THREE.Vector3; look: THREE.Vec
   front: { pos: new THREE.Vector3(0, 10.4, 9.9), look: new THREE.Vector3(0, 0.5, -0.5) },
   side: { pos: new THREE.Vector3(9.9, 10.4, 0), look: new THREE.Vector3(-0.5, 0.5, 0) },
 };
-const SHELL = ["#ffc21f", "#2fd8ff", "#ff6a3d", "#b9c4dc"];
 const REST_Y = 3.9, DROP_Y = 1.45, CEIL = 8.5;
 
 type Entry = { g: THREE.Group; target: THREE.Vector3; key: string; dying?: number; born: number };
@@ -27,67 +26,61 @@ type Entry = { g: THREE.Group; target: THREE.Vector3; key: string; dying?: numbe
 function makeMats() {
   const phys = (o: THREE.MeshPhysicalMaterialParameters) => new THREE.MeshPhysicalMaterial(o);
   return {
-    shell: SHELL.map((c) => phys({ color: c, metalness: 0.05, roughness: 0.16, clearcoat: 1, clearcoatRoughness: 0.04, sheen: 0.4, sheenColor: new THREE.Color("#ffffff") })),
-    mysteryShell: phys({ color: "#5a1a9a", metalness: 0.4, roughness: 0.25, clearcoat: 1, emissive: "#3a0f63", emissiveIntensity: 0.5 }),
-    glass: phys({ color: "#eaf6ff", metalness: 0, roughness: 0.03, clearcoat: 1, transparent: true, opacity: 0.2, depthWrite: false, envMapIntensity: 3, specularIntensity: 1, side: THREE.DoubleSide }),
     chrome: phys({ color: "#eef2ff", metalness: 1, roughness: 0.12, clearcoat: 1, envMapIntensity: 1.6 }),
-    // Plush prize inside each capsule (AI-generated art, one per prize mint), drawn as a camera-facing sprite.
-    plush: ["p_coin", "p_gem", "p_koi", "p_robo"].map((n) => {
+    // Plush prize (AI-generated art, one per prize mint) standing on the floor as a camera-facing sprite.
+    plush: ["p_coin", "p_gem", "p_koi", "p_robo", "p_mystery"].map((n) => {
       const t = new THREE.TextureLoader().load(`/art/${n}.webp`);
       t.colorSpace = THREE.SRGBColorSpace;
-      return new THREE.SpriteMaterial({ map: t, depthWrite: false });
+      t.anisotropy = 8;
+      return new THREE.SpriteMaterial({ map: t, alphaTest: 0.35 });
     }),
-    mysteryGlass: phys({ color: "#2b0a4a", metalness: 0.1, roughness: 0.08, clearcoat: 1, transparent: true, opacity: 0.62, emissive: "#55e01a", emissiveIntensity: 0.18, depthWrite: false }),
-    band: phys({ color: "#ffffff", metalness: 0.2, roughness: 0.3 }),
+    shadow: new THREE.MeshBasicMaterial({ map: blobTexture(), transparent: true, depthWrite: false }),
     goldBand: phys({ color: "#ffd84a", metalness: 1, roughness: 0.18, emissive: "#ff9d00", emissiveIntensity: 0.25 }),
     gold: phys({ color: "#ffcf3a", metalness: 1, roughness: 0.16, clearcoat: 0.6 }),
-    gem: phys({ color: "#7ef9ff", metalness: 0.1, roughness: 0.02, emissive: "#16c8ff", emissiveIntensity: 0.55, flatShading: true }),
-    koi: phys({ color: "#ff7b2e", metalness: 0.2, roughness: 0.25, flatShading: true }),
-    white: phys({ color: "#fff6ea", roughness: 0.4 }),
-    robo: phys({ color: "#dfe6f5", metalness: 0.9, roughness: 0.2 }),
-    eye: phys({ color: "#3df5ff", emissive: "#3df5ff", emissiveIntensity: 2 }),
     slime: phys({ color: "#a6ff2e", emissive: "#7dff10", emissiveIntensity: 1.2, roughness: 0.2 }),
   };
 }
 type Mats = ReturnType<typeof makeMats>;
 
 const GEO = {
-  top: new THREE.SphereGeometry(1, 36, 18, 0, Math.PI * 2, 0, Math.PI / 2),
-  bottom: new THREE.SphereGeometry(1, 36, 18, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2),
   band: new THREE.TorusGeometry(1, 0.06, 10, 48),
-  coin: new THREE.CylinderGeometry(0.36, 0.36, 0.09, 28),
-  gem: new THREE.OctahedronGeometry(0.42, 0),
-  koi: new THREE.IcosahedronGeometry(0.36, 0),
-  dot: new THREE.SphereGeometry(0.1, 12, 8),
-  box: new THREE.BoxGeometry(0.5, 0.42, 0.42),
-  orb: new THREE.SphereGeometry(0.34, 24, 16),
 };
 
-// One prize capsule: coloured base, clear dome, white band, readable contents inside.
-function buildCapsule(kind: number, mintIdx: number, r: number, M: Mats) {
+export const PLUSH_H = 3.6; // plush height in capsule radii (labels and the held prize use it)
+export const MYSTERY_H = 2.6; // sealed mystery capsule art height in radii
+
+// Soft round contact shadow under each plush.
+function blobTexture() {
+  const c = document.createElement("canvas"); c.width = c.height = 128;
+  const g = c.getContext("2d")!;
+  const gr = g.createRadialGradient(64, 64, 4, 64, 64, 62);
+  gr.addColorStop(0, "rgba(0,0,0,0.6)"); gr.addColorStop(1, "rgba(0,0,0,0)");
+  g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
+  return new THREE.CanvasTexture(c);
+}
+
+// A plush prize stands directly on the floor (no shell); rare prizes get a gold ring.
+function buildPlush(kind: number, mintIdx: number, r: number, M: Mats) {
   const g = new THREE.Group();
   const body = new THREE.Group();
-  const mystery = kind === 2;
-  const bottom = new THREE.Mesh(GEO.bottom, mystery ? M.mysteryShell : M.shell[mintIdx] ?? M.shell[0]);
-  const top = new THREE.Mesh(GEO.top, mystery ? M.mysteryGlass : M.glass);
-  const band = new THREE.Mesh(GEO.band, kind === 1 ? M.goldBand : M.band);
-  band.rotation.x = Math.PI / 2;
-  bottom.castShadow = true;
   const inner = new THREE.Group();
-  const plush = !mystery ? M.plush[mintIdx] : undefined;
-  if (mystery) inner.add(new THREE.Mesh(GEO.orb, M.slime));
-  else if (plush) { const sp = new THREE.Sprite(plush); sp.scale.setScalar(2.3); sp.position.y = 0.62; sp.renderOrder = 1; inner.add(sp); top.renderOrder = 2; }
-  else if (mintIdx === 0) for (let i = 0; i < 3; i++) { const c = new THREE.Mesh(GEO.coin, M.gold); c.position.set((i - 1) * 0.2, 0.12 + (i === 1 ? 0.12 : 0), 0); c.rotation.x = Math.PI / 2 - 0.35; c.rotation.z = 0.4 * (i - 1); inner.add(c); }
-  else if (mintIdx === 1) { const m = new THREE.Mesh(GEO.gem, M.gem); m.position.y = 0.15; inner.add(m); }
-  else if (mintIdx === 2) { const m = new THREE.Mesh(GEO.koi, M.koi); m.scale.set(1.25, 0.8, 0.8); m.position.y = 0.1; inner.add(m); for (const s of [-1, 1]) { const d = new THREE.Mesh(GEO.dot, M.white); d.position.set(s * 0.15, 0.35, 0.12); inner.add(d); } }
-  else { const b = new THREE.Mesh(GEO.box, M.robo); b.position.y = 0.12; inner.add(b); for (const s of [-1, 1]) { const e = new THREE.Mesh(GEO.dot, M.eye); e.scale.setScalar(0.8); e.position.set(s * 0.12, 0.16, 0.22); inner.add(e); } }
-  body.add(bottom, inner, band, top);
+  const mystery = kind === 2;
+  const sp = new THREE.Sprite(M.plush[mystery ? 4 : mintIdx]);
+  sp.center.set(0.5, 0);
+  sp.scale.setScalar(mystery ? MYSTERY_H : PLUSH_H);
+  inner.add(sp);
+  const sh = new THREE.Mesh(new THREE.CircleGeometry(1.15, 32), M.shadow);
+  sh.rotation.x = -Math.PI / 2; sh.position.y = 0.01;
+  body.add(sh, inner);
+  if (kind !== 0) { const ring = new THREE.Mesh(GEO.band, mystery ? M.slime : M.goldBand); ring.rotation.x = Math.PI / 2; ring.scale.setScalar(1.1); ring.position.y = 0.05; body.add(ring); }
   body.scale.setScalar(r);
-  body.position.y = r;
   g.add(body);
   g.userData = { body, inner, mystery };
   return g;
 }
+
+// Every prize is a sprite on the floor; a mystery prize shows only its sealed capsule art.
+const buildCapsule = buildPlush;
 
 function buildClaw(M: Mats) {
   const claw = new THREE.Group();
@@ -113,10 +106,35 @@ function buildClaw(M: Mats) {
   return { claw, prongs, cable };
 }
 
-function velvetFallback() {
-  const c = document.createElement("canvas"); c.width = c.height = 64;
-  const g = c.getContext("2d")!; g.fillStyle = "#3a0f63"; g.fillRect(0, 0, 64, 64);
-  return new THREE.CanvasTexture(c);
+// Arcade cabinet interior: glossy dark-plum panels, gold pinstripes, a marquee bulb row and a soft sheen.
+function panelTexture() {
+  const W = 1024, H = 1024;
+  const c = document.createElement("canvas"); c.width = W; c.height = H;
+  const g = c.getContext("2d")!;
+  const bg = g.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, "#160530"); bg.addColorStop(0.55, "#2a0b52"); bg.addColorStop(1, "#3b1170");
+  g.fillStyle = bg; g.fillRect(0, 0, W, H);
+  const n = 5, pw = W / n;
+  for (let i = 0; i < n; i++) {
+    const x = i * pw;
+    const p = g.createLinearGradient(x, 0, x + pw, 0); // each panel: lit left edge, dark right edge
+    p.addColorStop(0, "rgba(255,255,255,0.10)"); p.addColorStop(0.15, "rgba(255,255,255,0.02)"); p.addColorStop(0.85, "rgba(0,0,0,0.10)"); p.addColorStop(1, "rgba(0,0,0,0.28)");
+    g.fillStyle = p; g.fillRect(x + 6, 90, pw - 12, H - 130);
+    g.fillStyle = "#e9b93a"; g.fillRect(x - 2, 70, 4, H - 70); // gold pinstripe
+  }
+  g.fillStyle = "#e9b93a"; g.fillRect(0, 66, W, 6); g.fillRect(0, H - 30, W, 6);
+  for (let i = 0; i < 24; i++) { // marquee bulbs along the top
+    const x = (i + 0.5) * (W / 24);
+    const b = g.createRadialGradient(x, 34, 1, x, 34, 18);
+    b.addColorStop(0, "#fffbe6"); b.addColorStop(0.35, i % 2 ? "#ff5fc8" : "#ffd84a"); b.addColorStop(1, "rgba(0,0,0,0)");
+    g.fillStyle = b; g.beginPath(); g.arc(x, 34, 18, 0, Math.PI * 2); g.fill();
+  }
+  const sh = g.createLinearGradient(0, 0, W, H); // diagonal glass sheen
+  sh.addColorStop(0.25, "rgba(255,255,255,0)"); sh.addColorStop(0.35, "rgba(255,255,255,0.07)"); sh.addColorStop(0.45, "rgba(255,255,255,0)");
+  g.fillStyle = sh; g.fillRect(0, 0, W, H);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
+  return t;
 }
 
 export default function Cabinet3D(props: { cabinet: Cabinet | null; claw: { x: number; z: number }; view: View; anim: Anim; reduced: boolean }) {
@@ -169,10 +187,8 @@ export default function Cabinet3D(props: { cabinet: Cabinet | null; claw: { x: n
     const grid = new THREE.GridHelper(10, 10, "#a6ff2e", "#a6ff2e");
     (grid.material as THREE.Material).transparent = true; (grid.material as THREE.Material).opacity = 0.16;
     grid.position.y = 0.006; scene.add(grid);
-    // Velvet back walls on both far sides (seen from front and from side), gold trim
-    const wallTex = new THREE.TextureLoader().load("/art/wall.webp", undefined, undefined, () => {});
-    wallTex.colorSpace = THREE.SRGBColorSpace;
-    const wallMat = new THREE.MeshStandardMaterial({ map: wallTex ?? velvetFallback(), roughness: 0.9 });
+    // Glossy arcade panels on both far walls (seen from front and from side), gold trim
+    const wallMat = new THREE.MeshPhysicalMaterial({ map: panelTexture(), roughness: 0.35, metalness: 0.15, clearcoat: 1, clearcoatRoughness: 0.15 });
     const back = new THREE.Mesh(new THREE.PlaneGeometry(10.6, 9), wallMat); back.position.set(0, 4.5, -5.3); scene.add(back);
     const left = new THREE.Mesh(new THREE.PlaneGeometry(10.6, 9), wallMat); left.rotation.y = Math.PI / 2; left.position.set(-5.3, 4.5, 0); scene.add(left);
     const trim = new THREE.BoxGeometry(10.8, 0.16, 0.16);
@@ -268,15 +284,14 @@ export default function Cabinet3D(props: { cabinet: Cabinet | null; claw: { x: n
         }
         e.g.position.lerp(e.target, ease);
         e.g.scale.setScalar(Math.min(1, e.g.scale.x + (reduced ? 1 : dt * 3)));
-        const { inner, mystery, body } = e.g.userData as { inner: THREE.Group; mystery: boolean; body: THREE.Group };
+        const { inner, mystery } = e.g.userData as { inner: THREE.Group; mystery: boolean };
         if (!reduced) {
           // Plush sprites wobble like a toy settling; 3D contents (mystery orb) spin.
-          if (inner.children[0] instanceof THREE.Sprite) { (inner.children[0].material as THREE.SpriteMaterial).rotation = Math.sin(now / 900 + i) * 0.08; inner.position.y = Math.sin(now / 700 + i * 1.7) * 0.03; }
+          if (inner.children[0] instanceof THREE.Sprite) { (inner.children[0].material as THREE.SpriteMaterial).rotation = Math.sin(now / 900 + i) * 0.08; inner.scale.y = 1 + Math.sin(now / 700 + i * 1.7) * 0.025; }
           else inner.rotation.y += dt * 0.9;
-          if (mystery) body.position.y = (body.scale.x) + Math.sin(now / 380 + i) * 0.03;
+          if (mystery) inner.position.y = Math.abs(Math.sin(now / 380 + i)) * 0.08;
         }
       }
-      M.mysteryGlass.emissiveIntensity = reduced ? 0.18 : 0.14 + 0.12 * Math.sin(now / 300);
       ringMat.emissiveIntensity = reduced ? 1.6 : 1.4 + 0.6 * Math.sin(now / 350);
 
       // Claw: same timing as the 2D renderer (drop 0.9 s, hold, lift 0.9 s)
@@ -313,7 +328,7 @@ export default function Cabinet3D(props: { cabinet: Cabinet | null; claw: { x: n
           scene.add(held.g);
         }
         const r = hc.radius / U;
-        held.g.position.set(claw.position.x, claw.position.y - 0.95 - r, claw.position.z);
+        held.g.position.set(claw.position.x, claw.position.y - (0.7 + (hc.kind === 2 ? MYSTERY_H : PLUSH_H) * r * 0.8), claw.position.z);
       } else if (held) { scene.remove(held.g); held = null; }
 
       renderer.render(scene, cam);
@@ -324,7 +339,7 @@ export default function Cabinet3D(props: { cabinet: Cabinet | null; claw: { x: n
       for (const [i, e] of entries) {
         if (e.dying !== undefined || !cabinet) continue;
         const r = cabinet.capsules[i].radius / U;
-        const s = toScreen(new THREE.Vector3(e.g.position.x, 2 * r + 0.08, e.g.position.z));
+        const s = toScreen(new THREE.Vector3(e.g.position.x, (cabinet.capsules[i].kind === 2 ? MYSTERY_H : PLUSH_H) * r + 0.08, e.g.position.z));
         items.push({ i, x: s.x, y: s.y, d: cam.position.distanceTo(e.g.position) });
       }
       items.sort((a, b) => b.y - a.y);

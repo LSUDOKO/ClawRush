@@ -11,7 +11,7 @@ Submit at https://build.magicblock.app/?stage=blitz#submit (Telegram login). **P
 | Categories | Games, Consumer, Privacy |
 | Website | https://clawrush.pages.dev |
 | GitHub | https://github.com/LSUDOKO/ClawRush |
-| Pitch + demo | **NOT COMPLETED**: record the video (script below) and paste the link |
+| Pitch + demo | https://github.com/LSUDOKO/ClawRush/blob/main/demo/clawrush_phone_gameplay.mp4 (4:34 real gameplay on an Android phone, devnet). Re-upload to YouTube/Loom if the form needs a streaming link (user) |
 | Explorer link | https://explorer.solana.com/tx/31j7usJPvqmit6iJB7a43HMTnfVZvoC7YjKrdYcBE4QumEBR1KHNCFjDd3WtboAo8qqhKXCUPpxQQUixXQRyBxea?cluster=devnet (L1 commit + undelegate + Magic Action payout of a 1 dUSDC win; cabinet delegation: https://explorer.solana.com/tx/2FzY9oJrQXab58GSnLmjZ6ShPzQnAnvi4zkzxRKjLLSkd4LGGMqU4vX2WctvvKXxmZyXv5dgELXfNk1cHpWN2G7v?cluster=devnet) |
 | Program address | 9UwwBZu55wdbjQm3LdDKLHck79Sr95EPZsS5zRuvkKNs |
 | Wallet address | 5XPdQGRroRqUycg4rCsLV5ir7owe87jLn7vDGXjkpFqH (cabinet + program upgrade authority) |
@@ -52,9 +52,9 @@ Submit at https://build.magicblock.app/?stage=blitz#submit (Telegram login). **P
 
 ## Final checklist
 
-- [x] App URL serves; a real round was played from it in a 390×844 browser (burner wallet). Not yet checked on a physical phone.
+- [x] App URL serves; real rounds played on a physical Android phone (burner end to end; Solflare connect + session + play; Solflare mobile cannot sign the ER cash-out, documented in README)
 - [x] Repo public, README complete (proof links checked: L1 links open; ER links for public txs open via the TEE custom RPC)
 - [x] 30+ real devnet rounds played (30 completed + 4 recorded failures on the current build; 34 on the earlier build)
-- [ ] Video uploaded and viewable without login (user)
+- [x] Video recorded and committed (demo/clawrush_phone_gameplay.mp4); re-upload to YouTube/Loom if needed (user)
 - [ ] X account + Telegram handles filled (user)
 - [ ] Submitted before the deadline via Telegram login; confirmation seen (user; not submitted by the agent)
