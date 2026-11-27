@@ -102,9 +102,9 @@ function buildClaw(M: Mats) {
   for (let i = 0; i < 3; i++) {
     const yaw = new THREE.Group(); yaw.rotation.y = (i * Math.PI * 2) / 3;
     const hinge = new THREE.Group(); hinge.position.set(0, -0.2, 0.3);
-    const a = new THREE.Mesh(arm, M.gold); a.position.y = -0.39; a.castShadow = true;
+    const a = new THREE.Mesh(arm, M.chrome); a.position.y = -0.39; a.castShadow = true;
     const knuckle = new THREE.Group(); knuckle.position.y = -0.78; knuckle.rotation.x = 0.95;
-    const t = new THREE.Mesh(tip, M.gold); t.position.y = -0.25; t.castShadow = true;
+    const t = new THREE.Mesh(tip, M.chrome); t.position.y = -0.25; t.castShadow = true;
     knuckle.add(t); hinge.add(a, knuckle); yaw.add(hinge); claw.add(yaw);
     prongs.push(hinge);
   }
