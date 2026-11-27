@@ -7,12 +7,12 @@ Submit at https://build.magicblock.app/?stage=blitz#submit (Telegram login). **P
 | Field | Value |
 |---|---|
 | Project name | ClawRush |
-| Description | ClawRush is a live multiplayer claw machine you play from your phone. One shared cabinet on a MagicBlock Ephemeral Rollup: everyone sees every move live, capsules stay where they land, and your aim sets your grip chance before MagicBlock VRF rolls it. Jackpot "mystery capsules" are sealed in a Private Ephemeral Rollup so bots can't snipe them, and wins settle real tokens and collectibles to your wallet on Solana. |
+| Description | ClawRush is a live multiplayer claw machine you play from your phone. One shared cabinet on a MagicBlock Ephemeral Rollup: everyone sees every move live, capsules stay where they land, and your aim sets your grip chance before MagicBlock VRF rolls it. Jackpot "mystery capsules" are sealed in a Private Ephemeral Rollup so bots can't snipe them, an on-chain crank clears idle turns, and one signature commits your session back to Solana while a Magic Action pays every prize (tokens and plush collectibles with Metaplex metadata) to your wallet. |
 | Categories | Games, Consumer, Privacy |
 | Website | https://clawrush.pages.dev |
 | GitHub | https://github.com/LSUDOKO/ClawRush |
 | Pitch + demo | **NOT COMPLETED**: record the video (script below) and paste the link |
-| Explorer link | https://explorer.solana.com/tx/2FzY9oJrQXab58GSnLmjZ6ShPzQnAnvi4zkzxRKjLLSkd4LGGMqU4vX2WctvvKXxmZyXv5dgELXfNk1cHpWN2G7v?cluster=devnet (cabinet delegation to the TEE ER; VRF callbacks are redacted by the TEE because they write the sealed vault) |
+| Explorer link | https://explorer.solana.com/tx/31j7usJPvqmit6iJB7a43HMTnfVZvoC7YjKrdYcBE4QumEBR1KHNCFjDd3WtboAo8qqhKXCUPpxQQUixXQRyBxea?cluster=devnet (L1 commit + undelegate + Magic Action payout of a 1 dUSDC win; cabinet delegation: https://explorer.solana.com/tx/2FzY9oJrQXab58GSnLmjZ6ShPzQnAnvi4zkzxRKjLLSkd4LGGMqU4vX2WctvvKXxmZyXv5dgELXfNk1cHpWN2G7v?cluster=devnet) |
 | Program address | 9UwwBZu55wdbjQm3LdDKLHck79Sr95EPZsS5zRuvkKNs |
 | Wallet address | 5XPdQGRroRqUycg4rCsLV5ir7owe87jLn7vDGXjkpFqH (cabinet + program upgrade authority) |
 | Fee vault address | 7FYk2SBgXR3uM7YtdP5Kg9qMF1D1T5zKF8QFGvRMojf2 (vault authority PDA; dUSDC ATA 8KARifuHeMqHxX3arzsAVbMsbyDfcXNxfhJwg3LdTob6) |
@@ -29,6 +29,7 @@ Submit at https://build.magicblock.app/?stage=blitz#submit (Telegram login). **P
    - VRF → grip could be rigged by the operator or a validator
    - Private ER → bots read mystery contents and snipe jackpots
    - Commit / Magic Actions → prizes stuck in the rollup, never reach your wallet
+   - Crank → one idle player blocks the shared cabinet
 5. **Architecture:** Mermaid diagrams — turn lifecycle, drop → VRF → outcome, mystery reveal.
 6. **Grip math:** the formula block from 03-ARCHITECTURE.
 7. **Economics & solvency:** ev_simulation results table.
