@@ -201,9 +201,10 @@ Client-side only: the three.js cabinet (and its 2D fallback), claw sway and drop
 meter and the fairness re-check (both read on-chain numbers and only display them), sounds and haptics, the joystick's
 predicted claw position between confirmations (it snaps to chain state), and the devnet burner wallet.
 
-Operator process: [`scripts/keeper.ts`](scripts/keeper.ts) restocks when capsules run low (restock writes the private
-vault, so only the cabinet authority can do it) and clears expired turns (also permissionless, and the app does it
-too). It runs on the operator's machine, not as a hosted service.
+Turn expiry is on chain: the ER crank clears idle turns (the app and `expire_turn` also can, permissionlessly).
+Operator process: [`scripts/keeper.ts`](scripts/keeper.ts) only restocks when capsules run low (restock writes the
+private vault and seals new mystery contents, so only the cabinet authority can do it). It runs on the operator's
+machine, not as a hosted service.
 
 ## Run locally
 
@@ -232,8 +233,7 @@ Toolchain and every design decision with its trade-off: [`docs/DECISIONS.md`](do
 ## What's next
 
 - Pass the mystery vault to `drop_claw` as a derived address instead of an account, so drop transactions stay public.
-- MagicBlock cranks / Magic Actions for turn expiry and restock, replacing the local keeper (needs a program
-  redeploy, so it was left out of the tested build).
+- Restock from the crank too (needs the mystery contents sealed by a program-held secret instead of the authority).
 - Real collectible NFTs (Metaplex) instead of demo collectible tokens.
 
 ## License
