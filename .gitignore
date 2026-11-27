@@ -23,5 +23,5 @@ app/playwright-report/
 scripts/.state.local.json
 app/e2e/shots/fail-*.png
 
-# raw phone recordings
-demo/raw_*.mp4
+# video sources and renders (published on YouTube, not in git)
+demo/
