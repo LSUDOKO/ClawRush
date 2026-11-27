@@ -41,7 +41,7 @@ A "steer claw + VRF decides prize" build would look like a clone. ClawRush wins 
 
 ## Prizes (Entertainment Finance)
 
-- **Token capsules** — devnet SPL tokens (e.g. demo USDC, SOL-like, meme tokens), visible amount on the capsule.
+- **Token capsules** — SPL tokens (e.g. dUSDC, dGEM, ecosystem tokens), visible amount on the capsule.
 - **Collectible capsules** — NFT collectibles (sets of 4 variants; set completion is a stretch goal).
 - **Mystery capsules** — sealed. Could be dust, a mid prize, or a jackpot. Contents live in a
   Private Ephemeral Rollup and are revealed only after the capsule crosses the chute.

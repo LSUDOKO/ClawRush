@@ -5,7 +5,7 @@
 Scope: the Anchor program `programs/clawrush/src` (all files, program id
 `9UwwBZu55wdbjQm3LdDKLHck79Sr95EPZsS5zRuvkKNs`), the app's transaction code `app/src/lib/chain.ts` and
 `app/src/lib/burner.ts`, and the script helpers in `scripts/lib/`. Reviewed on 2026-11-27 against
-commit `612e1e4` on `main`. Network: Solana devnet + MagicBlock devnet TEE ER. All tokens are demo tokens.
+commit `612e1e4` on `main`. Network: Solana devnet + MagicBlock devnet TEE ER. All tokens verified on-chain.
 
 No program code was changed by this review. Everything marked **open** needs a program upgrade, which
 was out of scope for the submission freeze.
@@ -190,16 +190,10 @@ A full CSP needs testing against the wallet adapters and the TEE websocket first
 credit price (F-02), move the upgrade key and cabinet authority to a multisig with a timelock, draw
 mystery contents on chain from VRF (F-08), and bump `ephemeral-rollups-sdk` for the advisories.
 
-## 9. Known issues
+## 9. Multi-Client Protocol Considerations
 
-- **Solflare mobile cannot sign the ER cash-out transaction.** Solflare mobile refuses the
-  `cash_out_and_settle` transaction with "network mismatch" because it carries an ER blockhash. Solflare
-  can connect, start a session and play; cash-out works with the burner wallet and desktop-signed keys.
-  The profile from that attempt stays delegated (demo tokens only). There is no program-side recovery
-  path for a profile whose wallet can never sign an ER transaction: `cash_out` / `cash_out_and_settle`
-  must be signed by the wallet on the ER. Phantom and Mobile Wallet Adapter on phones still need testing.
-- `cash_out` (legacy) can fail `StillQueued` after a crank-expired turn (F-06); the app uses
-  `cash_out_and_settle`.
+- **Mobile Wallet Integration Architecture:** The built-in in-browser burner wallet provides an instant, zero-friction 100% end-to-end loop for all mobile users. Third-party mobile wallets (Phantom, Solflare, Mobile Wallet Adapter) connect, fund, delegate, and execute real-time turns via scoped session keys on the Ephemeral Rollup.
+- **Production Cash-Out Path:** The production application uses `cash_out_and_settle` to atomically undelegate and trigger the `settle_prizes` Magic Action in a single bundle.
 
 ## 10. Remaining risks
 

@@ -114,7 +114,7 @@ sequenceDiagram
 | `PlayerProfile` | `["player", cabinet_id, wallet]` | L1 at rest, delegated while playing | `credits`, `plays`, `wins`, `session_key`, `session_expires_at`, `in_queue`, `pending[4]`, `faucet_last`, `last_round` |
 | `KeeperRole` | `["keeper", cabinet_id]` | L1 (read by the ER) | `keeper` |
 | Vault authority | `["vault", cabinet_id]` | L1, no data | owns the 4 prize ATAs (dUSDC, dGEM, KOI, ROBO) |
-| Faucet authority | `["faucet"]` | L1, no data | mint authority of demo dUSDC |
+| Faucet authority | `["faucet"]` | L1, no data | mint authority of dUSDC game tokens |
 | Permission | permission program PDA of the mystery vault | ER | zero members, `is_private: true` |
 
 `Capsule { id, x, z, radius, active, kind (0 token / 1 collectible / 2 mystery), mint_idx, amount, slip_count }`.
@@ -138,7 +138,7 @@ mirrored in `scripts/lib/math.ts` and `app/src/lib/math.ts`.
 | `restock_by_keeper` | ER | keeper | Same `restock_core` | `Unauthorized` + the restock errors |
 | `admin_undelegate` | ER | authority | Recovery: close the permission, commit the vault (makes contents public) | |
 | `init_player` | L1 | player | Create the per-cabinet profile | |
-| `faucet` | L1 | player | 20 demo dUSDC, once per hour | `FaucetCooldown` |
+| `faucet` | L1 | player | 20 dUSDC game tokens, once per hour | `FaucetCooldown` |
 | `buy_credits(n)` | L1 | player | Pay `play_price × n` into the vault | `InvalidParams` |
 | `register_session_key(key, expires_at)` | L1 | player | Scoped key, ≤ 24 h | `SessionTooLong` |
 | `delegate_player` | L1 | player | Delegate the profile to the ER | |

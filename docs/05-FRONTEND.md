@@ -3,7 +3,7 @@
 ## Principles
 
 - **Phone first, portrait 9:16.** Test on a real phone early.
-- **Looks fun in the first 5 seconds** of the demo video.
+- **Looks fun in the first 5 seconds** of the showcase video.
 - **Zero wallet popups during play** (session key after one login signature).
 - **Proof is always one tap away** (Live Proof drawer).
 

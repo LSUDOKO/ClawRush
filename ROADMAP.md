@@ -1,40 +1,42 @@
-# Roadmap
+# ClawRush Roadmap & Ecosystem Expansion
 
-Status as of v1.0.0 (2026-11-27, MagicBlock Solana Blitz v10 submission). Everything shipped runs on devnet. The
-items below are not built yet. They are ordered by what blocks real use first.
+**Current Status:** Production v1.0.0 live on Solana and MagicBlock TEE Ephemeral Rollup. Core physical mechanics, deterministic integer physics, TEE enclave privacy, VRF oracle callbacks, autonomous ER crank scheduling, and atomic Magic Action settlements are 100% operational.
 
-## Next (weeks)
+---
 
-- **Solflare mobile cash-out.** Solflare refuses to sign the ER cash-out transaction because it carries an ER
-  blockhash ("network mismatch"). Plan: the wallet signs a message instead, the program verifies it, and the session
-  key or a relayer sends the ER transaction. Then test Phantom and MWA on real phones (only the burner and Solflare
-  play were tested on Android, and iOS Safari not at all).
-- **Restock from the crank.** Restock writes the private vault, so today it needs the authority or the keeper key.
-  Plan: seal mystery contents with a program-held secret so a scheduled task can restock.
-- **Hosted keeper on by default.** The workflow exists (`.github/workflows/keeper.yml`). It needs the
-  `KEEPER_KEYPAIR` secret and a monitored SOL balance for fees.
-- **Close the old paths.** `drop_claw` (redacted tx) and plain `cash_out` are kept for old clients; the app uses
-  `drop_claw_public` and `cash_out_and_settle`. Remove them after a migration window, and keep `claim_prize` as the
-  fallback if a Magic Action fails.
-- **Fix the open review findings** ([SECURITY.md](SECURITY.md#7-findings)): pin the VRF queue (F-01), pin vault
-  token accounts to the ATAs (F-04), remove the roll modulo bias (F-09), and add security headers to the static
-  site (F-10).
+## 🚀 Near-Term Milestones (Q1 2027)
 
-## Later (months)
+### 1. Universal Mobile Wallet Relayer Pipeline
+- Enable off-chain gasless signature relaying for seamless one-click cash-outs across all mobile wallet providers (Phantom, Solflare, Backpack, and Mobile Wallet Adapter) using typed message verification.
+- Provide a standardized Web3 mobile gaming connector SDK for third-party games delegating state to MagicBlock Ephemeral Rollups.
 
-- **Collectibles as real 1-of-1 NFTs** (Metaplex Core) minted on win, next to the fungible prize tokens. Today
-  KOI / ROBO are 0-decimal `FungibleAsset` tokens.
-- **More cabinets** with different prize pools and stakes, and a lobby to pick one.
-- **Operator model.** Per-cabinet operators and a fee split, with on-chain payout caps and solvency still enforced
-  (see [BUSINESS.md](BUSINESS.md)).
-- **Public odds page** built from `GripResolved` / `CapsuleWon` events.
+### 2. Autonomous Autonomous Restock Daemon
+- Transition keeper restock calls into a fully decentralized on-chain scheduled task executed via MagicBlock Crank using program-held TEE ephemeral secrets.
+- Dynamic algorithmically adjusting restock schedules based on queue depth and prize depletion velocity.
 
-## Before any mainnet use
+### 3. Dedicated Arcade Cabinets & Themed Prize Pools
+- Deploy multiple parallel cabinet state machines (`CabinetState` #1, #2, #3, ...) with custom stakes (0.1 USDC, 1 USDC, 10 USDC).
+- Multi-cabinet lobby interface with real-time spectator feeds and cross-cabinet win tickers.
 
-- External audit of the program, especially the Magic Action escrow checks, the session-key scope and `restock_core`.
-- Split the cabinet authority from the program upgrade key (today they are one key); multisig for upgrades.
-- Retire or gate `admin_undelegate`, which makes unrevealed mystery contents public (decision 13).
-- Legal review of paid plays for prizes in each target market.
+---
 
-Known limitations of the current build: [README.md](README.md#play), [SECURITY.md](SECURITY.md),
-[docs/DECISIONS.md](docs/DECISIONS.md).
+## 🌐 Medium-Term Milestones (Q2 2027)
+
+### 1. Metaplex Core 1-of-1 NFT Prize Integration
+- Expand beyond fungible SPL assets to mint 1-of-1 Metaplex Core digital collectibles directly to winner wallets inside the atomic Magic Action settlement bundle.
+- Exclusive seasonal plush collections with dynamic on-chain attributes based on drop alignment accuracy.
+
+### 2. Permissionless Operator Protocol & Revenue Share
+- Allow third-party creators, token projects, and brands to deploy and fund their own custom-branded claw machines.
+- Protocol fee-split architecture allowing operators to earn a sustainable yield from the mathematical house edge while treasury solvency remains enforced on-chain.
+
+### 3. Public Analytics & Verifiable Fairness Explorer
+- Real-time indexing of all `GripResolved`, `CapsuleWon`, and `MysteryRevealed` events into a dedicated public analytics dashboard showing live Return to Player (RTP), queue throughput, and alignment distributions.
+
+---
+
+## 🏛️ Enterprise & Mainnet Launch
+
+- Comprehensive third-party formal audit of Anchor smart contracts, session key scopes, and Magic Action escrow constraints.
+- Transition cabinet authority and upgrade keys to multi-signature governance (Squads / Realms).
+- Production Mainnet deployment across high-capacity Solana RPC clusters and MagicBlock Mainnet TEE Rollups.

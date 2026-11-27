@@ -40,7 +40,7 @@ the same rollup. **Fallback:** cabinet on the public ER, mystery contents via co
 
 **CabinetConfig** (PDA `["config", cabinet_id]`)
 - `authority: Pubkey`
-- `play_price: u64` (credit price in demo-USDC base units)
+- `play_price: u64` (credit price in dUSDC base units)
 - `turn_secs: u16` (15)
 - `grip_max_bps: u16` (8_500), `grip_min_bps: u16` (2_500)
 - `house_edge_min_bps / max_bps: u16` (800 / 1_500)
@@ -89,7 +89,7 @@ As built (`programs/clawrush/src/lib.rs`). "Session" means the scoped session ke
 | `restock_by_keeper` | ER | keeper | Same as `restock` (shared `restock_core`) |
 | `admin_undelegate` | ER | authority | Recovery: close the permission, commit the vault (makes unrevealed contents public) |
 | `init_player` | L1 | player | Create the per-cabinet profile |
-| `faucet` | L1 | player | Demo dUSDC, rate-limited per profile |
+| `faucet` | L1 | player | dUSDC game tokens, rate-limited per profile |
 | `buy_credits` | L1 | player | Pay play price × n into the vault, add credits |
 | `register_session_key` | L1 | player | Scoped session key, ≤ 24 h |
 | `delegate_player` | L1 | player | Delegate the profile to the ER |

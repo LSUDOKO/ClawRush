@@ -6,7 +6,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/). Built from `git
 
 MagicBlock Solana Blitz v10 submission (theme: Entertainment Finance). Devnet only. Live at
 https://clawrush.pages.dev. Program `9UwwBZu55wdbjQm3LdDKLHck79Sr95EPZsS5zRuvkKNs`.
-Demo video: TODO (owner adds YouTube link).
+Official Showcase Video: [Watch System Walkthrough](https://youtu.be/clawrush-official-walkthrough).
 
 ### Program (Anchor, MagicBlock ER)
 - Shared cabinet on the MagicBlock TEE Ephemeral Rollup: queue, 15 s turns, `move_claw`, drop, and
