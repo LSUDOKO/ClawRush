@@ -22,3 +22,6 @@ app/test-results/
 app/playwright-report/
 scripts/.state.local.json
 app/e2e/shots/fail-*.png
+
+# raw phone recordings
+demo/raw_*.mp4
