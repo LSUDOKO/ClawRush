@@ -1,5 +1,9 @@
 # 03 — Architecture
 
+> **As built: see [ARCHITECTURE.md](../ARCHITECTURE.md).** This is the original design doc. Its layer diagram
+> (Magic Router), the account list (`PrizeClaim`, `Queue`, 16 capsules, house-edge fields, global profile seed) and
+> some field names predate the build. The instruction table, grip math and settlement sections below are current.
+
 > Verify every MagicBlock call pattern (delegate, commit, undelegate, VRF request/callback, permission
 > program, TEE validator) against https://docs.magicblock.gg and the MagicBlock Dev Skill before coding.
 > Names below describe intent; exact macros/IDs come from the docs.
@@ -114,7 +118,7 @@ grip_bps = grip_max_bps - (grip_max_bps - grip_min_bps) * align_err_bps / 10_000
 roll_bps = u16_from(randomness[0..2]) % 10_000
 if roll_bps < grip_bps                → HELD → capsule to chute → WIN
 else                                  → SLIP
-   slip_frac_bps = u16_from(randomness[2..4]) % 10_000
+   slip_frac_bps = 1_500 + u16_from(randomness[2..4]) % 5_000   // 15–65% of the way (as built)
    capsule.(x,z) moves toward chute by slip_frac × path_length
    capsule.slip_count += 1            // persists for the next player
 MISS: nudge up to 2 capsules within 1.5×radius by small offsets from randomness[4..8]

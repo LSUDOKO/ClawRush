@@ -53,14 +53,14 @@ Work top to bottom. Don't start a milestone until the previous one runs end-to-e
 - [x] Front/side view toggle, haptics, synthesized sounds, wins ticker
 - [ ] Auto-restock (crank or permissionless) when active capsules < 6 — partial: keeper-role restock + GitHub Actions cron; not from the crank (restock writes the private vault)
 - [x] `scripts/ev_simulation.ts` + `ev_results.md`
-- [ ] Phone test pass (iOS Safari + Android Chrome) — not done: only headless Chrome at 390 px so far
+- [ ] Phone test pass (iOS Safari + Android Chrome) — partial: real Android phone (burner end to end; Solflare connect + session + play, cash-out blocked by Solflare "network mismatch"); iOS not tested
 
 ## M6 — Ship
 
 - [x] Deploy program + app (public URL)
 - [x] Run 30+ real rounds on devnet (so on-chain activity is visible)
 - [x] README final (see 07-SUBMISSION) with proof table filled in
-- [ ] Record demo video — not done
+- [ ] Record demo video — recorded on the phone; YouTube link TODO (owner)
 - [ ] Submit form with every optional field filled — user
 - [ ] Confirm submission shows up; post on X tagging @magicblock — user
 

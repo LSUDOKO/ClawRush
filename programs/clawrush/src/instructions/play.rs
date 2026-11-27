@@ -215,11 +215,9 @@ pub struct DropClaw<'info> {
     /// CHECK: MagicBlock VRF oracle queue
     #[account(
         mut,
-        constraint = oracle_queue.key() == mbvrf::consts::DEFAULT_EPHEMERAL_QUEUE
-            || oracle_queue.key() == mbvrf::consts::DEFAULT_QUEUE
-            || oracle_queue.key() == mbvrf::consts::DEFAULT_TEST_QUEUE
-            || oracle_queue.key() == mbvrf::consts::DEFAULT_EPHEMERAL_TEST_QUEUE
-            @ ClawError::InvalidParams
+        // Pinned to the ER oracle queue: a queue that never answers would leave pending_vrf set
+        // and let the player stall the cabinet until expire_turn refunds the credit (SECURITY.md F-01).
+        constraint = oracle_queue.key() == mbvrf::consts::DEFAULT_EPHEMERAL_QUEUE @ ClawError::InvalidParams
     )]
     pub oracle_queue: UncheckedAccount<'info>,
 }
@@ -238,11 +236,9 @@ pub struct DropClawPublic<'info> {
     /// CHECK: MagicBlock VRF oracle queue
     #[account(
         mut,
-        constraint = oracle_queue.key() == mbvrf::consts::DEFAULT_EPHEMERAL_QUEUE
-            || oracle_queue.key() == mbvrf::consts::DEFAULT_QUEUE
-            || oracle_queue.key() == mbvrf::consts::DEFAULT_TEST_QUEUE
-            || oracle_queue.key() == mbvrf::consts::DEFAULT_EPHEMERAL_TEST_QUEUE
-            @ ClawError::InvalidParams
+        // Pinned to the ER oracle queue: a queue that never answers would leave pending_vrf set
+        // and let the player stall the cabinet until expire_turn refunds the credit (SECURITY.md F-01).
+        constraint = oracle_queue.key() == mbvrf::consts::DEFAULT_EPHEMERAL_QUEUE @ ClawError::InvalidParams
     )]
     pub oracle_queue: UncheckedAccount<'info>,
 }

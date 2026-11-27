@@ -94,7 +94,7 @@ npx tsx scripts/devnet_rounds.ts                   # real devnet rounds (ROUNDS,
 npx tsx scripts/e2e_two_player.ts                  # stop keeper first
 CABINET_ID=2 npx tsx tests/invariants.ts           # devnet invariant suite (tsx, not anchor test)
 npx tsx scripts/keeper.ts                          # restock when low (KEEPER=keys/keeper.json ONCE=1 for one keeper-role pass)
-npx tsx scripts/crank.ts                           # schedule the ER crank that clears overdue turns
+CABINET_ID=1 npx tsx scripts/crank.ts schedule     # schedule the ER crank that clears overdue turns (`tick` = one direct tick)
 CABINET_ID=1 npx tsx scripts/set_keeper.ts <pubkey> # register the low-privilege restock key
 npx tsx scripts/metaplex_metadata.ts               # Token Metadata on the prize mints
 npx tsx scripts/e2e_magic_action.ts                # one-signature payout e2e
