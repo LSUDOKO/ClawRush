@@ -1,17 +1,21 @@
-// Cabinet keeper (operator process): restocks when capsules run low and clears expired turns.
-// expire_turn is permissionless on chain; restock is authority-only (it writes the private mystery vault).
-//   npx tsx scripts/keeper.ts
+// Cabinet keeper: restocks when capsules run low and clears stuck turns (the ER crank normally does that).
+// expire_turn is permissionless. Restock writes the private mystery vault, so it needs either the cabinet
+// authority or the low-privilege keeper key registered with set_keeper (KEEPER=path, used by the hosted job).
+//   npx tsx scripts/keeper.ts                  # loop, authority key
+//   KEEPER=keys/keeper.json ONCE=1 npx tsx scripts/keeper.ts   # one pass with the keeper key (GitHub Actions)
 import { PublicKey } from "@solana/web3.js";
 import { loadKeypair, loadState, program, erConn, sendTx, sleep, configPda, cabinetPda, playerPda } from "./lib/common.ts";
 import { restockFree } from "./lib/admin.ts";
 
-const authority = loadKeypair(process.env.AUTHORITY ?? "~/.config/solana/id.json");
+const asKeeper = !!process.env.KEEPER;
+const authority = loadKeypair(process.env.KEEPER ?? process.env.AUTHORITY ?? "~/.config/solana/id.json");
+const ONCE = !!process.env.ONCE;
 const st = loadState();
 const MIN_ACTIVE = Number(process.env.MIN_ACTIVE ?? 6);
 const NO_TURN = PublicKey.default.toBase58();
 const er = await erConn(authority);
 const pe = program(er, authority) as any;
-console.log("keeper running for cabinet", st.cabinet);
+console.log("keeper running for cabinet", st.cabinet, asKeeper ? "(keeper role)" : "(authority)");
 process.on("unhandledRejection", (e: any) => console.log(new Date().toISOString(), "background rpc error ignored:", String(e?.message ?? e).slice(0, 120)));
 for (;;) {
   try {
@@ -24,11 +28,13 @@ for (;;) {
       const r = await sendTx(er, [ix], [authority]);
       console.log(new Date().toISOString(), "expire_turn", owner.slice(0, 6), r.sig);
     } else if (!c.pendingVrf) {
-      const rs = await restockFree(authority, st, MIN_ACTIVE);
-      if (rs) console.log(new Date().toISOString(), "restock +" + rs.added, rs.sig);
+      const rs = await restockFree(authority, st, MIN_ACTIVE, asKeeper);
+      console.log(new Date().toISOString(), rs ? `restock +${rs.added} ${rs.sig}` : `stock ok (>= ${MIN_ACTIVE} active)`);
     }
   } catch (e: any) {
     console.log(new Date().toISOString(), "keeper error", String(e.message ?? e).slice(0, 200));
   }
+  if (ONCE) break;
   await sleep(4000);
 }
+if (ONCE) { console.log(new Date().toISOString(), "single pass done"); process.exit(0); }
