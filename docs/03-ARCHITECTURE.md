@@ -73,23 +73,32 @@ Invariant: `vault_value >= max_liability(stocked capsules)`.
 
 ## Instructions
 
+As built (`programs/clawrush/src/lib.rs`). "Session" means the scoped session key may sign it.
+
 | Instruction | Layer | Signer | What it does |
 |---|---|---|---|
-| `init_cabinet` | L1 | authority | Create config + vault + cabinet state |
-| `stock_capsules` | L1 / ER | authority | Place capsules, fund vault, write mystery entries (checks solvency) |
-| `delegate_cabinet` | L1 | authority | Delegate CabinetState, Queue, MysteryVault to the ER |
-| `buy_credits` | L1 | player | Pay play_price × n into vault, add credits |
-| `register_session_key` | L1 | player | Set scoped session key + expiry |
-| `join_queue` | ER | player or session | Spend 1 credit, enqueue |
-| `start_turn` | ER | anyone (crank) | Pop queue, set turn_owner + expiry |
-| `move_claw(dx, dz)` | ER | turn owner / session | Clamp to bounds, update position; emit `ClawMoved` |
-| `drop_claw` | ER | turn owner / session | Lock claw, find nearest capsule, compute alignment, **request VRF** |
-| `vrf_grip_callback(randomness)` | ER | VRF oracle only | Resolve held / slip / miss (see math) |
-| `reveal_mystery` | ER (private) | program | On win of a Mystery capsule, read entry, emit `MysteryRevealed` |
-| `settle_prize` | ER→L1 | program | Commit state; create PrizeClaim; transfer from vault to winner (Magic Action post-commit if available, else `claim_prize` on L1) |
-| `claim_prize` | L1 | winner | Fallback: transfer SPL from vault for a committed PrizeClaim |
-| `expire_turn` | ER | anyone (crank) | If `now > turn_expires_at`, end turn, start next |
-| `restock` | ER / L1 | authority / crank | Add capsules when active < threshold (must pass solvency check) |
+| `init_cabinet` | L1 | authority | Create config, vault authority, cabinet state, mystery vault |
+| `delegate_cabinet` | L1 | authority | Delegate CabinetState and MysteryVault to the TEE ER |
+| `seal_mystery` | ER | authority | Zero-member private permission on the mystery vault |
+| `restock` | ER | authority | Fill free slots, write sealed mystery entries; bounds, payout cap, per-mint solvency |
+| `set_keeper` | L1 | authority | Store a low-privilege keeper key in `KeeperRole` |
+| `restock_by_keeper` | ER | keeper | Same as `restock` (shared `restock_core`) |
+| `admin_undelegate` | ER | authority | Recovery: close the permission, commit the vault (makes unrevealed contents public) |
+| `init_player` | L1 | player | Create the per-cabinet profile |
+| `faucet` | L1 | player | Demo dUSDC, rate-limited per profile |
+| `buy_credits` | L1 | player | Pay play price × n into the vault, add credits |
+| `register_session_key` | L1 | player | Scoped session key, ≤ 24 h |
+| `delegate_player` | L1 | player | Delegate the profile to the ER |
+| `join_queue` | ER | player / session | Spend 1 credit; start the turn if idle, else enqueue |
+| `move_claw(dx, dz, seq)` | ER | turn owner / session | Clamp and move |
+| `drop_claw_public(seed)` | ER | turn owner / session | Lock claw, request VRF; mystery vault address derived on chain (tx stays readable) |
+| `drop_claw(seed)` | ER | turn owner / session | Older variant that lists the vault (tx redacted by the TEE) |
+| `vrf_grip_callback` | ER | VRF identity only | Resolve HELD / SLIP / MISS, reveal mystery on win, credit `pending`, start next turn |
+| `expire_turn` | ER | anyone | End an overdue turn; refund if the VRF is stuck > 30 s |
+| `schedule_crank` / `crank_tick` | ER | authority / ER scheduler | Every 3 s, end overdue turns and hand over to the queue |
+| `cash_out_and_settle` | ER | player | Commit + undelegate the profile with a post-undelegate Magic Action |
+| `settle_prizes` | L1 | delegation program escrow | The Magic Action: pay all `pending` from the vault, zero it |
+| `cash_out` / `claim_prize` | ER / L1 | player | Fallback path: commit + undelegate, then claim one mint at a time |
 
 **Move rate:** one `move_claw` tx per joystick tick, throttled to ~10–20 tx/s per player.
 The client interpolates between confirmed positions so motion stays smooth.
@@ -123,11 +132,14 @@ Show every intermediate number in the `GripResolved` event so the proof drawer c
 
 ## Settlement
 
-- On win: write PrizeClaim in ER, `commit` the relevant accounts to L1.
-- Preferred: Magic Action (post-commit L1 action) transfers the SPL prize from the vault to the winner
-  in the same flow. **Verify Magic Actions support for this.**
-- Fallback: winner (or app auto-signs) calls `claim_prize` on L1 against the committed PrizeClaim.
-- Emit `PrizeSettled { winner, mint, amount, l1_signature }`.
+- A win only credits `profile.pending` on the ER. Nothing leaves the vault until the player cashes out.
+- `cash_out_and_settle` (one wallet signature on the ER) schedules commit + undelegate of the profile and a
+  post-undelegate Magic Action, `settle_prizes`, on L1. It must be post-undelegate: a post-commit action runs while
+  the profile is still owned by the delegation program.
+- `settle_prizes` requires the delegation program's escrow PDA as signer, binds `escrow_auth` to the profile owner,
+  pays every non-zero `pending` mint from the vault and zeroes it.
+- Fallback: `cash_out` then `claim_prize` per mint. Both paths zero `pending`, so nothing is paid twice
+  (`NothingToClaim`).
 
 ## Security invariants (each needs a test)
 
