@@ -63,10 +63,17 @@ Only primitives that are actually integrated and exercised on devnet are listed.
 | **Ephemeral Rollup** (TEE validator `MTEWGuqx…`, `devnet-tee.magicblock.app`) | The cabinet account and player profiles are delegated; queue, every claw move, drop and turn expiry run there. Move confirmations measured ~380–780 ms from the browser. | L1 is too slow for a joystick, and every move would cost a fee and a wallet popup. |
 | **VRF** (`ephemeral_vrf_sdk`, ephemeral queue) | `drop_claw` requests randomness; `vrf_grip_callback` rolls the grip, the slip distance and miss nudges. Callback seen a median 205 ms after the drop confirmed (30 devnet rounds; max 6.5 s on a slow link). | The operator or validator could choose who wins. |
 | **Private ER / permission program** | `seal_mystery` puts a private permission with zero members on the mystery vault. The TEE RPC returns `null` for it to everyone and redacts transactions that list it (verified for restock and drop; no readable callback ever appeared either). | Bots read which `?` capsule holds the jackpot and snipe it. |
-| **Commit + undelegate** | `cash_out` (wallet-signed, on the ER) commits and undelegates the profile; `claim_prize` on L1 pays from the vault exactly once. | Prizes would stay in the rollup and never reach the wallet. |
+| **Commit + undelegate + Magic Action** | `cash_out_and_settle` (wallet-signed, on the ER) commits and undelegates the profile and attaches a post-undelegate Magic Action, `settle_prizes`, that pays every pending prize from the vault on L1 in the same settlement. One signature, no second claim transaction. `claim_prize` stays as the fallback if an action is ever dropped; both zero `pending` as they pay, so nothing is paid twice. | Prizes would stay in the rollup, or need a second L1 transaction and wallet popup to reach the wallet. |
+| **Crank (ER scheduled task)** | `schedule_crank` registers a task on the TEE ER's scheduler that runs `crank_tick` every 3 s. The tick ends any turn past its deadline and hands the claw to the next player in the queue. No server is involved, and it is idempotent (a no-op unless a turn is overdue). | One idle player would block the shared cabinet until someone ran an off-chain keeper. |
 
 We did **not** use MagicBlock Session Keys: ClawRush registers its own scoped session key in the player profile
-(see Security). Magic Actions are not used.
+(see Security).
+
+Verified on devnet: [`scripts/e2e_magic_action.ts`](scripts/e2e_magic_action.ts) wins a capsule and cashes out with
+one ER transaction, then checks that the wallet received exactly the pending amount, that L1 `pending` is zero, that a
+later `claim_prize` fails with `NothingToClaim`, and that calling `settle_prizes` directly (without the delegation
+program's escrow signature) is rejected. [`scripts/crank.ts`](scripts/crank.ts) schedules the crank and `watch`es
+turns clear.
 
 ## Architecture
 
