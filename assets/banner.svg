@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-label="ClawRush: one claw, every player, real prizes">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#12041f"/>
+      <stop offset="1" stop-color="#3a0f63"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.45" r="0.55">
+      <stop offset="0" stop-color="#6b2bd9" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#6b2bd9" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff3c4"/>
+      <stop offset="0.55" stop-color="#ffcf3a"/>
+      <stop offset="1" stop-color="#ff9d1a"/>
+    </linearGradient>
+    <filter id="neon" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="capM" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#ffd1ee"/><stop offset="0.5" stop-color="#ff2fb2"/><stop offset="1" stop-color="#8a0e5c"/></radialGradient>
+    <radialGradient id="capL" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#eaffc4"/><stop offset="0.5" stop-color="#a6ff2e"/><stop offset="1" stop-color="#4c8a0a"/></radialGradient>
+    <radialGradient id="capG" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#fff3c4"/><stop offset="0.5" stop-color="#ffcf3a"/><stop offset="1" stop-color="#9a6a00"/></radialGradient>
+    <radialGradient id="capV" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#e2d2ff"/><stop offset="0.5" stop-color="#6b2bd9"/><stop offset="1" stop-color="#2a0a5c"/></radialGradient>
+  </defs>
+
+  <rect width="1280" height="360" fill="url(#bg)"/>
+  <rect width="1280" height="360" fill="url(#glow)"/>
+
+  <!-- perspective floor grid -->
+  <g stroke="#6b2bd9" stroke-opacity="0.45" stroke-width="1.5" fill="none">
+    <path d="M0 300 H1280 M0 322 H1280 M0 345 H1280"/>
+    <path d="M640 270 L-200 360 M640 270 L100 360 M640 270 L400 360 M640 270 L640 360 M640 270 L880 360 M640 270 L1180 360 M640 270 L1480 360"/>
+  </g>
+  <path d="M0 280 H1280" stroke="#ff2fb2" stroke-opacity="0.6" stroke-width="2" filter="url(#soft)"/>
+
+  <!-- marquee bulbs -->
+  <g fill="#ffcf3a" filter="url(#soft)">
+    <circle cx="40" cy="22" r="4"/><circle cx="120" cy="22" r="4"/><circle cx="200" cy="22" r="4"/><circle cx="280" cy="22" r="4"/>
+    <circle cx="1000" cy="22" r="4"/><circle cx="1080" cy="22" r="4"/><circle cx="1160" cy="22" r="4"/><circle cx="1240" cy="22" r="4"/>
+  </g>
+
+  <!-- claw, left -->
+  <g transform="translate(190 0)">
+    <line x1="0" y1="0" x2="0" y2="150" stroke="#ffcf3a" stroke-width="4"/>
+    <rect x="-22" y="148" width="44" height="22" rx="6" fill="#ffcf3a"/>
+    <g fill="none" stroke="#ffcf3a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M-14 170 Q-48 200 -30 238 L-16 246"/>
+      <path d="M14 170 Q48 200 30 238 L16 246"/>
+      <path d="M0 170 V232"/>
+    </g>
+    <circle cx="0" cy="262" r="30" fill="url(#capM)" filter="url(#soft)"/>
+    <text x="0" y="272" text-anchor="middle" font-family="Arial Black, Impact, Helvetica, sans-serif" font-size="28" fill="#12041f">?</text>
+  </g>
+
+  <!-- capsule pile, right -->
+  <g transform="translate(50 30)">
+  <g filter="url(#soft)">
+    <circle cx="1010" cy="262" r="28" fill="url(#capL)"/>
+    <circle cx="1068" cy="250" r="34" fill="url(#capG)"/>
+    <circle cx="1128" cy="266" r="26" fill="url(#capV)"/>
+    <circle cx="1040" cy="296" r="22" fill="url(#capM)"/>
+    <circle cx="1100" cy="300" r="24" fill="url(#capL)"/>
+    <circle cx="1170" cy="296" r="20" fill="url(#capG)"/>
+  </g>
+  <text x="1068" y="262" text-anchor="middle" font-family="Arial Black, Impact, Helvetica, sans-serif" font-size="30" fill="#12041f">?</text>
+  </g>
+
+  <!-- title -->
+  <text x="640" y="168" text-anchor="middle" font-family="Arial Black, Impact, Helvetica Neue, Helvetica, sans-serif" font-weight="900" font-size="112" letter-spacing="4" fill="none" stroke="#ff2fb2" stroke-width="10" stroke-linejoin="round" filter="url(#neon)">CLAWRUSH</text>
+  <text x="640" y="168" text-anchor="middle" font-family="Arial Black, Impact, Helvetica Neue, Helvetica, sans-serif" font-weight="900" font-size="112" letter-spacing="4" fill="url(#title)" stroke="#12041f" stroke-width="2">CLAWRUSH</text>
+
+  <text x="640" y="222" text-anchor="middle" font-family="Arial Black, Impact, Helvetica, sans-serif" font-weight="900" font-size="30" letter-spacing="3" fill="#a6ff2e" filter="url(#soft)">ONE CLAW · EVERY PLAYER · REAL PRIZES</text>
+  <text x="640" y="258" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" letter-spacing="2" fill="#e2d2ff">SOLANA DEVNET · MAGICBLOCK EPHEMERAL ROLLUPS · VRF</text>
+</svg>
