@@ -81,4 +81,18 @@ pub mod clawrush {
     pub fn cash_out(ctx: Context<CashOut>) -> Result<()> {
         play::cash_out(ctx)
     }
+
+    // ───────────── MagicBlock automation (crank + Magic Action) ─────────────
+    pub fn crank_tick(ctx: Context<CrankTick>) -> Result<()> {
+        auto::crank_tick(ctx)
+    }
+    pub fn schedule_crank<'info>(ctx: Context<'info, ScheduleCrank<'info>>, interval_ms: i64, iterations: i64) -> Result<()> {
+        auto::schedule_crank(ctx, interval_ms, iterations)
+    }
+    pub fn cash_out_and_settle(ctx: Context<CashOutAndSettle>) -> Result<()> {
+        auto::cash_out_and_settle(ctx)
+    }
+    pub fn settle_prizes(ctx: Context<SettlePrizes>) -> Result<()> {
+        auto::settle_prizes(ctx)
+    }
 }
