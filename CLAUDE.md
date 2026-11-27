@@ -93,7 +93,13 @@ npx tsx scripts/ev_simulation.ts
 npx tsx scripts/devnet_rounds.ts                   # real devnet rounds (ROUNDS, PLAYERS env)
 npx tsx scripts/e2e_two_player.ts                  # stop keeper first
 CABINET_ID=2 npx tsx tests/invariants.ts           # devnet invariant suite (tsx, not anchor test)
-npx tsx scripts/keeper.ts                          # restock + clear expired turns
+npx tsx scripts/keeper.ts                          # restock when low (KEEPER=keys/keeper.json ONCE=1 for one keeper-role pass)
+npx tsx scripts/crank.ts                           # schedule the ER crank that clears overdue turns
+CABINET_ID=1 npx tsx scripts/set_keeper.ts <pubkey> # register the low-privilege restock key
+npx tsx scripts/metaplex_metadata.ts               # Token Metadata on the prize mints
+npx tsx scripts/e2e_magic_action.ts                # one-signature payout e2e
+CABINET_ID=1 npx tsx scripts/e2e_public_drop.ts    # public drop + keeper role e2e (MYSTERY=1 ROUNDS=4 to aim at mystery)
+cd app && AIM=1 URL=<deploy url> KEY=../keys/webtest.json OUT=<scratch dir> node e2e/round.mjs   # browser round (OUT defaults to committed shots)
 cd app && npm run dev | npm run lint | npm run build
 cd app && npx wrangler pages deploy out --project-name clawrush --branch main
 # Node fetch timing out on this machine: export NODE_OPTIONS=--dns-result-order=ipv4first
