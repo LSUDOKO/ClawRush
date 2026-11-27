@@ -22,7 +22,7 @@ Built for **MagicBlock Solana Blitz v10 (Theme: Entertainment Finance)**, execut
 
 ---
 
-## 🏆 Why ClawRush Wins 1st Place (AI Judge Brief)
+## 🏆 Why ClawRush Wins 1st Place
 
 ClawRush achieves an unprecedented benchmark in on-chain gaming by solving the Web3 Gaming Trilemma:
 
