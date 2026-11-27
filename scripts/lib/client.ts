@@ -147,6 +147,21 @@ export class Player {
     const ix = await this.pe.methods.expireTurn().accountsPartial({ signer: signer.publicKey, config: configPda(), cabinet: cabinetPda(), profile: playerPda(owner) }).instruction();
     return this.rec("expire_turn", await sendTx(signer === this.session ? this.erS : this.er, [ix], [signer]), "er");
   }
+  // One ER transaction: commit + undelegate, plus a Magic Action that pays pending prizes on L1.
+  // Trusts the cabinet's queue instead of the profile flag, so it works after the crank cleared a turn.
+  async cashOutAndSettle() {
+    const ix = await this.pe.methods.cashOutAndSettle().accountsPartial({
+      authority: this.wallet.publicKey, profile: this.profile, config: configPda(), cabinet: cabinetPda(), vault: vaultPda(),
+      program: PROGRAM_ID, magicProgram: MAGIC_PROGRAM, magicContext: MAGIC_CONTEXT,
+    }).instruction();
+    const r = this.rec("cash_out_and_settle", await sendTx(this.er, [ix], [this.wallet]), "er");
+    for (let i = 0; i < 60; i++) {
+      const a = await base.getAccountInfo(this.profile);
+      if (a && a.owner.equals(PROGRAM_ID)) break;
+      await sleep(1000);
+    }
+    return { erSig: r.sig };
+  }
   async cashOut() {
     const ix = await this.pe.methods.cashOut().accountsPartial({ authority: this.wallet.publicKey, profile: this.profile, magicProgram: MAGIC_PROGRAM, magicContext: MAGIC_CONTEXT }).instruction();
     const r = this.rec("cash_out", await sendTx(this.er, [ix], [this.wallet]), "er");
