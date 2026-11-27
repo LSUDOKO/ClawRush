@@ -1,9 +1,5 @@
 <p align="center">
-  <img src="assets/banner.svg" width="100%" alt="ClawRush: one claw, every player, real prizes">
-</p>
-
-<p align="center">
-  <img src="app/public/art/logo_main.webp" width="180" alt="ClawRush logo">
+  <img src="assets/brand/logo.png" width="260" alt="ClawRush logo">
 </p>
 
 <h1 align="center">ClawRush</h1>
@@ -32,6 +28,10 @@ Built for **MagicBlock Solana Blitz v10, theme "Entertainment Finance"**, answer
 > value. Every number and link here comes from a real devnet run; anything partial is labelled in
 > [Honest status](#honest-status).
 
+<p align="center">
+  <img src="assets/banner.jpg" width="100%" alt="ClawRush: one claw, every player, real prizes">
+</p>
+
 <a id="play"></a>
 
 ## Play it
@@ -52,21 +52,43 @@ Taken today from the live site (https://clawrush.pages.dev) at 390×844 by
 [`app/e2e/round.mjs`](app/e2e/round.mjs), during a real devnet round: the claw was steered onto the 90 dGEM plush,
 the program measured 98% alignment and 84% grip, VRF rolled 8.4%, and the capsule was **HELD**.
 
-<p align="center">
-  <img src="assets/screenshots/01-landing.png" width="160" alt="Landing screen with live cabinet stats">
-  <img src="assets/screenshots/02-cabinet.png" width="160" alt="Shared 3D cabinet, front view, with plush prizes on the floor">
-  <img src="assets/screenshots/03-aiming.png" width="160" alt="Aiming: predicted grip 84% at 98% alignment">
-  <img src="assets/screenshots/04-result.png" width="160" alt="Result: you won 90 dGEM">
-  <img src="assets/screenshots/05-live-proof.png" width="160" alt="Live Proof drawer re-checking the stored result">
-</p>
-<p align="center"><sub>Landing · shared cabinet · aiming (GRIP 84% predicted) · result · Live Proof drawer</sub></p>
+<table>
+  <tr>
+    <td align="center" width="33%"><img src="assets/screenshots/01-landing.png" width="100%" alt="Landing screen with live cabinet stats"><br><b>Landing</b><br><sub>live cabinet stats</sub></td>
+    <td align="center" width="33%"><img src="assets/screenshots/02-cabinet.png" width="100%" alt="Shared 3D cabinet, front view, with plush prizes on the floor"><br><b>Shared cabinet</b><br><sub>everyone plays the same box</sub></td>
+    <td align="center" width="33%"><img src="assets/screenshots/03-aiming.png" width="100%" alt="Aiming: predicted grip 84% at 98% alignment"><br><b>Aiming</b><br><sub>98% alignment, GRIP 84% predicted</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="assets/screenshots/04-result.png" width="100%" alt="Result: you won 90 dGEM"><br><b>Result</b><br><sub>VRF rolled 8.4%: HELD, 90 dGEM</sub></td>
+    <td align="center"><img src="assets/screenshots/05-live-proof.png" width="100%" alt="Live Proof drawer re-checking the stored result"><br><b>Live Proof</b><br><sub>re-checks the stored on-chain result</sub></td>
+    <td align="center"><img src="assets/round.gif" width="100%" alt="Recording of the round: claw moves onto the capsule, drops, and the win animation plays"><br><b>The round, animated</b><br><sub>aim → drop → win</sub></td>
+  </tr>
+</table>
 
-<details>
-<summary>Animated: the same round, aim → drop → win (GIF, 1.1 MB)</summary>
-<p align="center"><img src="assets/round.gif" width="260" alt="Recording of the round: claw moves onto the capsule, drops, and the win animation plays"></p>
-<sub>Recorded in headless Chrome with software WebGL, so the frame rate is lower than on a phone. The pause after the drop
-is the real wait for the VRF callback plus rendering.</sub>
-</details>
+<sub>The GIF was recorded in headless Chrome with software WebGL, so its frame rate is lower than on a phone. The pause
+after the drop is the real wait for the VRF callback plus rendering.</sub>
+
+## Meet the crew
+
+The cast of the cabinet. Every prize you can grab is a plush with its own on-chain token (Metaplex metadata on devnet).
+
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="app/public/art/mascot_win.webp" height="150" alt="The purple one-eyed mascot"><br><b>Mascot</b><br><sub>cheers every win</sub></td>
+    <td align="center" width="25%"><img src="app/public/art/crew_slime.webp" height="150" alt="Slime, the lime blob"><br><b>Slime</b><br><sub>crew</sub></td>
+    <td align="center" width="25%"><img src="app/public/art/crew_bat.webp" height="150" alt="Bat, the purple bat"><br><b>Bat</b><br><sub>crew</sub></td>
+    <td align="center" width="25%"><img src="app/public/art/claw_open.webp" height="150" alt="The golden claw"><br><b>The Claw</b><br><sub>one claw, every player</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="app/public/art/p_coin.webp" height="130" alt="Coin plush, pays dUSDC"><br><b>Coin</b><br><sub>pays dUSDC</sub></td>
+    <td align="center"><img src="app/public/art/p_gem.webp" height="130" alt="Gem plush, pays dGEM"><br><b>Gem</b><br><sub>pays dGEM</sub></td>
+    <td align="center"><img src="app/public/art/p_koi.webp" height="130" alt="Koi plush collectible"><br><b>Koi</b><br><sub>KOI collectible</sub></td>
+    <td align="center"><img src="app/public/art/p_robo.webp" height="130" alt="Robo plush collectible"><br><b>Robo</b><br><sub>ROBO collectible</sub></td>
+  </tr>
+  <tr>
+    <td align="center" colspan="4"><img src="app/public/art/p_mystery.webp" height="130" alt="Sealed mystery capsule"><br><b>Mystery capsule</b><br><sub>sealed in the Private ER: nobody can read what is inside until it falls</sub></td>
+  </tr>
+</table>
 
 Transactions from that round: [session start (L1)](https://explorer.solana.com/tx/3PxazQdMm6PR7hEHPHLadL2DKERGLd6sv8A8TakHjn1Bhsh5PWjfoCrQRRwtpLdoZurBadGc5i7Mkphdw95c98Z?cluster=devnet) ·
 [drop → VRF request (ER)](https://explorer.solana.com/tx/4DBe3B4qFtzLuZ8MjnSg2NSmfzLdqskUF7uK1c4jwhDdt4pz67Ayy1wW9hj1DH5hrysuhtsy7JhZRwiecr5cLbyZ?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app) ·
