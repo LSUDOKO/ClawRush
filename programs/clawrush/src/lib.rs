@@ -78,6 +78,9 @@ pub mod clawrush {
     pub fn drop_claw(ctx: Context<DropClaw>, client_seed: u8) -> Result<()> {
         play::drop_claw(ctx, client_seed)
     }
+    pub fn drop_claw_public(ctx: Context<DropClawPublic>, client_seed: u8) -> Result<()> {
+        instructions::play::drop_claw_public(ctx, client_seed)
+    }
     pub fn vrf_grip_callback(ctx: Context<VrfGripCallback>, randomness: [u8; 32], nonce: u64) -> Result<()> {
         play::vrf_grip_callback(ctx, randomness, nonce)
     }

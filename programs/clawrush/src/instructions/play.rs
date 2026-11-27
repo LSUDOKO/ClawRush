@@ -122,11 +122,36 @@ pub struct MoveClaw<'info> {
 
 // ───────────────────────── drop_claw (ER) ─────────────────────────
 
-pub fn drop_claw(ctx: Context<DropClaw>, client_seed: u8) -> Result<()> {
+pub fn drop_claw(mut ctx: Context<DropClaw>, client_seed: u8) -> Result<()> {
+    let a = &mut ctx.accounts;
+    let ix = drop_core(&a.signer, &a.profile, &a.config, &mut a.cabinet, a.oracle_queue.key(), a.mystery.key(), client_seed)?;
+    ctx.accounts.invoke_signed_vrf(&ctx.accounts.signer.to_account_info(), &ix)?;
+    Ok(())
+}
+
+/// Same as drop_claw, but the mystery vault is not an account of this transaction: its address is derived
+/// here and only handed to the VRF callback. The TEE redacts transactions that list the private vault, so
+/// drops sent through this instruction stay publicly readable; only the callback that reads the vault is hidden.
+pub fn drop_claw_public(mut ctx: Context<DropClawPublic>, client_seed: u8) -> Result<()> {
+    let (mystery, _) = Pubkey::find_program_address(&[SEED_MYSTERY, &[ctx.accounts.config.cabinet_id]], &crate::ID);
+    let a = &mut ctx.accounts;
+    let ix = drop_core(&a.signer, &a.profile, &a.config, &mut a.cabinet, a.oracle_queue.key(), mystery, client_seed)?;
+    ctx.accounts.invoke_signed_vrf(&ctx.accounts.signer.to_account_info(), &ix)?;
+    Ok(())
+}
+
+fn drop_core(
+    signer: &Signer,
+    profile: &Account<PlayerProfile>,
+    config: &Account<CabinetConfig>,
+    cab: &mut Account<CabinetState>,
+    oracle_queue: Pubkey,
+    mystery: Pubkey,
+    client_seed: u8,
+) -> Result<anchor_lang::solana_program::instruction::Instruction> {
     let now = Clock::get()?.unix_timestamp;
-    authorize(&ctx.accounts.profile, &ctx.accounts.signer.key(), now)?;
-    let cab = &mut ctx.accounts.cabinet;
-    require_keys_eq!(cab.turn_owner, ctx.accounts.profile.authority, ClawError::NotYourTurn);
+    authorize(profile, &signer.key(), now)?;
+    require_keys_eq!(cab.turn_owner, profile.authority, ClawError::NotYourTurn);
     require!(now <= cab.turn_expires_at, ClawError::TurnExpired);
     require!(!cab.pending_vrf, ClawError::VrfPending);
 
@@ -143,7 +168,7 @@ pub fn drop_claw(ctx: Context<DropClaw>, client_seed: u8) -> Result<()> {
     let nonce = cab.vrf_nonce;
     let capsule_id = if idx == NO_CAPSULE { u16::MAX } else { cab.capsules[idx as usize].id };
     emit!(DropInitiated {
-        player: ctx.accounts.profile.authority,
+        player: profile.authority,
         round: cab.round,
         x: cab.claw_x,
         z: cab.claw_z,
@@ -154,26 +179,24 @@ pub fn drop_claw(ctx: Context<DropClaw>, client_seed: u8) -> Result<()> {
 
     let mut seed = [client_seed; 32];
     seed[..8].copy_from_slice(&nonce.to_le_bytes());
-    let ix = create_request_randomness_ix_const(
+    Ok(create_request_randomness_ix_const(
         RequestRandomnessParams {
-            payer: ctx.accounts.signer.key(),
-            oracle_queue: ctx.accounts.oracle_queue.key(),
+            payer: signer.key(),
+            oracle_queue,
             callback_program_id: crate::ID,
             callback_discriminator: crate::instruction::VrfGripCallback::DISCRIMINATOR.to_vec(),
             caller_seed: seed,
             accounts_metas: Some(vec![
-                SerializableAccountMeta { pubkey: ctx.accounts.config.key(), is_signer: false, is_writable: false },
+                SerializableAccountMeta { pubkey: config.key(), is_signer: false, is_writable: false },
                 SerializableAccountMeta { pubkey: cab.key(), is_signer: false, is_writable: true },
-                SerializableAccountMeta { pubkey: ctx.accounts.profile.key(), is_signer: false, is_writable: true },
-                SerializableAccountMeta { pubkey: ctx.accounts.mystery.key(), is_signer: false, is_writable: true },
+                SerializableAccountMeta { pubkey: profile.key(), is_signer: false, is_writable: true },
+                SerializableAccountMeta { pubkey: mystery, is_signer: false, is_writable: true },
             ]),
             callback_args: Some(nonce.to_le_bytes().to_vec()),
             ..Default::default()
         },
         PROGRAM_IDENTITY,
-    );
-    ctx.accounts.invoke_signed_vrf(&ctx.accounts.signer.to_account_info(), &ix)?;
-    Ok(())
+    ))
 }
 
 #[vrf]
@@ -189,6 +212,29 @@ pub struct DropClaw<'info> {
     pub cabinet: Box<Account<'info, CabinetState>>,
     #[account(seeds = [SEED_MYSTERY, &[config.cabinet_id]], bump = mystery.bump)]
     pub mystery: Box<Account<'info, MysteryVault>>,
+    /// CHECK: MagicBlock VRF oracle queue
+    #[account(
+        mut,
+        constraint = oracle_queue.key() == mbvrf::consts::DEFAULT_EPHEMERAL_QUEUE
+            || oracle_queue.key() == mbvrf::consts::DEFAULT_QUEUE
+            || oracle_queue.key() == mbvrf::consts::DEFAULT_TEST_QUEUE
+            || oracle_queue.key() == mbvrf::consts::DEFAULT_EPHEMERAL_TEST_QUEUE
+            @ ClawError::InvalidParams
+    )]
+    pub oracle_queue: UncheckedAccount<'info>,
+}
+
+#[vrf]
+#[derive(Accounts)]
+pub struct DropClawPublic<'info> {
+    #[account(mut)]
+    pub signer: Signer<'info>,
+    #[account(mut, seeds = [SEED_PLAYER, &[profile.cabinet_id], profile.authority.as_ref()], bump = profile.bump, constraint = profile.cabinet_id == config.cabinet_id @ ClawError::WrongCabinet)]
+    pub profile: Box<Account<'info, PlayerProfile>>,
+    #[account(seeds = [SEED_CONFIG, &[config.cabinet_id]], bump = config.bump)]
+    pub config: Box<Account<'info, CabinetConfig>>,
+    #[account(mut, seeds = [SEED_CABINET, &[config.cabinet_id]], bump = cabinet.bump)]
+    pub cabinet: Box<Account<'info, CabinetState>>,
     /// CHECK: MagicBlock VRF oracle queue
     #[account(
         mut,
