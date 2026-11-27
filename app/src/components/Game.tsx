@@ -427,7 +427,7 @@ export default function Game() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/art/token.webp" alt="" className="h-6 w-6" />{signer ? credLeft : "–"}
           </span>
-          <span className="pill text-sm" title="Players on this cabinet right now (from chain)">
+          <span className="pill text-sm" title="Players on this cabinet right now: the turn owner plus the queue, read from chain" aria-label={`${playersNow} players on the cabinet`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/art/mascot_base.webp" alt="" className="h-6 w-6 object-contain" />{playersNow}
           </span>
@@ -471,7 +471,7 @@ export default function Game() {
               className={`btn3d h-11 ${myTurn ? "px-4" : "px-3"} text-base uppercase ${view === v ? "btn-gold" : "btn-violet"}`}>{v}</button>
           ))}
         </div>
-        <TimerRing left={turnLeft} total={15} label={cab?.turnOwner === NO_TURN ? "Cabinet idle" : myTurn ? "YOUR TURN!" : `${short(cab?.turnOwner ?? "")} playing`} />
+        <TimerRing left={turnLeft} total={15} label={cab?.turnOwner === NO_TURN ? "Cabinet idle" : (myTurn ? "YOUR TURN!" : `${short(cab?.turnOwner ?? "")} playing`) + (cab && cab.queue.length ? ` · ${cab.queue.length} in line` : "")} />
       </div>
 
       {/* Controls */}
