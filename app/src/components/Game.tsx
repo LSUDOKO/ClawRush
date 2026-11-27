@@ -251,7 +251,7 @@ export default function Game() {
     let r;
     try { r = await send(await erFor(ss), [await ix.dropClaw(ss.publicKey, new PublicKey(me), Math.floor(Math.random() * 256))], ss, 400_000); }
     catch (e) { setAnim({ phase: "idle", t0: performance.now() }); setMyRound(null); throw e; }
-    addProof({ label: "drop_claw → VRF request (ER)", sig: r.sig, er: true });
+    addProof({ label: "drop_claw_public → VRF request (ER)", sig: r.sig, er: true });
     // On a slow link the VRF result can land before this confirmation; don't overwrite the result animation.
     setAnim((a) => (a.phase === "drop" ? { phase: "hold", t0: performance.now() } : a));
     sfx.drumroll();

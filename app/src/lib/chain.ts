@@ -160,7 +160,9 @@ export const ix = {
   }).instruction(),
   joinQueue: (signer: PublicKey, w: PublicKey) => M.joinQueue().accountsPartial({ signer, profile: playerPda(w), config: configPda, cabinet: cabinetPda }).instruction(),
   moveClaw: (signer: PublicKey, w: PublicKey, dx: number, dz: number, seq: number) => M.moveClaw(dx, dz, seq).accountsPartial({ signer, profile: playerPda(w), cabinet: cabinetPda }).instruction(),
-  dropClaw: (signer: PublicKey, w: PublicKey, seed: number) => M.dropClaw(seed).accountsPartial({ signer, profile: playerPda(w), config: configPda, cabinet: cabinetPda, mystery: mysteryPda, oracleQueue: VRF_QUEUE }).instruction(),
+  // drop_claw_public: the private mystery vault is derived on chain instead of listed, so the TEE does not
+  // redact this transaction and the drop shows up in the Live Proof drawer like every other move.
+  dropClaw: (signer: PublicKey, w: PublicKey, seed: number) => M.dropClawPublic(seed).accountsPartial({ signer, profile: playerPda(w), config: configPda, cabinet: cabinetPda, oracleQueue: VRF_QUEUE }).instruction(),
   expireTurn: (signer: PublicKey, owner: PublicKey) => M.expireTurn().accountsPartial({ signer, config: configPda, cabinet: cabinetPda, profile: playerPda(owner) }).instruction(),
   cashOut: (w: PublicKey) => M.cashOut().accountsPartial({ authority: w, profile: playerPda(w), magicProgram: MAGIC_PROGRAM, magicContext: MAGIC_CONTEXT }).instruction(),
   // Commit + undelegate the profile and schedule the `settle_prizes` Magic Action on L1 (pays prizes in the same settlement).
