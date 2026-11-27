@@ -28,7 +28,12 @@ await page.screenshot({ path: `${OUT}/02-lobby-390.png` });
 
 const step = async (name, timeout = 90000) => {
   const start = page.getByRole("button", { name });
-  await start.waitFor({ timeout });
+  try { await start.waitFor({ timeout }); }
+  catch (e) {
+    await page.screenshot({ path: `${OUT}/fail-${name.replace(/\W+/g, "_")}.png` });
+    log("page text at failure:", (await page.locator("main").innerText().catch(() => "")).replace(/\s+/g, " ").slice(0, 600));
+    throw e;
+  }
   return start;
 };
 // Start or resume
@@ -53,19 +58,32 @@ const status = page.getByRole("status").filter({ hasText: /won|SLIP|MISS/ });
 await status.first().waitFor({ timeout: 60000 });
 const result = await status.first().innerText();
 log("result:", result);
+await page.getByText("Dropping…").waitFor({ state: "hidden", timeout: 60000 }).catch(() => {});
 await page.screenshot({ path: `${OUT}/05-result-390.png` });
 await page.getByRole("button", { name: /Live Proof/ }).click();
 await page.waitForTimeout(1500);
 await page.screenshot({ path: `${OUT}/06-proof-390.png`, fullPage: true });
 const links = await page.locator("section a[href*='explorer.solana.com/tx']").evaluateAll((as) => as.map((a) => `${a.textContent} ${a.href}`));
 log("proof links:\n" + links.join("\n"));
+// Round 2 in the same session: join again, then let the turn time out on purpose (no drop).
+// The app must clear its own expired turn (expire_turn with the session key) and offer INSERT CREDIT / Cash out again.
+// Stop scripts/keeper.ts before this run so the app, not the keeper, clears the turn.
+log("round 2: join and idle until the turn expires");
+await (await step("INSERT CREDIT", 60000)).click();
+await step("DROP", 120000);
+const t0 = Date.now();
+await page.getByRole("button", { name: "INSERT CREDIT" }).or(page.getByRole("button", { name: "No credits" })).first().waitFor({ timeout: 60000 });
+const recovered = `turn expired and cleared after ${((Date.now() - t0) / 1000).toFixed(1)} s`;
+log(recovered);
+await page.screenshot({ path: `${OUT}/05b-timeout-recovered-390.png` });
+
 // Cash out & claim
 await page.getByRole("button", { name: /Cash out/ }).first().click();
 await page.getByRole("status").filter({ hasText: /Paid to your wallet|No prizes pending/ }).first().waitFor({ timeout: 120000 });
 log("settled:", await page.getByRole("status").filter({ hasText: /Paid|No prizes/ }).first().innerText());
 await page.screenshot({ path: `${OUT}/07-settled-390.png`, fullPage: true });
 const links2 = await page.locator("section a[href*='explorer.solana.com/tx']").evaluateAll((as) => as.map((a) => `${a.textContent} ${a.href}`));
-fs.writeFileSync(`${OUT}/proof-links.txt`, `${new Date().toISOString()} ${URL}\nresult: ${result}\n` + links2.join("\n") + "\n");
+fs.writeFileSync(`${OUT}/proof-links.txt`, `${new Date().toISOString()} ${URL}\nround 1 result: ${result}\nround 2: ${recovered}\n` + links2.join("\n") + "\n");
 // 375x812 screenshot
 await page.setViewportSize({ width: 375, height: 812 });
 await page.waitForTimeout(800);

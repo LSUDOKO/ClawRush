@@ -15,12 +15,13 @@ and the **MagicBlock devnet TEE validator**. Tokens are demo devnet tokens with 
 
 ## ▶️ Try it
 
-- **Live app:** https://clawrush.adoranto737.workers.dev (phone, portrait)
+- **Live app:** https://clawrush.pages.dev (phone, portrait)
 - **Demo video:** NOT COMPLETED (to be recorded)
 
 1. Connect a devnet wallet (Phantom / Solflare, or Mobile Wallet Adapter on Android). For a quick look, the
    app offers an opt-in, clearly labelled **devnet burner** wallet kept only in your browser. The burner path is
    tested end-to-end in a browser; the Phantom / Solflare / MWA path is built but **not yet tested on a device**.
+   You need a little devnet SOL for fees (https://faucet.solana.com; the public airdrop is often rate-limited).
 2. **Start session**: one approval buys credits (free demo dUSDC from the faucet in the same transaction),
    registers a scoped session key, and moves your profile onto the Ephemeral Rollup.
 3. **Insert credit** to join the shared queue. On your turn (15 s) steer with the joystick, switch

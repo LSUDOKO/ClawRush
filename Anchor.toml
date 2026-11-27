@@ -16,4 +16,5 @@ cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
-test = "npx tsx node_modules/.bin/mocha -t 1000000 tests/**/*.ts"
+# Devnet suites (tests/invariants.ts, scripts/*) send real transactions; run them explicitly with tsx.
+test = "npx tsx scripts/lib/math.test.ts"

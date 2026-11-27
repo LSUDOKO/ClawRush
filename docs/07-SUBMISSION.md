@@ -9,7 +9,7 @@ Submit at https://build.magicblock.app/?stage=blitz#submit (Telegram login). **P
 | Project name | ClawRush |
 | Description | ClawRush is a live multiplayer claw machine you play from your phone. One shared cabinet on a MagicBlock Ephemeral Rollup: everyone sees every move live, capsules stay where they land, and your aim sets your grip chance before MagicBlock VRF rolls it. Jackpot "mystery capsules" are sealed in a Private Ephemeral Rollup so bots can't snipe them, and wins settle real tokens and collectibles to your wallet on Solana. |
 | Categories | Games, Consumer, Privacy |
-| Website | https://clawrush.adoranto737.workers.dev |
+| Website | https://clawrush.pages.dev |
 | GitHub | https://github.com/LSUDOKO/ClawRush |
 | Pitch + demo | **NOT COMPLETED**: record the video (script below) and paste the link |
 | Explorer link | https://explorer.solana.com/tx/2FzY9oJrQXab58GSnLmjZ6ShPzQnAnvi4zkzxRKjLLSkd4LGGMqU4vX2WctvvKXxmZyXv5dgELXfNk1cHpWN2G7v?cluster=devnet (cabinet delegation to the TEE ER; VRF callbacks are redacted by the TEE because they write the sealed vault) |

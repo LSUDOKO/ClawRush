@@ -73,7 +73,7 @@ clawrush/
 │       ├── math.rs           # grip + slip math (pure fns, unit-tested)
 │       ├── events.rs
 │       └── errors.rs
-├── tests/                    # anchor tests (TS)
+├── tests/                    # devnet invariant suite (tsx)
 ├── scripts/
 │   ├── ev_simulation.ts      # Monte Carlo payout proof
 │   ├── setup_devnet.ts       # create mints, cabinet, stock capsules
@@ -85,11 +85,18 @@ clawrush/
 
 ```bash
 anchor build
-anchor test                       # unit + integration
-anchor deploy --provider.cluster devnet
-npx ts-node scripts/setup_devnet.ts
-npx ts-node scripts/ev_simulation.ts
-cd app && npm run dev
+cargo test -p clawrush --lib                       # math unit tests
+npx tsx scripts/lib/math.test.ts                   # TS port matches math.rs
+solana program deploy target/deploy/clawrush.so --program-id <program keypair> --url devnet
+npx tsx scripts/setup_devnet.ts                    # mints, cabinet, delegation, sealed vault, stock
+npx tsx scripts/ev_simulation.ts
+npx tsx scripts/devnet_rounds.ts                   # real devnet rounds (ROUNDS, PLAYERS env)
+npx tsx scripts/e2e_two_player.ts                  # stop keeper first
+CABINET_ID=2 npx tsx tests/invariants.ts           # devnet invariant suite (tsx, not anchor test)
+npx tsx scripts/keeper.ts                          # restock + clear expired turns
+cd app && npm run dev | npm run lint | npm run build
+cd app && npx wrangler pages deploy out --project-name clawrush --branch main
+# Node fetch timing out on this machine: export NODE_OPTIONS=--dns-result-order=ipv4first
 ```
 
 ## Coding conventions

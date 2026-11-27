@@ -10,11 +10,11 @@ export default function ProofDrawer({ cab, proof, avgLat, lastLat, me, session }
   cab: Cabinet | null; proof: ProofItem[]; avgLat: number | null; lastLat: number | null; me: string | null; session: string | null;
 }) {
   const [open, setOpen] = useState(false);
-  const [sealed, setSealed] = useState<"checking" | "sealed" | "readable">("checking");
+  const [sealed, setSealed] = useState<"checking" | "sealed" | "readable" | "unknown">("checking");
   useEffect(() => {
     if (!open) return;
     // Live privacy check: ask the TEE RPC for the mystery vault with no credentials.
-    erPublic.getAccountInfo(mysteryPda).then((a) => setSealed(a ? "readable" : "sealed")).catch(() => setSealed("sealed"));
+    erPublic.getAccountInfo(mysteryPda).then((a) => setSealed(a ? "readable" : "sealed")).catch(() => setSealed("unknown"));
   }, [open, cab?.round]);
   const L = cab?.last;
   return (
@@ -39,7 +39,7 @@ export default function ProofDrawer({ cab, proof, avgLat, lastLat, me, session }
           )}
           <div>
             <p className="text-white/60">Mystery capsules</p>
-            <p>{sealed === "sealed" ? "🔒 Sealed in Private ER: the TEE RPC refuses to return the mystery vault to anyone (checked live just now)." : sealed === "readable" ? "⚠ Mystery vault is readable!" : "checking…"}</p>
+            <p>{sealed === "sealed" ? "🔒 Sealed in Private ER: the TEE RPC refuses to return the mystery vault to anyone (checked live just now)." : sealed === "readable" ? "⚠ Mystery vault is readable!" : sealed === "unknown" ? "Couldn't reach the TEE RPC to check right now." : "checking…"}</p>
           </div>
           <div>
             <p className="text-white/60">Your transactions this session</p>
@@ -48,7 +48,7 @@ export default function ProofDrawer({ cab, proof, avgLat, lastLat, me, session }
                 <li key={p.sig}><a className="underline decoration-cyan-400/50" href={explorerTx(p.sig, p.er)} target="_blank" rel="noreferrer">{p.label}</a> <span className="font-mono text-white/50">{short(p.sig)}</span></li>
               ))}</ul>
             ) : <p className="text-white/50">None yet.</p>}
-            <p className="mt-1 text-white/40">ER links open Solana Explorer pointed at {ER_URL}. The TEE hides transaction details without an auth token.</p>
+            <p className="mt-1 text-white/40">ER links open Solana Explorer pointed at {ER_URL}. Public moves (join, move, expire, cash out) are readable by anyone; transactions that touch the sealed mystery vault (drop, VRF result, restock) are redacted for everyone.</p>
           </div>
           <div className="space-y-0.5">
             <p className="text-white/60">On-chain addresses (devnet)</p>

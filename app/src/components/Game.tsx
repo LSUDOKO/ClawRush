@@ -157,6 +157,24 @@ export default function Game() {
     return () => clearInterval(t);
   }, [canControl, session, me]);
 
+  // ───── Clear stale turns (permissionless expire_turn), including my own timed-out turn or a stuck VRF ─────
+  const expiring = useRef<number>(-1);
+  useEffect(() => {
+    if (!cab || !session || cab.turnOwner === NO_TURN || expiring.current === cab.round) return;
+    const stale = cab.pendingVrf ? now > cab.dropAt + 31 : now > cab.turnExpiresAt + 1;
+    if (!stale) return;
+    expiring.current = cab.round;
+    const ss = keypairSigner(session.kp);
+    void (async () => {
+      try {
+        const r = await send(await erFor(ss), [await ix.expireTurn(ss.publicKey, new PublicKey(cab.turnOwner))], ss);
+        addProof({ label: cab.turnOwner === me ? "expire_turn (your turn timed out)" : "expire_turn (stale turn)", sig: r.sig, er: true });
+        if (cab.turnOwner === me) { setAnim({ phase: "idle", t0: performance.now() }); setMyRound(null); }
+      } catch { /* someone else cleared it; retry next round if still stuck */ expiring.current = -1; }
+      void refresh();
+    })();
+  }, [cab, session, now, me]);
+
   // ───── Actions ─────
   const run = async (label: string, f: () => Promise<void>) => {
     setBusy(label); setErr(null);
@@ -169,8 +187,10 @@ export default function Game() {
     const w = signer.publicKey;
     const need = PLAY_PRICE * BigInt(credits);
     const ixs: TransactionInstruction[] = [];
-    if (!l1.exists) ixs.push(await ix.initPlayer(w));
-    if (usdc < need) ixs.push(await ix.faucet(w)); // demo faucet, rate-limited on chain (1 per hour)
+    // Read fresh chain state: the polled state may not have loaded yet when the button is pressed.
+    const [prof, bal] = await Promise.all([base.getAccountInfo(playerPda(w)), tokenBalance(0, w)]);
+    if (!prof) ixs.push(await ix.initPlayer(w));
+    if (bal < need) ixs.push(await ix.faucet(w)); // demo faucet, rate-limited on chain (1 per hour)
     const s = newSession(me, SESSION_SECS);
     if (credits > 0) ixs.push(await ix.buyCredits(w, credits));
     ixs.push(await ix.registerSession(w, s.kp.publicKey, s.expires));
@@ -184,10 +204,6 @@ export default function Game() {
   const join = () => run("Joining queue…", async () => {
     if (!session || !me) return;
     const ss = keypairSigner(session.kp);
-    // Clear a stale turn (permissionless after expiry) so the queue keeps moving.
-    if (cab && cab.turnOwner !== NO_TURN && cab.turnOwner !== me && now > cab.turnExpiresAt + 1 && !cab.pendingVrf) {
-      try { const r = await send(await erFor(ss), [await ix.expireTurn(ss.publicKey, new PublicKey(cab.turnOwner))], ss); addProof({ label: "expire_turn (stale turn)", sig: r.sig, er: true }); } catch { /* someone else did it */ }
-    }
     const r = await send(await erFor(ss), [await ix.joinQueue(ss.publicKey, new PublicKey(me))], ss);
     addProof({ label: "join_queue (session key, ER)", sig: r.sig, er: true });
     sfx.coin();
@@ -200,9 +216,12 @@ export default function Game() {
     setAnim({ phase: "drop", t0: performance.now() });
     sfx.servo();
     setMyRound(cab.round);
-    const r = await send(await erFor(ss), [await ix.dropClaw(ss.publicKey, new PublicKey(me), Math.floor(Math.random() * 256))], ss, 400_000);
+    let r;
+    try { r = await send(await erFor(ss), [await ix.dropClaw(ss.publicKey, new PublicKey(me), Math.floor(Math.random() * 256))], ss, 400_000); }
+    catch (e) { setAnim({ phase: "idle", t0: performance.now() }); setMyRound(null); throw e; }
     addProof({ label: "drop_claw → VRF request (ER)", sig: r.sig, er: true });
-    setAnim({ phase: "hold", t0: performance.now() });
+    // On a slow link the VRF result can land before this confirmation; don't overwrite the result animation.
+    setAnim((a) => (a.phase === "drop" ? { phase: "hold", t0: performance.now() } : a));
     sfx.drumroll();
   });
 
