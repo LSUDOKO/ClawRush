@@ -1154,6 +1154,79 @@
       ]
     },
     {
+      "name": "drop_claw_public",
+      "discriminator": [
+        233,
+        16,
+        244,
+        16,
+        243,
+        246,
+        196,
+        28
+      ],
+      "accounts": [
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "profile",
+          "writable": true
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "cabinet",
+          "writable": true
+        },
+        {
+          "name": "oracle_queue",
+          "writable": true
+        },
+        {
+          "name": "program_identity",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  100,
+                  101,
+                  110,
+                  116,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "vrf_program",
+          "address": "Vrf1RNUjXmQGjmQrQLvJHs9SNkvDJEsRVFPkfSQUwGz"
+        },
+        {
+          "name": "slot_hashes",
+          "address": "SysvarS1otHashes111111111111111111111111111"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "client_seed",
+          "type": "u8"
+        }
+      ]
+    },
+    {
       "name": "expire_turn",
       "discriminator": [
         129,
@@ -1691,6 +1764,66 @@
       ]
     },
     {
+      "name": "restock_by_keeper",
+      "discriminator": [
+        17,
+        116,
+        158,
+        96,
+        226,
+        210,
+        51,
+        1
+      ],
+      "accounts": [
+        {
+          "name": "keeper",
+          "signer": true
+        },
+        {
+          "name": "keeper_role"
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "cabinet",
+          "writable": true
+        },
+        {
+          "name": "mystery",
+          "writable": true
+        },
+        {
+          "name": "vault"
+        },
+        {
+          "name": "vault0"
+        },
+        {
+          "name": "vault1"
+        },
+        {
+          "name": "vault2"
+        },
+        {
+          "name": "vault3"
+        }
+      ],
+      "args": [
+        {
+          "name": "specs",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "CapsuleSpec"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "schedule_crank",
       "discriminator": [
         208,
@@ -1848,6 +1981,46 @@
       "args": []
     },
     {
+      "name": "set_keeper",
+      "discriminator": [
+        102,
+        94,
+        23,
+        78,
+        157,
+        222,
+        243,
+        214
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "keeper_role",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "keeper",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
       "name": "settle_prizes",
       "discriminator": [
         252,
@@ -2003,6 +2176,19 @@
       ]
     },
     {
+      "name": "KeeperRole",
+      "discriminator": [
+        195,
+        81,
+        64,
+        101,
+        204,
+        136,
+        73,
+        122
+      ]
+    },
+    {
       "name": "MysteryVault",
       "discriminator": [
         112,
@@ -2106,6 +2292,19 @@
         144,
         22,
         236
+      ]
+    },
+    {
+      "name": "KeeperSet",
+      "discriminator": [
+        116,
+        85,
+        200,
+        22,
+        76,
+        163,
+        56,
+        243
       ]
     },
     {
@@ -2855,6 +3054,46 @@
           {
             "name": "outcome",
             "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "KeeperRole",
+      "docs": [
+        "Low-privilege restock role, so a hosted keeper never holds the cabinet authority (also the upgrade key).",
+        "A keeper can only add capsules that pass the same bounds and solvency checks as an authority restock."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "cabinet_id",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "keeper",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "KeeperSet",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "cabinet_id",
+            "type": "u8"
+          },
+          {
+            "name": "keeper",
+            "type": "pubkey"
           }
         ]
       }
