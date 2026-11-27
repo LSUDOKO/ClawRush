@@ -96,15 +96,18 @@ if (process.env.AIM) {
     c = await read();
     log("claw at", c.clawX, c.clawZ, "dist", Math.round(Math.hypot(tgt.x - c.clawX, tgt.z - c.clawZ)));
   }
-  await page.screenshot({ path: `${OUT}/04b-aimed-390.png` });
+  // Software-WebGL screenshots take ~10 s each; mid-turn shots only when asked, or the 15 s turn runs out.
+  if (process.env.TURN_SHOTS) { await page.screenshot({ path: `${OUT}/04b-aimed-390.png` }); log("shot aimed"); }
 } else {
   await page.keyboard.down("ArrowRight"); await page.waitForTimeout(900); await page.keyboard.up("ArrowRight");
   await page.keyboard.down("ArrowUp"); await page.waitForTimeout(700); await page.keyboard.up("ArrowUp");
 }
-await page.getByRole("button", { name: "side" }).click();
-await page.waitForTimeout(1500);
-await page.screenshot({ path: `${OUT}/04-aiming-side-390.png` });
-await page.getByRole("button", { name: "front" }).click();
+if (process.env.TURN_SHOTS) {
+  await page.getByRole("button", { name: "side" }).click();
+  await page.waitForTimeout(1500);
+  await page.screenshot({ path: `${OUT}/04-aiming-side-390.png` }); log("shot side");
+  await page.getByRole("button", { name: "front" }).click();
+}
 log("drop"); await dropBtn.click();
 const status = page.getByRole("status").filter({ hasText: /won|SLIP|MISS/ });
 await status.first().waitFor({ timeout: 60000 });
