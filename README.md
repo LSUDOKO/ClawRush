@@ -11,7 +11,7 @@ them. Wins settle devnet tokens and collectibles to your wallet on Solana.
 Built for **MagicBlock Solana Blitz v10 (Entertainment Finance)**. Everything below runs on **Solana devnet**
 and the **MagicBlock devnet TEE validator**. Tokens are demo devnet tokens with no value.
 
-<p align="center"><img src="app/e2e/shots/04-aiming-side-390.png" width="260" alt="Aiming in side view"> <img src="app/e2e/shots/05-result-390.png" width="260" alt="Drop result"> <img src="app/e2e/shots/06-proof-390.png" width="260" alt="Live proof drawer"></p>
+<p align="center"><img src="app/e2e/shots/00-title-390.png" width="260" alt="Title screen"> <img src="app/e2e/shots/04-aiming-side-390.png" width="260" alt="Aiming in side view"> <img src="app/e2e/shots/05-result-390.png" width="260" alt="Drop result"> <img src="app/e2e/shots/06-proof-390.png" width="260" alt="Live proof drawer"></p>
 
 ## ▶️ Try it
 

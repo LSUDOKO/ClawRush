@@ -43,14 +43,26 @@ export default function Joystick({ vec, disabled }: { vec: React.MutableRefObjec
       role="application"
       aria-label="Claw joystick. Drag, or use arrow keys."
       aria-disabled={disabled}
-      className={`relative h-32 w-32 touch-none select-none rounded-full border-2 ${disabled ? "border-white/10 opacity-40" : "border-cyan-300/60 shadow-[0_0_24px_rgba(61,245,255,0.35)]"} bg-white/5`}
+      className={`relative h-32 w-32 shrink-0 touch-none select-none rounded-full ${disabled ? "opacity-45 grayscale" : ""}`}
+      style={{
+        background: "radial-gradient(circle at 50% 45%, #2a0b48 0%, #14041f 62%, #0a0213 100%)",
+        boxShadow: "0 0 0 6px #ffcf3a, 0 0 0 9px #1a0630, inset 0 6px 16px rgba(0,0,0,0.7), 0 10px 20px rgba(0,0,0,0.5)" + (disabled ? "" : ", 0 0 30px rgba(255,207,58,0.45)"),
+      }}
       onPointerDown={(e) => { if (disabled) return; active.current = e.pointerId; (e.target as HTMLElement).setPointerCapture(e.pointerId); move(e); }}
       onPointerMove={move}
       onPointerUp={end}
       onPointerCancel={end}
     >
-      <div className="pointer-events-none absolute inset-0 m-auto h-14 w-14 rounded-full bg-gradient-to-br from-pink-400 to-fuchsia-700 shadow-[0_0_18px_rgba(255,61,189,0.8)]"
-        style={{ transform: `translate(${knob.x}px, ${knob.y}px)` }} />
+      {["▲", "▶", "▼", "◀"].map((a, i) => (
+        <span key={a} aria-hidden className="pointer-events-none absolute text-[11px] text-[#ffcf3a]/70"
+          style={{ left: "50%", top: "50%", transform: `rotate(${i * 90}deg) translateY(-52px) rotate(${-i * 90}deg) translate(-50%, -50%)` }}>{a}</span>
+      ))}
+      <div className="pointer-events-none absolute inset-0 m-auto h-16 w-16 rounded-full"
+        style={{
+          transform: `translate(${knob.x}px, ${knob.y}px)`,
+          background: "radial-gradient(circle at 35% 30%, #ffc2ec 0%, #ff2fb2 40%, #8a0a5f 100%)",
+          boxShadow: "0 0 0 3px #1a0630, 0 6px 0 #4d0535, 0 10px 18px rgba(0,0,0,0.55), 0 0 22px rgba(255,47,178,0.7)",
+        }} />
     </div>
   );
 }

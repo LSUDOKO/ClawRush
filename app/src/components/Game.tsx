@@ -30,7 +30,8 @@ export default function Game() {
   const [anim, setAnim] = useState<Anim>({ phase: "idle", t0: 0 });
   const [busy, setBusy] = useState<Busy>(null);
   const [err, setErr] = useState<string | null>(null);
-  const [toast, setToast] = useState<{ text: string; tone: "win" | "slip" | "miss" | "info" } | null>(null);
+  const [toast, setToast] = useState<{ text: string; tone: "win" | "slip" | "miss" | "info"; mine?: boolean; mystery?: boolean } | null>(null);
+  const [entered, setEntered] = useState(false);
   const [proof, setProof] = useState<ProofItem[]>([]);
   const [lat, setLat] = useState<number[]>([]);
   const [muted, setMute] = useState(false);
@@ -125,7 +126,7 @@ export default function Game() {
     const text = L.outcome === 1
       ? `${who} won ${fmtAmount(L.mintIdx, L.amount)}${L.kind === 2 ? ` · mystery revealed (${["", "dust", "mid", "jackpot"][L.tier]})` : ""}`
       : L.outcome === 2 ? `${who}: SLIP — capsule slid toward the chute` : `${who}: MISS`;
-    setToast({ text, tone: L.outcome === 1 ? "win" : L.outcome === 2 ? "slip" : "miss" });
+    setToast({ text, tone: L.outcome === 1 ? "win" : L.outcome === 2 ? "slip" : "miss", mine, mystery: L.kind === 2 });
     setTimeout(() => setToast(null), 4500);
     if (mine) setMyRound(null);
   }, [cab, me]);
@@ -278,64 +279,152 @@ export default function Game() {
     else stage = "play";
   }
 
-  return (
-    <main className="mx-auto flex min-h-dvh max-w-md flex-col gap-2 px-3 pb-4 pt-2 text-white">
-      {/* Header */}
-      <header className="flex items-center justify-between">
-        <div>
-          <h1 className="font-display text-2xl leading-none tracking-wider text-pink-400 drop-shadow-[0_0_10px_rgba(255,61,189,0.9)]">CLAWRUSH</h1>
-          <p className="text-[10px] tracking-[0.3em] text-cyan-300/80">クローラッシュ · DEVNET</p>
-        </div>
-        <div className="flex items-center gap-2 text-xs">
-          <span className="rounded-full border border-white/15 px-2 py-1" title="Players on this cabinet right now (from chain)">{playersNow} in play</span>
-          <button className="h-11 w-11 rounded-full border border-white/15 text-lg" aria-label={muted ? "Unmute" : "Mute"} onClick={() => { setMuted(!muted); setMute(!muted); }}>{muted ? "🔇" : "🔊"}</button>
-        </div>
-      </header>
-      <div className="h-6 overflow-hidden rounded bg-white/5 px-2 text-xs leading-6 text-yellow-200" aria-live="polite">
-        {latestWin ? `🏆 ${short(latestWin.player)} won ${fmtAmount(latestWin.mintIdx, latestWin.amount)} · ${ago(now - latestWin.ts)}` : "No wins yet on this cabinet — be first."}
+  const muteBtn = (
+    <button className="btn3d btn-violet h-11 w-11 shrink-0 text-lg" aria-label={muted ? "Unmute" : "Mute"} onClick={() => { setMuted(!muted); setMute(!muted); }}>
+      <span aria-hidden>{muted ? "🔇" : "🔊"}</span>
+    </button>
+  );
+  const ticker = (
+    <div className="slime-bar mx-1 flex h-8 items-center gap-2 overflow-hidden px-2 text-xs font-extrabold" aria-live="polite">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/art/trophy.webp" alt="" className="h-6 w-auto" />
+      <span className="truncate">{latestWin ? `${short(latestWin.player)} won ${fmtAmount(latestWin.mintIdx, latestWin.amount)}${latestWin.kind === 2 ? " from a mystery capsule" : ""} · ${ago(now - latestWin.ts)}` : "No wins yet on this cabinet. Be the first!"}</span>
+    </div>
+  );
+
+  // ───── Title screen ─────
+  if (!entered) return (
+    <main className="scene relative mx-auto flex min-h-dvh max-w-md flex-col items-center overflow-hidden px-4 pb-6 pt-3 text-white">
+      <div className="flex w-full items-center justify-between">
+        <span className="pill text-xs"><span className="ml-1 h-2.5 w-2.5 rounded-full bg-[var(--lime)] shadow-[0_0_8px_#a6ff2e]" /> SOLANA DEVNET</span>
+        {muteBtn}
+      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/art/logo.webp" alt="ClawRush" className="float-slow mt-1 w-[74%] drop-shadow-[0_10px_18px_rgba(0,0,0,0.6)]" />
+      <p className="title-stroke font-display -mt-1 text-center text-lg">One claw · every player · real prizes</p>
+
+      <div className="relative mt-1 h-56 w-full">
+        <div className="rays absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 opacity-70" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/art/crew_slime.webp" alt="" className="float absolute bottom-2 left-0 w-[30%] drop-shadow-[0_8px_10px_rgba(0,0,0,0.6)]" style={{ animationDelay: "0.4s" }} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/art/mascot_base.webp" alt="Grabbo, the ClawRush monster" className="wobble absolute bottom-0 left-1/2 w-[52%] -translate-x-1/2 drop-shadow-[0_12px_14px_rgba(0,0,0,0.7)]" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/art/crew_bat.webp" alt="" className="float absolute right-0 top-4 w-[32%] drop-shadow-[0_8px_10px_rgba(0,0,0,0.6)]" style={{ animationDelay: "1.1s" }} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/art/cap_mystery.webp" alt="" className="float-slow absolute left-[6%] top-2 w-[17%]" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/art/cap_gold.webp" alt="" className="float absolute bottom-0 right-[4%] w-[18%]" style={{ animationDelay: "0.8s" }} />
       </div>
 
-      {/* Cabinet */}
-      <section className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border-2 border-pink-500/70 shadow-[0_0_30px_rgba(255,61,189,0.35)]">
-        {cab ? <CabinetCanvas cabinet={cab} claw={claw} view={view} anim={anim} reduced={reduced} /> : (
-          <div className="flex h-full items-center justify-center text-sm text-white/60">{cabErr ?? "Connecting to the cabinet on MagicBlock ER…"}</div>
-        )}
-        {toast && (
-          <div role="status" className={`absolute inset-x-3 top-12 rounded-xl px-3 py-2 text-center text-sm font-bold backdrop-blur ${toast.tone === "win" ? "bg-yellow-400/90 text-black" : toast.tone === "slip" ? "bg-fuchsia-600/90" : toast.tone === "miss" ? "bg-slate-700/90" : "bg-cyan-700/90"}`}>
-            {toast.text}
-          </div>
-        )}
-        {cab?.pendingVrf && <div className="absolute inset-x-0 bottom-10 text-center text-sm font-bold text-cyan-200 animate-pulse">Rolling MagicBlock VRF…</div>}
-        <div className="absolute right-2 top-2 flex flex-col items-end gap-1 text-[11px]">
-          <span className="rounded bg-black/50 px-2 py-0.5">{activeCaps} capsules</span>
+      <div className="panel mt-3 grid w-full grid-cols-3 gap-1 px-2 py-2 text-center">
+        {[
+          [cab ? String(activeCaps) : "…", "capsules"],
+          [cab ? String(cab.plays) : "…", "plays"],
+          [cab ? String(cab.wins) : "…", "prizes won"],
+        ].map(([v, l]) => (
+          <div key={l}><p className="title-stroke font-display text-2xl leading-none">{v}</p><p className="text-[11px] font-bold uppercase text-white/75">{l}</p></div>
+        ))}
+      </div>
+      <div className="mt-3 w-full">{ticker}</div>
+
+      <button onClick={() => { setEntered(true); sfx.coin(); }} className="btn3d btn-gold pulse-glow mt-5 h-16 w-[80%] text-3xl">PLAY NOW</button>
+      <button onClick={() => { setEntered(true); setOnboard(true); }} className="btn3d btn-violet mt-3 h-11 px-6 text-base">HOW IT WORKS</button>
+      <p className="mt-auto pt-5 text-center text-[11px] font-semibold text-white/60">Live on MagicBlock Ephemeral Rollups · VRF · Private ER · Solana devnet (test tokens, no real value)</p>
+    </main>
+  );
+
+  // ───── Game screen ─────
+  const bulbs = Array.from({ length: 22 }, (_, i) => {
+    const side = i < 6 ? "t" : i < 11 ? "r" : i < 17 ? "b" : "l";
+    const k = i < 6 ? i : i < 11 ? i - 6 : i < 17 ? i - 11 : i - 17;
+    const n = side === "t" || side === "b" ? 6 : 5;
+    const f = `${((k + 0.5) / n) * 100}%`;
+    const pos = side === "t" ? { top: 1, left: f } : side === "b" ? { bottom: 1, left: f } : side === "r" ? { right: 1, top: f } : { left: 1, top: f };
+    return <i key={i} style={pos} />;
+  });
+  return (
+    <main className="scene mx-auto flex min-h-dvh max-w-md flex-col gap-2.5 px-3 pb-5 pt-2 text-white">
+      {/* HUD */}
+      <header className="flex items-center justify-between gap-2">
+        <button onClick={() => setEntered(false)} aria-label="Back to title screen" className="shrink-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/art/logo.webp" alt="ClawRush" className="h-12 w-auto drop-shadow-[0_4px_6px_rgba(0,0,0,0.6)]" />
+        </button>
+        <div className="flex items-center gap-1.5">
+          <span className="pill text-sm" title="Your play credits">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/art/token.webp" alt="" className="h-6 w-6" />{signer ? credLeft : "–"}
+          </span>
+          <span className="pill text-sm" title="Players on this cabinet right now (from chain)">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/art/mascot_base.webp" alt="" className="h-6 w-6 object-contain" />{playersNow}
+          </span>
+          {muteBtn}
         </div>
-      </section>
+      </header>
+      {ticker}
+
+      {/* Cabinet */}
+      <div className="cabinet relative mt-1">
+        <div className="bulbs" aria-hidden>{bulbs}</div>
+        <section className="cabinet-inner relative aspect-[4/5] w-full overflow-hidden bg-[#14041f]">
+          {cab ? <CabinetCanvas cabinet={cab} claw={claw} view={view} anim={anim} reduced={reduced} /> : (
+            <div className="flex h-full flex-col items-center justify-center gap-3 text-center text-sm font-bold text-white/80">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/art/mascot_base.webp" alt="" className="wobble w-28" />
+              {cabErr ?? "Connecting to the live cabinet on MagicBlock ER…"}
+            </div>
+          )}
+          {toast && !(toast.mine && toast.tone !== "info") && (
+            <div role="status" className={`pop-in absolute inset-x-3 top-12 rounded-2xl border-[3px] border-[var(--ink)] px-3 py-2 text-center text-sm font-extrabold shadow-lg ${toast.tone === "win" ? "bg-[var(--gold)] text-[var(--ink)]" : toast.tone === "slip" ? "bg-[var(--magenta)]" : toast.tone === "miss" ? "bg-[#3b1d5e]" : "bg-[var(--violet)]"}`}>
+              {toast.text}
+            </div>
+          )}
+          {cab?.pendingVrf && (
+            <div className="absolute inset-x-0 bottom-9 flex justify-center">
+              <span className="pill animate-pulse text-sm text-[var(--lime)]">🎲 Rolling MagicBlock VRF…</span>
+            </div>
+          )}
+          <div className="absolute right-2 top-3 flex flex-col items-end gap-1">
+            <span className="pill text-xs">{activeCaps} capsules</span>
+          </div>
+        </section>
+      </div>
 
       {/* View + timer */}
-      <div className="flex items-center justify-between">
-        <div className="flex overflow-hidden rounded-full border border-cyan-300/40" role="group" aria-label="Camera view">
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex gap-2" role="group" aria-label="Camera view">
           {(["front", "side"] as View[]).map((v) => (
-            <button key={v} onClick={() => setView(v)} aria-pressed={view === v} className={`h-11 px-5 text-sm font-bold uppercase ${view === v ? "bg-cyan-300 text-black" : "text-cyan-200"}`}>{v}</button>
+            <button key={v} onClick={() => setView(v)} aria-pressed={view === v}
+              className={`btn3d h-11 px-4 text-base uppercase ${view === v ? "btn-gold" : "btn-violet"}`}>{v}</button>
           ))}
         </div>
-        <TimerRing left={turnLeft} total={15} label={cab?.turnOwner === NO_TURN ? "idle" : myTurn ? "your turn" : short(cab?.turnOwner ?? "")} />
+        <TimerRing left={turnLeft} total={15} label={cab?.turnOwner === NO_TURN ? "Cabinet idle" : myTurn ? "YOUR TURN!" : `${short(cab?.turnOwner ?? "")} playing`} />
       </div>
 
       {/* Controls */}
       {stage === "play" ? (
-        <div className="flex items-center justify-between gap-3">
+        <div className="panel flex items-center justify-between gap-4 px-5 py-5">
           <Joystick vec={vec} disabled={!canControl} />
-          <div className="flex flex-1 flex-col items-stretch gap-2">
+          <div className="flex flex-1 flex-col items-center gap-3">
             {myTurn ? (
-              <button onClick={drop} disabled={!canControl || !!busy} className="h-24 rounded-2xl bg-gradient-to-b from-yellow-300 to-orange-500 text-3xl font-black text-black shadow-[0_0_30px_rgba(255,180,0,0.6)] disabled:opacity-40">DROP</button>
+              <button onClick={drop} disabled={!canControl || !!busy} className="btn3d btn-drop h-28 w-28 text-3xl">DROP</button>
             ) : queuePos >= 0 ? (
-              <div className="rounded-2xl border border-white/15 p-3 text-center text-sm">{queuePos >= 0 ? `You're #${queuePos + 1} in queue` : myRound !== null ? "Waiting for VRF…" : "In queue…"}</div>
+              <div className="flex flex-col items-center text-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/art/crew_bat.webp" alt="" className="float w-20" />
+                <p className="title-stroke font-display text-xl">You&apos;re #{queuePos + 1}</p>
+                <p className="text-xs font-bold text-white/75">in the queue. Get ready!</p>
+              </div>
             ) : (
-              <button onClick={join} disabled={!!busy || credLeft === 0} className="h-24 rounded-2xl bg-gradient-to-b from-pink-400 to-fuchsia-700 text-xl font-black shadow-[0_0_24px_rgba(255,61,189,0.6)] disabled:opacity-40">
+              <button onClick={join} disabled={!!busy || credLeft === 0} className="btn3d btn-pink h-24 w-full flex-col gap-0 text-xl leading-tight">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/art/token.webp" alt="" className="h-8 w-8" />
                 {credLeft === 0 ? "No credits" : "INSERT CREDIT"}
               </button>
             )}
-            <p className="text-center text-xs text-white/70">{credLeft} credits{pendingPrizes.length ? ` · won: ${pendingPrizes.join(", ")}` : ""}</p>
+            <p className="text-center text-xs font-bold text-white/80">{credLeft} credits{pendingPrizes.length ? ` · won: ${pendingPrizes.join(", ")}` : ""}{myRound !== null && !myTurn ? " · waiting for VRF…" : ""}</p>
           </div>
         </div>
       ) : (
@@ -343,21 +432,25 @@ export default function Game() {
           busy={busy} pickBurner={pickBurner} leaveBurner={leaveBurner} airdrop={airdrop} start={startSession} cashOut={cashOut} />
       )}
       {stage === "play" && queuePos < 0 && !myTurn && (
-        <button onClick={cashOut} disabled={!!busy} className="h-11 rounded-xl border border-yellow-300/60 text-sm font-bold text-yellow-200 disabled:opacity-40">
-          Cash out & claim prizes to wallet
+        <button onClick={cashOut} disabled={!!busy} className="btn3d btn-gold h-12 text-base">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/art/trophy.webp" alt="" className="h-7 w-auto" /> Cash out &amp; claim prizes
         </button>
       )}
-      {busy && <p className="text-center text-sm text-cyan-200" role="status">{busy}</p>}
-      {err && <p className="rounded-lg bg-red-900/60 p-2 text-xs text-red-100" role="alert">{err}</p>}
+      {busy && <p className="pill mx-auto text-sm text-[var(--cyan)]" role="status">{busy}</p>}
+      {err && <p className="rounded-2xl border-2 border-[var(--ink)] bg-[#7a0d2c] p-2 text-xs font-bold text-red-50" role="alert">{err}</p>}
 
       <ProofDrawer cab={cab} proof={proof} avgLat={avgLat} lastLat={lat[lat.length - 1] ?? null} me={me} session={session?.kp.publicKey.toBase58() ?? null} />
 
       {signer && (
-        <p className="text-center text-[11px] text-white/50">
+        <p className="text-center text-[11px] font-semibold text-white/60">
           {useBurner ? "⚠ DEVNET BURNER " : "Wallet "}{short(me!)} · {sol?.toFixed(3) ?? "…"} SOL · {(Number(usdc) / 1e6).toFixed(2)} dUSDC
           {useBurner ? <> · <button className="underline" onClick={leaveBurner}>switch to real wallet</button></> : wallet.connected ? <> · <button className="underline" onClick={() => void wallet.disconnect()}>disconnect</button></> : null}
         </p>
       )}
+
+      {/* My result: full-screen celebration (non-blocking, auto-dismisses) */}
+      {toast?.mine && toast.tone !== "info" && <ResultSplash tone={toast.tone} text={toast.text} mystery={!!toast.mystery} reduced={reduced} />}
 
       {onboard && <Onboarding done={() => { setOnboard(false); localStorage.setItem("clawrush.onboarded", "1"); }} />}
     </main>
@@ -370,17 +463,48 @@ function ago(s: number) {
   return `${Math.round(s / 3600)}h ago`;
 }
 
+function ResultSplash({ tone, text, mystery, reduced }: { tone: string; text: string; mystery: boolean; reduced: boolean }) {
+  const win = tone === "win";
+  const head = win ? (mystery ? "MYSTERY REVEALED!" : "YOU WON!") : tone === "slip" ? "SO CLOSE!" : "MISSED!";
+  return (
+    <div className="pointer-events-none fixed inset-0 z-40 flex items-center justify-center bg-[rgba(18,4,31,0.55)] p-6">
+      {win && !reduced && <div className="coin-rain absolute inset-0 overflow-hidden" aria-hidden>{Array.from({ length: 14 }, (_, i) => <i key={i} style={{ left: `${(i * 7.3) % 100}%`, animationDelay: `${(i % 7) * 0.22}s` }} />)}</div>}
+      <div className="pop-in relative flex w-full max-w-sm flex-col items-center">
+        {win && <div className="rays absolute left-1/2 top-24 h-80 w-80 -translate-x-1/2 -translate-y-1/2" aria-hidden />}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={win ? "/art/mascot_win.webp" : "/art/mascot_sad.webp"} alt="" className="relative w-56 drop-shadow-[0_12px_16px_rgba(0,0,0,0.7)]" />
+        <p className={`font-display relative -mt-2 text-5xl ${win ? "title-stroke" : "text-outline text-[var(--magenta)]"}`}>{head}</p>
+        <div role="status" className={`panel relative mt-3 px-4 py-3 text-center text-base font-extrabold ${win ? "text-[var(--gold)]" : ""}`}>{text}</div>
+      </div>
+    </div>
+  );
+}
+
 function TimerRing({ left, total, label }: { left: number; total: number; label: string }) {
   const f = Math.max(0, Math.min(1, left / total));
-  const C = 2 * Math.PI * 18;
+  const C = 2 * Math.PI * 22;
+  const low = f < 0.3 && left > 0;
   return (
     <div className="flex items-center gap-2" aria-label={`Turn timer ${Math.ceil(left)} seconds, ${label}`}>
-      <span className="text-xs text-white/70">{label}</span>
-      <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden>
-        <circle cx="24" cy="24" r="18" stroke="rgba(255,255,255,0.15)" strokeWidth="5" fill="none" />
-        <circle cx="24" cy="24" r="18" stroke={f < 0.3 ? "#ff3d5a" : "#3df5ff"} strokeWidth="5" fill="none" strokeDasharray={C} strokeDashoffset={C * (1 - f)} transform="rotate(-90 24 24)" strokeLinecap="round" />
-        <text x="24" y="29" textAnchor="middle" fontSize="14" fill="#fff" fontWeight="bold">{Math.ceil(left)}</text>
+      <span className={`text-right text-xs font-extrabold leading-tight ${label === "YOUR TURN!" ? "title-stroke font-display text-base" : "text-white/80"}`}>{label}</span>
+      <svg width="60" height="60" viewBox="0 0 60 60" aria-hidden className={low ? "animate-pulse" : ""}>
+        <circle cx="30" cy="30" r="28" fill="#1a0630" />
+        <circle cx="30" cy="30" r="25" fill="url(#coin)" stroke="#1a0630" strokeWidth="2" />
+        <defs><radialGradient id="coin" cx="40%" cy="30%"><stop offset="0" stopColor="#4a167a" /><stop offset="1" stopColor="#1d0636" /></radialGradient></defs>
+        <circle cx="30" cy="30" r="22" stroke="rgba(255,255,255,0.12)" strokeWidth="5" fill="none" />
+        <circle cx="30" cy="30" r="22" stroke={low ? "#ff1f4b" : "#ffcf3a"} strokeWidth="5" fill="none" strokeDasharray={C} strokeDashoffset={C * (1 - f)} transform="rotate(-90 30 30)" strokeLinecap="round" />
+        <text x="30" y="37" textAnchor="middle" fontSize="20" fill="#fff" stroke="#1a0630" strokeWidth="3" paintOrder="stroke" fontFamily="var(--font-display)">{Math.ceil(left)}</text>
       </svg>
+    </div>
+  );
+}
+
+function PanelHead({ img, title }: { img: string; title: string }) {
+  return (
+    <div className="-mt-12 mb-1 flex flex-col items-center">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={img} alt="" className="float h-24 w-auto drop-shadow-[0_8px_10px_rgba(0,0,0,0.6)]" />
+      <h2 className="title-stroke font-display text-2xl">{title}</h2>
     </div>
   );
 }
@@ -391,71 +515,85 @@ function Onramp(p: any) {
   if (stage === "connect") {
     const ws = wallet.wallets.filter((w: { readyState: string }) => w.readyState === "Installed" || w.readyState === "Loadable");
     return (
-      <div className="flex flex-col gap-2 rounded-2xl border border-white/15 p-3">
-        <p className="text-sm text-white/80">Connect a Solana wallet on <b>devnet</b> to play.</p>
+      <div className="panel mt-12 flex flex-col gap-3 px-4 pb-4">
+        <PanelHead img="/art/mascot_base.webp" title="CONNECT TO PLAY" />
+        <p className="text-center text-sm font-semibold text-white/85">Connect a Solana wallet set to <b className="text-[var(--lime)]">devnet</b>.</p>
         {ws.length ? ws.map((w: { adapter: { name: string; icon: string } }) => (
           <button key={w.adapter.name} onClick={() => { wallet.select(w.adapter.name); void wallet.connect().catch(() => {}); }}
-            className="flex h-12 items-center justify-center gap-2 rounded-xl bg-white text-sm font-bold text-black">
+            className="btn3d btn-violet h-12 text-base">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={w.adapter.icon} alt="" className="h-5 w-5" /> {w.adapter.name}
+            <img src={w.adapter.icon} alt="" className="h-6 w-6 rounded" /> {w.adapter.name}
           </button>
-        )) : <p className="text-xs text-white/60">No wallet detected. Install Phantom or Solflare (set to devnet), or open this page in your wallet&apos;s browser.</p>}
-        <button onClick={pickBurner} className="h-11 rounded-xl border border-orange-400/60 text-sm text-orange-200">
-          {burner ? "Use my devnet burner wallet" : "Try with a devnet burner wallet (testing only)"}
+        )) : <p className="text-center text-xs text-white/70">No wallet detected. Install Phantom or Solflare (set to devnet), or open this page in your wallet&apos;s browser.</p>}
+        <button onClick={pickBurner} className="btn3d btn-lime h-12 text-base">
+          {burner ? "Use my devnet burner" : "Try a devnet burner wallet"}
         </button>
-        <p className="text-[11px] text-white/50">The burner is a throwaway devnet key kept in this browser only. Devnet tokens have no value.</p>
+        <p className="text-center text-[11px] text-white/60">The burner is a throwaway devnet key kept in this browser only. Testing only; devnet tokens have no value.</p>
       </div>
     );
   }
   if (stage === "fund") return (
-    <div className="flex flex-col gap-2 rounded-2xl border border-orange-400/50 p-3 text-sm">
-      <p><b>⚠ Devnet burner</b> {useBurner && burner ? short(burner.publicKey.toBase58()) : ""} needs a little devnet SOL for fees (has {sol?.toFixed(3)}).</p>
-      <button onClick={airdrop} disabled={!!busy} className="h-11 rounded-xl bg-orange-400 font-bold text-black disabled:opacity-40">Airdrop 1 devnet SOL</button>
+    <div className="panel mt-12 flex flex-col gap-3 px-4 pb-4 text-sm">
+      <PanelHead img="/art/crew_slime.webp" title="NEED FUEL!" />
+      <p className="text-center"><b>⚠ Devnet burner</b> {useBurner && burner ? short(burner.publicKey.toBase58()) : ""} needs a little devnet SOL for fees (has {sol?.toFixed(3)}).</p>
+      <button onClick={airdrop} disabled={!!busy} className="btn3d btn-lime h-12 text-base">Airdrop 1 devnet SOL</button>
       <a className="text-center text-xs underline" href="https://faucet.solana.com" target="_blank" rel="noreferrer">Airdrop rate-limited? Use faucet.solana.com with the address above</a>
     </div>
   );
   if (stage === "start") return (
-    <div className="flex flex-col gap-2 rounded-2xl border border-white/15 p-3 text-sm">
-      <p>Buy credits (1 dUSDC each) and open a play session. One approval: it registers a <b>session key</b> that can only move, drop and queue — never withdraw.</p>
-      <div className="flex items-center justify-between">
-        <span>Credits</span>
-        <div className="flex items-center gap-2">
-          <button aria-label="Fewer credits" className="h-11 w-11 rounded-full border border-white/20" onClick={() => setCredits(Math.max(1, credits - 1))}>−</button>
-          <span className="w-6 text-center font-bold">{credits}</span>
-          <button aria-label="More credits" className="h-11 w-11 rounded-full border border-white/20" onClick={() => setCredits(Math.min(20, credits + 1))}>+</button>
-        </div>
+    <div className="panel mt-12 flex flex-col gap-3 px-4 pb-4 text-sm">
+      <PanelHead img="/art/token.webp" title="BUY CREDITS" />
+      <p className="text-center font-semibold text-white/85">1 credit = 1 dUSDC = 1 drop. One approval opens a <b className="text-[var(--gold)]">session key</b> that can only move, drop and queue. It can never withdraw.</p>
+      <div className="grid grid-cols-4 gap-2" role="group" aria-label="Credit amount">
+        {[1, 3, 5, 10].map((n) => (
+          <button key={n} onClick={() => setCredits(n)} aria-pressed={credits === n}
+            className={`btn3d h-14 flex-col gap-0 text-2xl ${credits === n ? "btn-gold" : "btn-violet"}`}>
+            {n}<span className="text-[10px] leading-none">CREDITS</span>
+          </button>
+        ))}
       </div>
-      <p className="text-xs text-white/60">{usdc >= BigInt(credits) * 1_000_000n ? `You have ${(Number(usdc) / 1e6).toFixed(2)} dUSDC.` : "You'll get 20 free demo dUSDC from the devnet faucet in the same transaction."}</p>
-      <button onClick={start} disabled={!!busy} className="h-12 rounded-xl bg-gradient-to-b from-pink-400 to-fuchsia-700 font-black disabled:opacity-40">START SESSION</button>
+      <div className="flex items-center justify-center gap-3">
+        <button aria-label="Fewer credits" className="btn3d btn-violet h-11 w-11 text-xl" onClick={() => setCredits(Math.max(1, credits - 1))}>−</button>
+        <span className="title-stroke font-display w-44 text-center text-xl">{credits} for {credits} dUSDC</span>
+        <button aria-label="More credits" className="btn3d btn-violet h-11 w-11 text-xl" onClick={() => setCredits(Math.min(20, credits + 1))}>+</button>
+      </div>
+      <p className="text-center text-xs text-white/70">{usdc >= BigInt(credits) * 1_000_000n ? `You have ${(Number(usdc) / 1e6).toFixed(2)} dUSDC.` : "You'll get 20 free demo dUSDC from the devnet faucet in the same transaction."}</p>
+      <button onClick={start} disabled={!!busy} className="btn3d btn-pink h-14 text-2xl">START SESSION</button>
     </div>
   );
   return (
-    <div className="flex flex-col gap-2 rounded-2xl border border-white/15 p-3 text-sm">
-      <p>Your profile is still on the ER from an earlier session, but this browser has no valid session key. Cash out to settle any prizes, then start a new session.</p>
-      <button onClick={cashOut} disabled={!!busy} className="h-12 rounded-xl bg-yellow-400 font-bold text-black disabled:opacity-40">Cash out & claim</button>
+    <div className="panel mt-12 flex flex-col gap-3 px-4 pb-4 text-sm">
+      <PanelHead img="/art/trophy.webp" title="WELCOME BACK" />
+      <p className="text-center">Your profile is still on the rollup from an earlier session, but this browser has no valid session key. Cash out to settle any prizes, then start a new session.</p>
+      <button onClick={cashOut} disabled={!!busy} className="btn3d btn-gold h-12 text-base">Cash out &amp; claim</button>
     </div>
   );
 }
 
 function Onboarding({ done }: { done: () => void }) {
   const steps = [
-    ["One claw, every player", "This cabinet is shared live on a MagicBlock Ephemeral Rollup. Capsules stay where they land for the next player."],
-    ["Aim in 3D", "FRONT view shows left/right, SIDE view shows depth. Switch views to line the claw up — then DROP."],
-    ["Skill × VRF", "Your aim sets the grip chance (85% dead centre → 25% at the edge). MagicBlock VRF rolls it. HELD prizes pay out to your wallet."],
+    ["/art/mascot_base.webp", "One claw, every player", "This cabinet is shared live on a MagicBlock Ephemeral Rollup. Capsules stay where they land for the next player."],
+    ["/art/claw_open.webp", "Aim in 3D", "FRONT view shows left and right. SIDE view shows depth. Switch views to line the claw up, then hit DROP."],
+    ["/art/cap_mystery.webp", "Skill × VRF", "Your aim sets the grip chance (85% dead centre, 25% at the edge). MagicBlock VRF rolls it. Slimy mystery capsules stay sealed until they fall. Prizes pay out to your wallet."],
   ];
   const [i, setI] = useState(0);
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 p-4" role="dialog" aria-modal aria-label="How to play">
-      <div className="w-full max-w-md rounded-2xl border border-pink-400/60 bg-[#14062a] p-5">
-        <p className="text-xs text-cyan-300">{i + 1} / 3</p>
-        <h2 className="mt-1 text-xl font-black text-pink-300">{steps[i][0]}</h2>
-        <p className="mt-2 text-sm text-white/85">{steps[i][1]}</p>
-        <div className="mt-4 flex justify-between">
-          <button className="h-11 px-3 text-sm text-white/60" onClick={done}>Skip</button>
-          <button className="h-11 rounded-xl bg-pink-500 px-6 font-bold" onClick={() => (i < 2 ? setI(i + 1) : done())}>{i < 2 ? "Next" : "Play"}</button>
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(10,2,20,0.75)] p-4" role="dialog" aria-modal aria-label="How to play">
+      <div className="panel pop-in mb-4 w-full max-w-md px-5 pb-5 pt-2" key={i}>
+        <div className="-mt-16 flex justify-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={steps[i][0]} alt="" className="float h-32 w-auto drop-shadow-[0_10px_12px_rgba(0,0,0,0.6)]" />
+        </div>
+        <div className="mt-1 flex justify-center gap-1.5" aria-label={`Step ${i + 1} of 3`}>
+          {steps.map((_, k) => <span key={k} className={`h-2.5 rounded-full border border-[var(--ink)] ${k === i ? "w-7 bg-[var(--gold)]" : "w-2.5 bg-white/30"}`} />)}
+        </div>
+        <h2 className="title-stroke font-display mt-2 text-center text-3xl">{steps[i][1]}</h2>
+        <p className="mt-2 text-center text-sm font-semibold text-white/90">{steps[i][2]}</p>
+        <div className="mt-5 flex items-center justify-between gap-3">
+          <button className="h-11 px-3 text-sm font-bold text-white/70 underline" onClick={done}>Skip</button>
+          <button className="btn3d btn-gold h-12 flex-1 text-xl" onClick={() => (i < 2 ? setI(i + 1) : done())}>{i < 2 ? "Next" : "Let's go!"}</button>
         </div>
       </div>
     </div>
   );
 }
-

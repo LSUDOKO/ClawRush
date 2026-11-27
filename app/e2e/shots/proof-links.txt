@@ -1,10 +1,10 @@
-2026-11-27T00:20:24.494Z https://clawrush.pages.dev
+2026-11-27T05:55:35.791Z https://redesign.clawrush.pages.dev
 round 1 result: You: MISS
-round 2: turn expired and cleared after 16.1 s
-cash_out: commit + undelegate profile (ER) https://explorer.solana.com/tx/3bJ9z2sRkSb7MUCM4D1uhQ7BaMtY6GReHY11zhbCHoCK1aCxtQvQZSdsgSdTHNqWi9C4L94ZEPCtwt3sSSa8Fg7w?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
-expire_turn (your turn timed out) https://explorer.solana.com/tx/SEm3bB3VN6vYaSb2f4Rsk5roxHbPBqFzBNpX17Ct3wHTjR1ba5QdPsebqUEPMgJstMGu5gpRgBesBEX2Vi4zo71?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
-join_queue (session key, ER) https://explorer.solana.com/tx/4AKuM1jYWZo6gt1F4tCphARmJadRQn3PFgTCif1SKar2SVZp4Z8q8RjJrponM6ud6mZr6cdviAXWFh2mB4SAzQm3?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
-drop_claw → VRF request (ER) https://explorer.solana.com/tx/3nd1DUrpWh3bL3i9SLFBYUCJYNSs8XFGMhRMNjZMAXMxzGR4C3bgfVf5a4ZLbgvb7fSGk485a6NyKn9BstzGR7Pf?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
-join_queue (session key, ER) https://explorer.solana.com/tx/3yQ6GSrfLCYed4JY6GUCZxaHpyZUqRi9JWDHb9k7zSxGrEH5ahdvVSuC6iQFxbeMxShRszkycnpqqWevnXNsgNy9?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
-Session start: buy credits + session key + delegate (L1) https://explorer.solana.com/tx/2LW38b2RE1KJVVJHrGV8xfGSR1yUGWMVpshRWKCHRryNVqT4BbAxfdCyyhw2KbvXPmm5wv3x4Te3uQZGYgowUgqG?cluster=devnet
+round 2: turn expired and cleared after 15.8 s
+cash_out: commit + undelegate profile (ER) https://explorer.solana.com/tx/23w3TwveQ3vWP7yJW8rV3f3nt43WSQvdapgavQF6WpCjAhB6RGBAVUkuN7ekrpDBUGVeEYTwYCrvB2FofD6suX7K?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
+expire_turn (your turn timed out) https://explorer.solana.com/tx/KD2jh9NmtgwtT3apTX2xK7NfPZrcHZkrPTEGmJGjviYeBbLKyRUN8pBAdS12jKks2BF4g26R3obQTScqjJpnYoe?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
+join_queue (session key, ER) https://explorer.solana.com/tx/4zq9Ss32CcUyCGHS8xHiGuYnEmabZ9PCr8L3YUCNw3mFtRitzUXY1SZYxZcHvkc8PopMcu3dpKD1NEDTZ6qF2zMn?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
+drop_claw → VRF request (ER) https://explorer.solana.com/tx/3QkBiZUCMAj4Xb5oUqnWqFn6CUH4FFuMcf7BYidAPiG7DtkKnkSbrbwDv8JfaMwmrZWJcuiF56CFSP8snwGcgG6f?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
+join_queue (session key, ER) https://explorer.solana.com/tx/2YtZ7reTZGvqQZV9CKuPRNue5QyX5hXcZvZ9suHv5bAKaT8J1b2pFwRrvQnDapMKdZK4vdz9UctZWv1wEvkX3SCo?cluster=custom&customUrl=https%3A%2F%2Fdevnet-tee.magicblock.app
+Session start: buy credits + session key + delegate (L1) https://explorer.solana.com/tx/54eGoa2dh6A6gfL9tWUDAuYfAJXb2F4YQdBN3r1LNq64L9wi5Fz3TA3GVtScZi2L9PD82X2U859iV9iGsgs6S9Cm?cluster=devnet
 2FzY…2G7v https://explorer.solana.com/tx/2FzY9oJrQXab58GSnLmjZ6ShPzQnAnvi4zkzxRKjLLSkd4LGGMqU4vX2WctvvKXxmZyXv5dgELXfNk1cHpWN2G7v?cluster=devnet

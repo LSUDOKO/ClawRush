@@ -20,6 +20,13 @@ await ctx.addInitScript((sk) => {
 const page = await ctx.newPage();
 page.on("console", (m) => { if (m.type() === "error") log("console.error", m.text().slice(0, 200)); });
 await page.goto(URL);
+// Title screen → PLAY NOW, then the first-run how-to-play dialog.
+await page.getByRole("button", { name: "PLAY NOW" }).waitFor({ timeout: 30000 });
+await page.waitForTimeout(1500);
+await page.screenshot({ path: `${OUT}/00-title-390.png` });
+await page.getByRole("button", { name: "PLAY NOW" }).click();
+await page.getByRole("dialog").waitFor({ timeout: 10000 });
+await page.waitForTimeout(600);
 await page.getByRole("dialog").screenshot({ path: `${OUT}/00-onboarding.png` }).catch(() => {});
 await page.screenshot({ path: `${OUT}/01-onboarding-390.png` });
 await page.getByRole("button", { name: "Skip" }).click();
