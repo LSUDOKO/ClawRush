@@ -92,15 +92,16 @@ async function sendAndConfirm(conn: Connection, tx: Transaction, bh: { blockhash
 export async function send(conn: Connection, ixs: TransactionInstruction[], signer: AppSigner, cu?: number): Promise<Sent> {
   const { tx, bh } = await build(conn, ixs, signer.publicKey, cu);
   const t0 = Date.now();
-  await signer.signTransaction(tx);
-  return sendAndConfirm(conn, tx, bh, t0);
+  // Use the returned transaction: wallets like Solflare return a signed copy instead of signing in place.
+  const signed = await signer.signTransaction(tx);
+  return sendAndConfirm(conn, signed, bh, t0);
 }
 /** Several L1 transactions, one wallet approval, sent in order. */
 export async function sendBatch(conn: Connection, groups: TransactionInstruction[][], signer: AppSigner): Promise<Sent[]> {
   const built = await Promise.all(groups.map((g) => build(conn, g, signer.publicKey)));
-  await signer.signAllTransactions(built.map((b) => b.tx));
+  const signed = await signer.signAllTransactions(built.map((b) => b.tx));
   const out: Sent[] = [];
-  for (const b of built) out.push(await sendAndConfirm(conn, b.tx, b.bh, Date.now()));
+  for (let i = 0; i < built.length; i++) out.push(await sendAndConfirm(conn, signed[i], built[i].bh, Date.now()));
   return out;
 }
 
