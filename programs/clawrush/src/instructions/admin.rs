@@ -185,12 +185,36 @@ pub struct SealMystery<'info> {
 // ───────────────────────── restock (ER) ─────────────────────────
 /// Place capsules into free slots. Mystery contents go straight into the private vault.
 /// Fails unless, for every mint: vault + claimed >= won + liability(all live prizes).
-pub fn restock(ctx: Context<Restock>, specs: Vec<CapsuleSpec>) -> Result<()> {
-    require!(ctx.accounts.mystery.sealed, ClawError::NotSealed);
+pub fn restock(mut ctx: Context<Restock>, specs: Vec<CapsuleSpec>) -> Result<()> {
+    let a = &mut ctx.accounts;
+    let vaults = [a.vault0.amount, a.vault1.amount, a.vault2.amount, a.vault3.amount];
+    restock_core(&a.config, &mut a.cabinet, &mut a.mystery, vaults, specs)
+}
+
+pub fn restock_by_keeper(mut ctx: Context<RestockByKeeper>, specs: Vec<CapsuleSpec>) -> Result<()> {
+    let a = &mut ctx.accounts;
+    let vaults = [a.vault0.amount, a.vault1.amount, a.vault2.amount, a.vault3.amount];
+    restock_core(&a.config, &mut a.cabinet, &mut a.mystery, vaults, specs)
+}
+
+pub fn set_keeper(ctx: Context<SetKeeper>, keeper: Pubkey) -> Result<()> {
+    let r = &mut ctx.accounts.keeper_role;
+    r.cabinet_id = ctx.accounts.config.cabinet_id;
+    r.bump = ctx.bumps.keeper_role;
+    r.keeper = keeper;
+    emit!(KeeperSet { cabinet_id: r.cabinet_id, keeper });
+    Ok(())
+}
+
+fn restock_core(
+    cfg: &CabinetConfig,
+    cab: &mut CabinetState,
+    mys: &mut MysteryVault,
+    vault_amounts: [u64; NUM_MINTS],
+    specs: Vec<CapsuleSpec>,
+) -> Result<()> {
+    require!(mys.sealed, ClawError::NotSealed);
     require!(!specs.is_empty(), ClawError::InvalidCapsule);
-    let cfg = &ctx.accounts.config;
-    let cab = &mut ctx.accounts.cabinet;
-    let mys = &mut ctx.accounts.mystery;
     for s in specs.iter() {
         require!(s.x >= 0 && s.x <= GRID && s.z >= 0 && s.z <= GRID, ClawError::InvalidCapsule);
         require!(s.radius >= MIN_RADIUS && s.radius <= MAX_RADIUS, ClawError::InvalidCapsule);
@@ -219,7 +243,6 @@ pub fn restock(ctx: Context<Restock>, specs: Vec<CapsuleSpec>) -> Result<()> {
         };
     }
     // Solvency over every live prize, per mint.
-    let vaults = [&ctx.accounts.vault0, &ctx.accounts.vault1, &ctx.accounts.vault2, &ctx.accounts.vault3];
     for m in 0..NUM_MINTS {
         let mut liability: u64 = 0;
         for (i, c) in cab.capsules.iter().enumerate() {
@@ -236,7 +259,7 @@ pub fn restock(ctx: Context<Restock>, specs: Vec<CapsuleSpec>) -> Result<()> {
             }
         }
         require!(
-            math::is_solvent(vaults[m].amount, cfg.total_claimed[m], cab.total_won[m], liability),
+            math::is_solvent(vault_amounts[m], cfg.total_claimed[m], cab.total_won[m], liability),
             ClawError::VaultInsolvent
         );
     }
@@ -264,6 +287,41 @@ pub struct Restock<'info> {
     pub vault2: Box<Account<'info, TokenAccount>>,
     #[account(token::mint = config.mints[3], token::authority = vault)]
     pub vault3: Box<Account<'info, TokenAccount>>,
+}
+
+#[derive(Accounts)]
+pub struct RestockByKeeper<'info> {
+    pub keeper: Signer<'info>,
+    #[account(seeds = [SEED_KEEPER, &[config.cabinet_id]], bump = keeper_role.bump, constraint = keeper_role.keeper == keeper.key() @ ClawError::Unauthorized)]
+    pub keeper_role: Box<Account<'info, KeeperRole>>,
+    #[account(seeds = [SEED_CONFIG, &[config.cabinet_id]], bump = config.bump)]
+    pub config: Box<Account<'info, CabinetConfig>>,
+    #[account(mut, seeds = [SEED_CABINET, &[config.cabinet_id]], bump = cabinet.bump)]
+    pub cabinet: Box<Account<'info, CabinetState>>,
+    #[account(mut, seeds = [SEED_MYSTERY, &[config.cabinet_id]], bump = mystery.bump)]
+    pub mystery: Box<Account<'info, MysteryVault>>,
+    /// CHECK: vault authority PDA
+    #[account(seeds = [SEED_VAULT, &[config.cabinet_id]], bump = config.vault_bump)]
+    pub vault: UncheckedAccount<'info>,
+    #[account(token::mint = config.mints[0], token::authority = vault)]
+    pub vault0: Box<Account<'info, TokenAccount>>,
+    #[account(token::mint = config.mints[1], token::authority = vault)]
+    pub vault1: Box<Account<'info, TokenAccount>>,
+    #[account(token::mint = config.mints[2], token::authority = vault)]
+    pub vault2: Box<Account<'info, TokenAccount>>,
+    #[account(token::mint = config.mints[3], token::authority = vault)]
+    pub vault3: Box<Account<'info, TokenAccount>>,
+}
+
+#[derive(Accounts)]
+pub struct SetKeeper<'info> {
+    #[account(mut)]
+    pub authority: Signer<'info>,
+    #[account(has_one = authority, seeds = [SEED_CONFIG, &[config.cabinet_id]], bump = config.bump)]
+    pub config: Box<Account<'info, CabinetConfig>>,
+    #[account(init_if_needed, payer = authority, space = 8 + KeeperRole::INIT_SPACE, seeds = [SEED_KEEPER, &[config.cabinet_id]], bump)]
+    pub keeper_role: Box<Account<'info, KeeperRole>>,
+    pub system_program: Program<'info, System>,
 }
 
 // ───────────────────────── admin_undelegate (ER) ─────────────────────────

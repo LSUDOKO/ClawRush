@@ -38,6 +38,12 @@ pub mod clawrush {
     pub fn restock(ctx: Context<Restock>, specs: Vec<CapsuleSpec>) -> Result<()> {
         admin::restock(ctx, specs)
     }
+    pub fn set_keeper(ctx: Context<SetKeeper>, keeper: Pubkey) -> Result<()> {
+        instructions::admin::set_keeper(ctx, keeper)
+    }
+    pub fn restock_by_keeper(ctx: Context<RestockByKeeper>, specs: Vec<CapsuleSpec>) -> Result<()> {
+        instructions::admin::restock_by_keeper(ctx, specs)
+    }
     pub fn admin_undelegate(ctx: Context<AdminUndelegate>) -> Result<()> {
         admin::admin_undelegate(ctx)
     }
