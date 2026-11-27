@@ -3,7 +3,7 @@ name = "clawrush"
 version = "0.1.0"
 description = "ClawRush: shared skill x VRF claw cabinet on MagicBlock Ephemeral Rollups"
 edition = "2021"
-license = "MIT"
+license = "Apache-2.0"
 
 [lib]
 crate-type = ["cdylib", "lib"]

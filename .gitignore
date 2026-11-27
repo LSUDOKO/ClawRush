@@ -25,3 +25,17 @@ app/e2e/shots/fail-*.png
 
 # video sources and renders (published on YouTube, not in git)
 demo/
+# scratch dev helpers (scripts/_*.ts); tracked ones stay tracked
+scripts/_*.ts
+# keypairs and secrets by other names
+*.key
+.secrets/
+# playwright artifacts anywhere
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+# logs
+*.log
+# submission scratch
+.submission-brief.md
