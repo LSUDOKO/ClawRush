@@ -1,0 +1,38 @@
+# Hosted keeper: restocks the live cabinet when it runs low.
+# Turn expiry is handled on chain by the MagicBlock crank; this job only restocks.
+# It signs with a low-privilege keeper key (registered with set_keeper), never the cabinet authority.
+# Setup (once):  gh secret set KEEPER_KEYPAIR < keys/keeper.json
+name: keeper
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+concurrency:
+  group: keeper
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  restock:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      CABINET_ID: "1"
+      MIN_ACTIVE: "8"
+      ONCE: "1"
+      KEEPER: keys/keeper.json
+      NODE_OPTIONS: --dns-result-order=ipv4first
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Write keeper key
+        env:
+          KEEPER_KEYPAIR: ${{ secrets.KEEPER_KEYPAIR }}
+        run: |
+          test -n "$KEEPER_KEYPAIR" || { echo "KEEPER_KEYPAIR secret not set"; exit 1; }
+          mkdir -p keys && umask 077 && printf '%s' "$KEEPER_KEYPAIR" > keys/keeper.json
+      - run: npx tsx scripts/keeper.ts
