@@ -20,7 +20,9 @@ export const MAGIC_PROGRAM = new PublicKey("Magic1111111111111111111111111111111
 export const MAGIC_CONTEXT = new PublicKey("MagicContext1111111111111111111111111111111");
 export const DELEGATION_PROGRAM = new PublicKey("DELeGGvXpWV2fqJUhqcF5ZSYMS4JTLjteaAMARRSaeSh");
 
-export const idl = JSON.parse(fs.readFileSync(path.join(ROOT, "target/idl/clawrush.json"), "utf8"));
+// Fresh build output when present; otherwise the IDL copy committed for the app (CI has no target/).
+const IDL_PATH = [path.join(ROOT, "target/idl/clawrush.json"), path.join(ROOT, "app/src/lib/idl.json")].find((p) => fs.existsSync(p))!;
+export const idl = JSON.parse(fs.readFileSync(IDL_PATH, "utf8"));
 export const PROGRAM_ID = new PublicKey(idl.address);
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
