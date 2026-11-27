@@ -173,7 +173,7 @@ export class Player {
     const ix = await this.pe.methods.cashOut().accountsPartial({ authority: this.wallet.publicKey, profile: this.profile, magicProgram: MAGIC_PROGRAM, magicContext: MAGIC_CONTEXT }).instruction();
     const r = this.rec("cash_out", await sendTx(this.er, [ix], [this.wallet]), "er");
     let baseSig = "";
-    try { baseSig = await GetCommitmentSignature(r.sig, this.er); this.log.push({ step: "cash_out commit (L1)", sig: baseSig, layer: "devnet", ms: 0 }); } catch (e) { /* recorded below by owner poll */ }
+    try { baseSig = await GetCommitmentSignature(r.sig, this.er as any); this.log.push({ step: "cash_out commit (L1)", sig: baseSig, layer: "devnet", ms: 0 }); } catch (e) { /* recorded below by owner poll */ }
     for (let i = 0; i < 60; i++) {
       const a = await base.getAccountInfo(this.profile);
       if (a && a.owner.equals(PROGRAM_ID)) break;
