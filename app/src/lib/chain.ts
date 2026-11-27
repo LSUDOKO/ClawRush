@@ -4,7 +4,7 @@ import { AnchorProvider, BN, Program } from "@coral-xyz/anchor";
 import {
   ComputeBudgetProgram, Connection, Keypair, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction, TransactionInstruction,
 } from "@solana/web3.js";
-import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID, getAssociatedTokenAddressSync } from "@solana/spl-token";
+import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID, createAssociatedTokenAccountIdempotentInstruction, getAssociatedTokenAddressSync } from "@solana/spl-token";
 import { getAuthToken } from "@magicblock-labs/ephemeral-rollups-sdk";
 import nacl from "tweetnacl";
 import idlJson from "./idl.json";
@@ -163,7 +163,18 @@ export const ix = {
   dropClaw: (signer: PublicKey, w: PublicKey, seed: number) => M.dropClaw(seed).accountsPartial({ signer, profile: playerPda(w), config: configPda, cabinet: cabinetPda, mystery: mysteryPda, oracleQueue: VRF_QUEUE }).instruction(),
   expireTurn: (signer: PublicKey, owner: PublicKey) => M.expireTurn().accountsPartial({ signer, config: configPda, cabinet: cabinetPda, profile: playerPda(owner) }).instruction(),
   cashOut: (w: PublicKey) => M.cashOut().accountsPartial({ authority: w, profile: playerPda(w), magicProgram: MAGIC_PROGRAM, magicContext: MAGIC_CONTEXT }).instruction(),
+  // Commit + undelegate the profile and schedule the `settle_prizes` Magic Action on L1 (pays prizes in the same settlement).
+  cashOutAndSettle: (w: PublicKey) => M.cashOutAndSettle().accountsPartial({
+    authority: w, profile: playerPda(w), config: configPda, cabinet: cabinetPda, vault: vaultPda, program: PROGRAM_ID, magicProgram: MAGIC_PROGRAM, magicContext: MAGIC_CONTEXT,
+  }).instruction(),
 };
+
+/** The payout action needs the player's token account for every prize mint; create the missing ones (L1, idempotent). */
+export async function missingAtaIxs(w: PublicKey): Promise<TransactionInstruction[]> {
+  const atas = MINTS.map((m) => ata(m, w));
+  const infos = await base.getMultipleAccountsInfo(atas);
+  return infos.flatMap((a, i) => (a ? [] : [createAssociatedTokenAccountIdempotentInstruction(w, atas[i], w, MINTS[i])]));
+}
 
 export async function tokenBalance(mintIdx: number, owner: PublicKey): Promise<bigint> {
   try { const b = await base.getTokenAccountBalance(ata(MINTS[mintIdx], owner)); return BigInt(b.value.amount); } catch { return 0n; }

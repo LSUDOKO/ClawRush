@@ -9,7 +9,7 @@ import Joystick from "./Joystick";
 import { nearest, alignErrBps, gripBps, BPS } from "@/lib/math";
 import ProofDrawer, { type ProofItem } from "./ProofDrawer";
 import {
-  type AppSigner, type Cabinet, type Profile, base, erPublic, erFor, send, sendBatch, ix, keypairSigner, decodeCabinet, decodeProfile,
+  type AppSigner, type Cabinet, type Profile, base, erPublic, erFor, send, sendBatch, ix, missingAtaIxs, keypairSigner, decodeCabinet, decodeProfile,
   cabinetPda, configPda, program, playerPda, PROGRAM_ID, NO_TURN, PLAY_PRICE, tokenBalance, solBalance, fmtAmount, short,
 } from "@/lib/chain";
 import { sfx, isMuted, setMuted, buzz } from "@/lib/sound";
@@ -261,11 +261,32 @@ export default function Game() {
     if (!signer) return;
     const w = signer.publicKey;
     const er = await erFor(signer); // wallet signs one login message for the TEE
-    const r = await send(er, [await ix.cashOut(w)], signer);
-    addProof({ label: "cash_out: commit + undelegate profile (ER)", sig: r.sig, er: true });
+    const onEr = await er.getAccountInfo(playerPda(w));
+    const pending = onEr ? decodeProfile(onEr.data).pending : [0n, 0n, 0n, 0n];
+    const won = pending.flatMap((v, i) => (v > 0n ? [fmtAmount(i, v)] : []));
+    if (won.length) {
+      // The Magic Action pays into the player's token accounts, so they must exist on L1 first.
+      const atas = await missingAtaIxs(w);
+      if (atas.length) addProof({ label: "create prize token accounts (L1)", sig: (await send(base, atas, signer)).sig });
+    }
+    const r = await send(er, [await ix.cashOutAndSettle(w)], signer);
+    addProof({ label: won.length ? "cash_out_and_settle: commit + undelegate + Magic Action payout (ER)" : "cash_out: commit + undelegate profile (ER)", sig: r.sig, er: true });
     let back = false;
     for (let i = 0; i < 40 && !back; i++) { const a = await base.getAccountInfo(playerPda(w)); back = !!a && a.owner.equals(PROGRAM_ID); if (!back) await new Promise((ok) => setTimeout(ok, 1000)); }
     if (!back) throw new Error("Profile not back on Solana yet — try Claim again in a few seconds.");
+    if (!won.length) { setToast({ text: "Cashed out. No prizes pending.", tone: "info" }); return; }
+    // Paid only once L1 shows pending = 0 (the action ran); otherwise fall back to claim_prize.
+    for (let i = 0; i < 12; i++) {
+      const a = await base.getAccountInfo(playerPda(w));
+      if (a && decodeProfile(a.data).pending.every((v) => v === 0n)) {
+        const [last] = await base.getSignaturesForAddress(playerPda(w), { limit: 1 });
+        if (last) addProof({ label: "L1 settlement: commit + undelegate + settle_prizes Magic Action → your wallet", sig: last.signature });
+        sfx.win();
+        setToast({ text: `Paid to your wallet by Magic Action: ${won.join(", ")}`, tone: "win" });
+        return;
+      }
+      await new Promise((ok) => setTimeout(ok, 1000));
+    }
     await claim();
   });
 
