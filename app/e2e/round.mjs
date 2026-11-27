@@ -3,6 +3,8 @@
 // The funded devnet test key is injected as the page's burner wallet via localStorage (test-only; never in the build).
 import { chromium, devices } from "playwright";
 import fs from "fs";
+import anchorPkg from "@coral-xyz/anchor";
+import { Connection } from "@solana/web3.js";
 const URL = process.env.URL ?? "http://localhost:4321";
 const KEY = process.env.KEY ?? "../keys/webtest.json";
 const OUT = process.env.OUT ?? "e2e/shots";
@@ -10,8 +12,9 @@ fs.mkdirSync(OUT, { recursive: true });
 const secret = fs.readFileSync(KEY, "utf8").trim();
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 
-const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || undefined });
-const ctx = await browser.newContext({ ...devices["iPhone 13"], viewport: { width: 390, height: 844 } });
+// swiftshader flags let headless Chrome render the WebGL cabinet; VIDEO=<dir> records the run as real demo footage.
+const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || undefined, args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"] });
+const ctx = await browser.newContext({ ...devices["iPhone 13"], viewport: { width: 390, height: 844 }, ...(process.env.VIDEO ? { recordVideo: { dir: process.env.VIDEO, size: { width: 390, height: 844 } } } : {}) });
 await ctx.addInitScript((sk) => {
   localStorage.setItem("clawrush.burner.v1", sk);
   localStorage.setItem("clawrush.useBurner", "1");
@@ -48,14 +51,56 @@ const startBtn = page.getByRole("button", { name: "START SESSION" });
 const cashBtn = page.getByRole("button", { name: /Cash out/ });
 const insert = page.getByRole("button", { name: "INSERT CREDIT" });
 await Promise.race([startBtn.waitFor(), insert.waitFor(), cashBtn.first().waitFor()]).catch(() => {});
-if (await startBtn.isVisible()) { log("start session"); await startBtn.click(); }
+// Leftover profile from an interrupted run ("WELCOME BACK"): settle it first, then start fresh.
+if (await page.getByText("WELCOME BACK").isVisible() && !(await startBtn.isVisible()) && !(await insert.isVisible())) {
+  log("leftover profile: cash out first"); await cashBtn.first().click();
+  await page.getByText(/Paid to your wallet|No prizes pending/).first().waitFor({ timeout: 120000 });
+  await Promise.race([startBtn.waitFor({ timeout: 60000 }), insert.waitFor({ timeout: 60000 })]).catch(() => {});
+}
+if (await startBtn.isVisible()) {
+  // Pick a credit pack the wallet can already afford (the demo faucet is limited to one claim per hour).
+  const have = Number((await page.getByText(/You have [0-9.]+ dUSDC/).textContent().catch(() => "You have 0 dUSDC")).match(/[0-9.]+/)[0]);
+  if (have >= 1 && have < 5) await page.getByRole("button", { name: have >= 3 ? /^3\s*CREDITS/ : /^1\s*CREDITS/ }).click().catch(() => {});
+  log("start session"); await startBtn.click();
+}
 await (await step("INSERT CREDIT", 120000));
 await page.screenshot({ path: `${OUT}/03-ready-390.png` });
 log("join"); await insert.click();
 const dropBtn = await step("DROP", 120000);
 log("my turn: aiming");
-await page.keyboard.down("ArrowRight"); await page.waitForTimeout(900); await page.keyboard.up("ArrowRight");
-await page.keyboard.down("ArrowUp"); await page.waitForTimeout(700); await page.keyboard.up("ArrowUp");
+if (process.env.AIM) {
+  // AIM=1: steer the joystick toward the nearest prize capsule using the live on-chain cabinet state.
+  const idl = JSON.parse(fs.readFileSync("src/lib/idl.json", "utf8"));
+  const dev = JSON.parse(fs.readFileSync("src/lib/devnet.json", "utf8"));
+  const coder = new anchorPkg.BorshAccountsCoder(idl);
+  const er = new Connection("https://devnet-tee.magicblock.app", "confirmed");
+  const { PublicKey } = await import("@solana/web3.js");
+  const read = async () => { const d = coder.decode("CabinetState", (await er.getAccountInfo(new PublicKey(dev.cabinet))).data); return { ...d, clawX: d.claw_x, clawZ: d.claw_z }; };
+  const pad = await page.getByRole("application").boundingBox();
+  const cx = pad.x + pad.width / 2, cy = pad.y + pad.height / 2, R = pad.width / 2 * 0.8;
+  const t0 = Date.now();
+  let c = await read();
+  const caps = c.capsules.filter((k) => k.active && k.kind !== 2);
+  const tgt = caps.sort((a, b) => Math.hypot(a.x - c.clawX, a.z - c.clawZ) - Math.hypot(b.x - c.clawX, b.z - c.clawZ))[0];
+  log("aim target", tgt.x, tgt.z, "from", c.clawX, c.clawZ);
+  // The app moves round(v * 80) grid units per 120 ms tick, so pick n ticks and a vector that lands exactly.
+  for (let it = 0; it < 3 && Date.now() - t0 < 7500; it++) {
+    const dx = tgt.x - c.clawX, dz = tgt.z - c.clawZ, d = Math.hypot(dx, dz);
+    if (d < 15) break;
+    const n = Math.ceil(d / 80), vx = dx / n / 80, vz = dz / n / 80;
+    await page.mouse.move(cx, cy); await page.mouse.down();
+    await page.mouse.move(cx + vx * R, cy - vz * R);
+    await page.waitForTimeout(n * 120 - 50);
+    await page.mouse.up();
+    await page.waitForTimeout(1100);
+    c = await read();
+    log("claw at", c.clawX, c.clawZ, "dist", Math.round(Math.hypot(tgt.x - c.clawX, tgt.z - c.clawZ)));
+  }
+  await page.screenshot({ path: `${OUT}/04b-aimed-390.png` });
+} else {
+  await page.keyboard.down("ArrowRight"); await page.waitForTimeout(900); await page.keyboard.up("ArrowRight");
+  await page.keyboard.down("ArrowUp"); await page.waitForTimeout(700); await page.keyboard.up("ArrowUp");
+}
 await page.getByRole("button", { name: "side" }).click();
 await page.waitForTimeout(1500);
 await page.screenshot({ path: `${OUT}/04-aiming-side-390.png` });

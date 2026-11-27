@@ -50,7 +50,7 @@ collectibles and tokens instead of plush toys."*
 
 - **Programs:** Rust + Anchor, `ephemeral-rollups-sdk` (delegation, commit, undelegate),
   `ephemeral_vrf_sdk` (VRF request + callback). Private ER via MagicBlock's TEE validator + permission program.
-- **Frontend:** Next.js + TypeScript + Tailwind, mobile-first PWA, HTML Canvas 2D cabinet
+- **Frontend:** Next.js + TypeScript + Tailwind, mobile-first PWA, three.js 3D cabinet (2D canvas fallback)
   (front/side view toggle). Solana wallet adapter + Mobile Wallet Adapter.
 - **Client SDK:** `@magicblock-labs/ephemeral-rollups-sdk` (Magic Router connection).
 - **Network:** Solana devnet + MagicBlock devnet ER.

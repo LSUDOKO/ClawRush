@@ -2,12 +2,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Keypair, PublicKey, Transaction, TransactionInstruction, LAMPORTS_PER_SOL } from "@solana/web3.js";
-import CabinetCanvas, { type Anim, type View } from "./CabinetCanvas";
+import dynamic from "next/dynamic";
+import type { Anim, View } from "./CabinetCanvas";
+const Cabinet3D = dynamic(() => import("./Cabinet3D"), { ssr: false, loading: () => null });
 import Joystick from "./Joystick";
+import { nearest, alignErrBps, gripBps, BPS } from "@/lib/math";
 import ProofDrawer, { type ProofItem } from "./ProofDrawer";
 import {
   type AppSigner, type Cabinet, type Profile, base, erPublic, erFor, send, sendBatch, ix, keypairSigner, decodeCabinet, decodeProfile,
-  cabinetPda, playerPda, PROGRAM_ID, NO_TURN, PLAY_PRICE, tokenBalance, solBalance, fmtAmount, short,
+  cabinetPda, configPda, program, playerPda, PROGRAM_ID, NO_TURN, PLAY_PRICE, tokenBalance, solBalance, fmtAmount, short,
 } from "@/lib/chain";
 import { sfx, isMuted, setMuted, buzz } from "@/lib/sound";
 import { loadBurner, createBurner, loadSession, newSession } from "@/lib/burner";
@@ -27,6 +30,19 @@ export default function Game() {
   const [sol, setSol] = useState<number | null>(null);
   const [view, setView] = useState<View>("front");
   const [claw, setClaw] = useState({ x: 120, z: 120 });
+  // Grip curve read from the on-chain CabinetConfig (not hardcoded), used for the live "predicted grip" meter.
+  const [gripCfg, setGripCfg] = useState<{ max: number; min: number } | null>(null);
+  useEffect(() => {
+    (async () => {
+      for (const c of [base, erPublic]) {
+        try {
+          const a = await c.getAccountInfo(configPda);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          if (a) { const d: any = program.coder.accounts.decode("cabinetConfig", a.data); setGripCfg({ max: d.gripMaxBps, min: d.gripMinBps }); return; }
+        } catch { /* try the next endpoint */ }
+      }
+    })();
+  }, []);
   const [anim, setAnim] = useState<Anim>({ phase: "idle", t0: 0 });
   const [busy, setBusy] = useState<Busy>(null);
   const [err, setErr] = useState<string | null>(null);
@@ -103,6 +119,14 @@ export default function Game() {
   const myTurn = !!(cab && me && cab.turnOwner === me);
   const turnLeft = cab && cab.turnOwner !== NO_TURN ? Math.max(0, cab.turnExpiresAt - now) : 0;
   const queuePos = cab && me ? cab.queue.indexOf(me) : -1;
+  // Same integer math as drop_claw: nearest active capsule -> alignment error -> grip chance. VRF still decides.
+  const predicted = useMemo(() => {
+    if (!cab || !gripCfg) return null;
+    const n = nearest(cab.capsules, claw.x, claw.z);
+    if (!n) return { aim: 0, grip: 0 };
+    const e = alignErrBps(n[1], cab.capsules[n[0]].radius);
+    return { aim: Math.round((BPS - e) / 100), grip: e >= BPS ? 0 : Math.round(gripBps(e, gripCfg.max, gripCfg.min) / 100) };
+  }, [cab, claw, gripCfg]);
   const canControl = myTurn && sessionOk && !cab!.pendingVrf && turnLeft > 0 && anim.phase === "idle";
 
   // Reconcile claw with chain when no moves are in flight.
@@ -191,7 +215,14 @@ export default function Game() {
     // Read fresh chain state: the polled state may not have loaded yet when the button is pressed.
     const [prof, bal] = await Promise.all([base.getAccountInfo(playerPda(w)), tokenBalance(0, w)]);
     if (!prof) ixs.push(await ix.initPlayer(w));
-    if (bal < need) ixs.push(await ix.faucet(w)); // demo faucet, rate-limited on chain (1 per hour)
+    if (bal < need) {
+      // Demo faucet is rate-limited on chain (1 claim per hour per player): check first instead of failing in simulation.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const last = prof ? Number((program.coder.accounts.decode("playerProfile", prof.data) as any).faucetLast) : 0;
+      const wait = last ? last + 3600 - Math.floor(Date.now() / 1000) : 0;
+      if (wait > 0) throw new Error(`Not enough dUSDC for ${credits} credits (you have ${(Number(bal) / 1e6).toFixed(2)}). The demo faucet refills in ${Math.ceil(wait / 60)} min, so pick fewer credits for now.`);
+      ixs.push(await ix.faucet(w));
+    }
     const s = newSession(me, SESSION_SECS);
     if (credits > 0) ixs.push(await ix.buyCredits(w, credits));
     ixs.push(await ix.registerSession(w, s.kp.publicKey, s.expires));
@@ -300,21 +331,20 @@ export default function Game() {
         {muteBtn}
       </div>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/art/logo.webp" alt="ClawRush" className="float-slow mt-1 w-[74%] drop-shadow-[0_10px_18px_rgba(0,0,0,0.6)]" />
-      <p className="title-stroke font-display -mt-1 text-center text-lg">One claw · every player · real prizes</p>
+      <img src="/art/logo_main.webp" alt="ClawRush" className="logo-in mt-1 w-[58%] drop-shadow-[0_10px_18px_rgba(0,0,0,0.6)]" />
+      <p className="title-stroke font-display -mt-2 text-center text-lg">One claw · every player · real prizes</p>
 
-      <div className="relative mt-1 h-56 w-full">
-        <div className="rays absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 opacity-70" />
+      {/* Crew on one ground line: each has a contact shadow and its own frame-swap + squash/stretch loop */}
+      <div className="relative mt-1 h-52 w-full">
+        <div className="rays absolute left-1/2 top-[45%] h-72 w-72 -translate-x-1/2 -translate-y-1/2 opacity-60" />
+        <div className="stage-floor absolute inset-x-0 bottom-0 h-10" />
+        <div className="absolute bottom-3 left-[1%] w-[27%]"><i className="contact" /><Frames reduced={reduced} cls="squish" alt="" srcs={["/art/crew_slime.webp", "/art/crew_slime2.webp"]} seq={[[0, 2600], [1, 900]]} /></div>
+        <div className="absolute bottom-2 left-1/2 w-[46%] -translate-x-1/2"><i className="contact" /><Frames reduced={reduced} cls="hop" alt="Grabbo, the ClawRush monster" srcs={["/art/mascot_base.webp", "/art/mascot_blink.webp", "/art/mascot_wave.webp"]} seq={[[0, 2200], [1, 140], [0, 1600], [2, 1400], [0, 900], [1, 140]]} /></div>
+        <div className="absolute bottom-3 right-[1%] w-[27%]"><i className="contact" /><Frames reduced={reduced} cls="hover-bat" alt="" srcs={["/art/crew_bat.webp", "/art/crew_bat2.webp"]} seq={[[0, 260], [1, 260]]} /></div>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/art/crew_slime.webp" alt="" className="float absolute bottom-2 left-0 w-[30%] drop-shadow-[0_8px_10px_rgba(0,0,0,0.6)]" style={{ animationDelay: "0.4s" }} />
+        <img src="/art/cap_mystery.webp" alt="" className="bob absolute bottom-1 left-[25%] w-[13%]" />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/art/mascot_base.webp" alt="Grabbo, the ClawRush monster" className="wobble absolute bottom-0 left-1/2 w-[52%] -translate-x-1/2 drop-shadow-[0_12px_14px_rgba(0,0,0,0.7)]" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/art/crew_bat.webp" alt="" className="float absolute right-0 top-4 w-[32%] drop-shadow-[0_8px_10px_rgba(0,0,0,0.6)]" style={{ animationDelay: "1.1s" }} />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/art/cap_mystery.webp" alt="" className="float-slow absolute left-[6%] top-2 w-[17%]" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/art/cap_gold.webp" alt="" className="float absolute bottom-0 right-[4%] w-[18%]" style={{ animationDelay: "0.8s" }} />
+        <img src="/art/cap_gold.webp" alt="" className="bob absolute bottom-1 right-[25%] w-[13%]" style={{ animationDelay: "0.7s" }} />
       </div>
 
       <div className="panel mt-3 grid w-full grid-cols-3 gap-1 px-2 py-2 text-center">
@@ -330,6 +360,24 @@ export default function Game() {
 
       <button onClick={() => { setEntered(true); sfx.coin(); }} className="btn3d btn-gold pulse-glow mt-5 h-16 w-[80%] text-3xl">PLAY NOW</button>
       <button onClick={() => { setEntered(true); setOnboard(true); }} className="btn3d btn-violet mt-3 h-11 px-6 text-base">HOW IT WORKS</button>
+      {cab && cab.recentWins.length > 1 && (
+        <div className="panel mt-4 w-full px-3 pb-2 pt-2.5">
+          <p className="title-stroke font-display text-center text-base">RECENT WINNERS</p>
+          <ul className="mt-1 divide-y divide-white/10 text-xs font-bold">
+            {cab.recentWins.slice(0, 4).map((w, i) => (
+              <li key={`${w.ts}-${i}`} className="flex items-center justify-between gap-2 py-1">
+                <span className="flex items-center gap-1.5">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={w.kind === 2 ? "/art/cap_mystery.webp" : `/art/cap_${["gold", "gem", "koi", "robo"][w.mintIdx] ?? "gold"}.webp`} alt="" className="h-5 w-5 object-contain" />
+                  {short(w.player)}
+                </span>
+                <span className="text-[var(--gold)]">{fmtAmount(w.mintIdx, w.amount)}{w.kind === 2 ? " · mystery" : ""}</span>
+                <span className="text-white/60">{ago(now - w.ts)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <p className="mt-auto pt-5 text-center text-[11px] font-semibold text-white/60">Live on MagicBlock Ephemeral Rollups · VRF · Private ER · Solana devnet (test tokens, no real value)</p>
     </main>
   );
@@ -349,7 +397,7 @@ export default function Game() {
       <header className="flex items-center justify-between gap-2">
         <button onClick={() => setEntered(false)} aria-label="Back to title screen" className="shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/art/logo.webp" alt="ClawRush" className="h-12 w-auto drop-shadow-[0_4px_6px_rgba(0,0,0,0.6)]" />
+          <img src="/art/logo_main.webp" alt="ClawRush" className="h-12 w-auto drop-shadow-[0_4px_6px_rgba(0,0,0,0.6)]" />
         </button>
         <div className="flex items-center gap-1.5">
           <span className="pill text-sm" title="Your play credits">
@@ -369,7 +417,7 @@ export default function Game() {
       <div className="cabinet relative mt-1">
         <div className="bulbs" aria-hidden>{bulbs}</div>
         <section className="cabinet-inner relative aspect-[4/5] w-full overflow-hidden bg-[#14041f]">
-          {cab ? <CabinetCanvas cabinet={cab} claw={claw} view={view} anim={anim} reduced={reduced} /> : (
+          {cab ? <Cabinet3D cabinet={cab} claw={claw} view={view} anim={anim} reduced={reduced} /> : (
             <div className="flex h-full flex-col items-center justify-center gap-3 text-center text-sm font-bold text-white/80">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/art/mascot_base.webp" alt="" className="wobble w-28" />
@@ -404,6 +452,17 @@ export default function Game() {
       </div>
 
       {/* Controls */}
+      {stage === "play" && myTurn && predicted && (
+        <div className="panel mb-3 px-4 py-2.5">
+          <div className="flex items-baseline justify-between gap-2">
+            <span className="title-stroke font-display text-lg">GRIP {predicted.grip}%</span>
+            <span className="text-right text-[11px] font-bold text-white/75">predicted · aim {predicted.aim}% · VRF rolls it</span>
+          </div>
+          <div className="mt-1.5 h-4 overflow-hidden rounded-full border-2 border-[var(--ink)] bg-[#1d0636]">
+            <div className="h-full rounded-full transition-[width] duration-150" style={{ width: `${predicted.grip}%`, background: predicted.grip >= 70 ? "linear-gradient(90deg,#5fbf10,var(--lime))" : predicted.grip >= 40 ? "linear-gradient(90deg,#f29a12,var(--gold))" : "linear-gradient(90deg,#b0107a,var(--magenta))" }} />
+          </div>
+        </div>
+      )}
       {stage === "play" ? (
         <div className="panel flex items-center justify-between gap-4 px-5 py-5">
           <Joystick vec={vec} disabled={!canControl} />
@@ -440,7 +499,7 @@ export default function Game() {
       {busy && <p className="pill mx-auto text-sm text-[var(--cyan)]" role="status">{busy}</p>}
       {err && <p className="rounded-2xl border-2 border-[var(--ink)] bg-[#7a0d2c] p-2 text-xs font-bold text-red-50" role="alert">{err}</p>}
 
-      <ProofDrawer cab={cab} proof={proof} avgLat={avgLat} lastLat={lat[lat.length - 1] ?? null} me={me} session={session?.kp.publicKey.toBase58() ?? null} />
+      <ProofDrawer cab={cab} proof={proof} avgLat={avgLat} lastLat={lat[lat.length - 1] ?? null} me={me} session={session?.kp.publicKey.toBase58() ?? null} grip={gripCfg} />
 
       {signer && (
         <p className="text-center text-[11px] font-semibold text-white/60">
@@ -594,6 +653,26 @@ function Onboarding({ done }: { done: () => void }) {
           <button className="btn3d btn-gold h-12 flex-1 text-xl" onClick={() => (i < 2 ? setI(i + 1) : done())}>{i < 2 ? "Next" : "Let's go!"}</button>
         </div>
       </div>
+    </div>
+  );
+}
+
+// Frame-swap sprite: all frames stay mounted (no flicker), one is visible at a time.
+function Frames({ srcs, seq, cls, alt, reduced }: { srcs: string[]; seq: [number, number][]; cls: string; alt: string; reduced: boolean }) {
+  const [k, setK] = useState(0);
+  const sq = useRef(seq);
+  useEffect(() => {
+    if (reduced) return;
+    const t = setTimeout(() => setK((k + 1) % sq.current.length), sq.current[k][1]);
+    return () => clearTimeout(t);
+  }, [k, reduced]);
+  const show = reduced ? 0 : seq[k][0];
+  return (
+    <div className={`relative ${reduced ? "" : cls}`}>
+      {srcs.map((src, i) => (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img key={src} src={src} alt={i === 0 ? alt : ""} className={`${i === 0 ? "relative" : "absolute inset-0"} w-full drop-shadow-[0_8px_10px_rgba(0,0,0,0.6)]`} style={{ opacity: i === show ? 1 : 0 }} />
+      ))}
     </div>
   );
 }

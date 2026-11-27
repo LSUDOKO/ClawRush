@@ -1,12 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import type { Cabinet } from "@/lib/chain";
+import { outcome, gripBps } from "@/lib/math";
 import { DEV, PROGRAM_ID, cabinetPda, mysteryPda, erPublic, explorerTx, explorerAddr, short, fmtAmount, ER_URL } from "@/lib/chain";
 
 export type ProofItem = { label: string; sig: string; er?: boolean };
 const OUT = ["—", "HELD", "SLIP", "MISS"];
 
-export default function ProofDrawer({ cab, proof, avgLat, lastLat, me, session }: {
+export default function ProofDrawer({ cab, proof, avgLat, lastLat, me, session, grip }: {
+  grip?: { max: number; min: number } | null;
   cab: Cabinet | null; proof: ProofItem[]; avgLat: number | null; lastLat: number | null; me: string | null; session: string | null;
 }) {
   const [open, setOpen] = useState(false);
@@ -39,6 +41,11 @@ export default function ProofDrawer({ cab, proof, avgLat, lastLat, me, session }
               <p className="font-mono text-sm">
                 Alignment {((10000 - L.alignErrBps) / 100).toFixed(0)}% → Grip {(L.gripBps / 100).toFixed(0)}% → VRF roll {(L.rollBps / 100).toFixed(1)} → <b className={L.outcome === 1 ? "text-[var(--gold)]" : "text-[var(--magenta)]"}>{OUT[L.outcome]}</b>
               </p>
+              {(() => {
+                // Re-derive the result from the on-chain numbers with the same integer math as the program.
+                const ok = outcome(L.alignErrBps, L.gripBps, L.rollBps) === L.outcome && (!grip || L.alignErrBps >= 10000 || gripBps(L.alignErrBps, grip.max, grip.min) === L.gripBps);
+                return <p className={`font-bold ${ok ? "text-[var(--lime)]" : "text-[var(--magenta)]"}`}>{ok ? "✓ Re-checked in your browser: grip curve and roll < grip match the program's math" : "✗ Recomputed result does not match the on-chain record"}</p>;
+              })()}
               <p className="text-[var(--lime)]/80">HELD when roll &lt; grip. {L.outcome === 1 ? `Prize: ${fmtAmount(L.mintIdx, L.amount)}${L.kind === 2 ? ` (mystery, tier ${["", "dust", "mid", "jackpot"][L.tier]})` : ""}` : ""}</p>
             </div>
           )}

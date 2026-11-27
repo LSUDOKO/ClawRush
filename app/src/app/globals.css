@@ -200,3 +200,55 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--cyan); outline-
   .float, .float-slow, .wobble, .pulse-glow, .rays, .bulbs i, .coin-rain i, .animate-pulse { animation: none; }
 }
 .font-body { font-family: var(--font-body), ui-rounded, system-ui, sans-serif; }
+
+/* 3D cabinet DOM labels (projected each frame) */
+.cab3d-label, .cab3d-chute {
+  position: absolute; left: 0; top: 0; white-space: nowrap; will-change: transform;
+  font-family: var(--font-display), sans-serif; letter-spacing: 0.03em; line-height: 1;
+}
+.cab3d-label {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 2px 6px 1px; font-size: 10px; color: var(--ink);
+  background: linear-gradient(180deg, #fff3a0, var(--gold));
+  border: 2px solid var(--ink); border-radius: 9999px;
+  box-shadow: 0 2px 0 rgba(26, 6, 48, 0.7);
+}
+.cab3d-label.mystery { background: linear-gradient(180deg, #e3ff9f, var(--lime)); padding: 2px 6px 1px; }
+.cab3d-label b {
+  display: inline-grid; place-items: center; min-width: 15px; height: 15px; margin-right: -4px;
+  border-radius: 9999px; background: var(--magenta); color: #fff; font-weight: 400; font-size: 10px;
+  border: 1.5px solid var(--ink);
+}
+.cab3d-chute {
+  font-size: 13px; color: var(--lime);
+  -webkit-text-stroke: 1.5px var(--ink); paint-order: stroke fill; text-shadow: 0 0 10px rgba(166, 255, 46, 0.8);
+}
+
+/* Title-screen character motion: squash & stretch on a shared ground line */
+.contact { position: absolute; left: 12%; right: 12%; bottom: -6px; height: 14px; border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0) 70%); }
+.stage-floor { background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(255, 47, 178, 0.35), rgba(255, 47, 178, 0) 70%); }
+.hop { animation: hop 3.6s cubic-bezier(0.3, 0, 0.3, 1) infinite; transform-origin: 50% 100%; }
+@keyframes hop {
+  0%, 62%, 100% { transform: translateY(0) scale(1, 1); }
+  30% { transform: translateY(0) scale(1.025, 0.975); }
+  68% { transform: translateY(0) scale(1.08, 0.9); }
+  78% { transform: translateY(-16%) scale(0.95, 1.06); }
+  88% { transform: translateY(0) scale(1.07, 0.93); }
+  94% { transform: translateY(0) scale(0.98, 1.02); }
+}
+.squish { animation: squish 1.7s ease-in-out infinite; transform-origin: 50% 100%; }
+@keyframes squish {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  35% { transform: translateY(0) scale(1.1, 0.88); }
+  60% { transform: translateY(-9%) scale(0.94, 1.08); }
+  80% { transform: translateY(0) scale(1.04, 0.96); }
+}
+.hover-bat { animation: hoverbat 2.4s ease-in-out infinite; transform-origin: 50% 100%; }
+@keyframes hoverbat { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-12%) rotate(3deg); } }
+.bob { animation: bob 2.8s ease-in-out infinite; transform-origin: 50% 100%; }
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-6px) rotate(4deg); } }
+.logo-in { animation: logoin 700ms cubic-bezier(0.2, 1.5, 0.4, 1) both, logofloat 4.6s ease-in-out 700ms infinite; }
+@keyframes logoin { 0% { transform: scale(0.3) rotate(-8deg); opacity: 0; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
+@keyframes logofloat { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-6px) rotate(-1deg); } }
+@media (prefers-reduced-motion: reduce) { .hop, .squish, .hover-bat, .bob, .logo-in { animation: none; } }

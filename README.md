@@ -28,6 +28,22 @@ and the **MagicBlock devnet TEE validator**. Tokens are demo devnet tokens with 
    **FRONT / SIDE** view to judge depth, and **DROP**. No wallet popups while playing.
 4. **Cash out**: one approval commits your profile back to Solana and pays every prize to your wallet.
 
+## What you see on the phone
+
+- **A real-time 3D cabinet** (three.js, WebGL). Capsules are placed at their exact on-chain grid
+  coordinates and radius (world unit = 100 grid units), so what you aim at is what the program measures.
+  Two fixed cameras (FRONT looks along depth, SIDE looks across it); switching glides the camera, and you
+  still need both views to judge depth, exactly like the on-chain aim. Slipped capsules visibly slide to their
+  new on-chain position; restocked ones pop in. Falls back to a 2D canvas if WebGL is unavailable.
+- **Live predicted-grip meter.** While you aim, the app runs the program's own integer math
+  (`nearest` → `align_err_bps` → `grip_bps`, ported 1:1 in `app/src/lib/math.ts`, curve read from the on-chain
+  `CabinetConfig`) and shows "GRIP 78% · predicted". MagicBlock VRF then rolls against the real number.
+- **In-browser fairness re-check.** The Live Proof drawer recomputes every drop's result from the on-chain
+  record (alignment → grip curve → roll < grip ⇒ HELD) and shows ✓ when it matches the program.
+- **Recent winners** board and win ticker built from the cabinet's on-chain `recent_wins` ring buffer.
+- Original 3D-rendered characters and logo (AI-generated, credits in `docs/DECISIONS.md`), frame-swap and
+  squash-and-stretch character animation, sound and haptics. All presentation; none of it decides outcomes.
+
 ## Why ClawRush
 
 | | Typical on-chain claw (e.g. arclaw) | ClawRush |
@@ -36,7 +52,7 @@ and the **MagicBlock devnet TEE validator**. Tokens are demo devnet tokens with 
 | Players per cabinet | One at a time, isolated | **One shared live cabinet**, queue + 15 s turns |
 | Persistent state | Fresh box each play | **Capsules stay where they land**; slips move them toward the chute for the next player |
 | Hidden prizes | Box contents | **Mystery capsules sealed in a Private ER**, unreadable even to the operator's RPC token |
-| Fairness proof | VRF | VRF + on-screen proof drawer + Monte Carlo payout simulation + devnet invariant tests |
+| Fairness proof | VRF | VRF + live predicted-grip meter + in-browser re-check of every drop + Monte Carlo payout simulation + devnet invariant tests |
 
 ## How MagicBlock powers it
 
@@ -174,7 +190,8 @@ empty stub, which is the privacy guarantee working (checked with a control tx in
 On chain: queue and turns, every claw position, drop, VRF roll, grip/slip/miss resolution, capsule positions and slip
 counts, mystery contents and reveal, credits, pending prizes, payouts, solvency checks.
 
-Client-side only: the 3D-ish canvas, claw sway and drop/lift animation, sounds and haptics, the joystick's
+Client-side only: the three.js cabinet (and its 2D fallback), claw sway and drop/lift animation, the predicted-grip
+meter and the fairness re-check (both read on-chain numbers and only display them), sounds and haptics, the joystick's
 predicted claw position between confirmations (it snaps to chain state), and the devnet burner wallet.
 
 Operator process: [`scripts/keeper.ts`](scripts/keeper.ts) restocks when capsules run low (restock writes the private
@@ -208,8 +225,9 @@ Toolchain and every design decision with its trade-off: [`docs/DECISIONS.md`](do
 ## What's next
 
 - Pass the mystery vault to `drop_claw` as a derived address instead of an account, so drop transactions stay public.
-- Spectator count and a second camera angle; real collectible NFTs (Metaplex) instead of demo collectible tokens.
-- Host the keeper (restock + turn clearing) instead of running it locally.
+- MagicBlock cranks / Magic Actions for turn expiry and restock, replacing the local keeper (needs a program
+  redeploy, so it was left out of the tested build).
+- Real collectible NFTs (Metaplex) instead of demo collectible tokens.
 
 ## License
 

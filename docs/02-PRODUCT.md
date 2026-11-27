@@ -72,7 +72,7 @@ A "steer claw + VRF decides prize" build would look like a clone. ClawRush wins 
 - Spectator betting ("hold or slip") — separate product, gambling/regulatory questions.
 - Live price-feed prize values — nice, not core.
 - Set-burn treasury jackpot, stealth payouts, gift links — scope creep.
-- Full 3D (Three.js) — use 2D canvas with front/side toggle instead.
+- ~~Full 3D (Three.js)~~ — built after the core loop shipped, at the user's request (decision 21). Fixed front/side cameras keep the two-view aim mechanic; the 2D canvas remains as the WebGL fallback.
 
 ## Target user & vibe
 

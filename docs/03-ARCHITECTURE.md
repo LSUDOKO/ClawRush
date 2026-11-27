@@ -8,7 +8,7 @@
 
 ```
 ┌───────────────────────────────────────────────────────────────┐
-│ MOBILE WEB APP (Next.js PWA, Canvas 2D cabinet)                │
+│ MOBILE WEB APP (Next.js PWA, three.js 3D cabinet)              │
 │ joystick · front/side view · proof drawer · session key        │
 └───────────────────────────┬───────────────────────────────────┘
                             │ Magic Router (routes L1 vs ER automatically)

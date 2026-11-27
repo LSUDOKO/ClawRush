@@ -15,7 +15,7 @@
 │ 🏆 7xQ… won 5 dUSDC · 2s ago │
 ├─────────────────────────────┤
 │   ╔═══════════════════════╗ │
-│   ║   ▼ claw              ║ │  cabinet (Canvas 2D)
+│   ║   ▼ claw              ║ │  cabinet (three.js 3D)
 │   ║  ●  ◆  ?  ●  ◆        ║ │  ● token  ◆ collectible  ? mystery
 │   ║ ●  ?  ●   ◆  ●   [⬇] ║ │  [⬇] chute
 │   ╚═══════════════════════╝ │
@@ -29,7 +29,7 @@
 
 ## Cabinet rendering
 
-- Canvas 2D, ~60 fps render loop; game state from ER account subscription.
+- three.js WebGL cabinet (2D canvas fallback), ~60 fps render loop; game state from ER account subscription.
 - **Front view** shows x (left/right) + height; **Side view** shows z (depth) + height. The toggle is the
   depth-aiming mechanic — keep it.
 - Capsule sprites by kind; mystery capsules glow with a "?" and show no value.
