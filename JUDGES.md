@@ -111,9 +111,9 @@ Full matrix and commands: [TESTING.md](TESTING.md).
 | Suite | Kind | Result | Report |
 |---|---|---|---|
 | `cargo test -p clawrush --lib` | Rust unit tests for `math.rs` | 21 passed (20 math tests + Anchor's `test_id`; 6 added today) | [TESTING.md](TESTING.md) |
-| `CABINET_ID=2 npx tsx tests/extra_invariants.ts` | Extra devnet invariants (new) | 12/12 | [TESTING.md](TESTING.md) |
+| `CABINET_ID=2 npx tsx tests/extra_invariants.ts` | Extra devnet invariants (new: payout cap, batch insolvency, admin-only paths, pinned VRF queue) | 21/21 | [TESTING.md](TESTING.md) |
 | `CABINET_ID=2 npx tsx tests/e2e_slip_then_win.ts` | Slip persists, next player wins it, exact balances (new) | 6/6 on run 2; run 1 not completed (VRF luck) | [TESTING.md](TESTING.md) |
-| `npx tsx scripts/lib/math.test.ts` | TS port matches the Rust vectors | pass (MORNING_REPORT.md) | [MORNING_REPORT.md](MORNING_REPORT.md) |
+| `npx tsx scripts/lib/math.test.ts` | TS port matches the Rust vectors | pass (also in CI) | [TESTING.md](TESTING.md) |
 | `CABINET_ID=2 npx tsx tests/invariants.ts` | 7 invariants as real devnet / TEE txs | 23/23 (latest run date in the report) | [docs/INVARIANTS.md](docs/INVARIANTS.md) |
 | `npx tsx scripts/e2e_two_player.ts` | Shared queue, two players | 8/8, 2026-11-26 (earlier drop/cash-out path) | [docs/E2E_TWO_PLAYER.md](docs/E2E_TWO_PLAYER.md) |
 | `scripts/devnet_rounds.ts` | Real rounds | 34 attempts: 30 completed (HELD 17 / SLIP 5 / MISS 8), 4 failures recorded | [docs/DEVNET_ROUNDS.md](docs/DEVNET_ROUNDS.md) |
