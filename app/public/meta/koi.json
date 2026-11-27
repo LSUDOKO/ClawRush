@@ -1,0 +1,26 @@
+{
+  "name": "ClawRush Koi",
+  "symbol": "KOI",
+  "description": "Koi plush collectible from the ClawRush claw cabinet. Won on Solana devnet with MagicBlock Ephemeral Rollups + VRF.",
+  "image": "https://raw.githubusercontent.com/LSUDOKO/ClawRush/main/app/public/meta/koi.png",
+  "external_url": "https://clawrush.pages.dev",
+  "attributes": [
+    {
+      "trait_type": "cabinet",
+      "value": "ClawRush #1"
+    },
+    {
+      "trait_type": "network",
+      "value": "devnet"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "https://raw.githubusercontent.com/LSUDOKO/ClawRush/main/app/public/meta/koi.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image"
+  }
+}

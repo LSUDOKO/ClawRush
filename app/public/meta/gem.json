@@ -1,0 +1,26 @@
+{
+  "name": "ClawRush Gem",
+  "symbol": "dGEM",
+  "description": "Glowing gem plush from the ClawRush claw cabinet. Demo prize token on Solana devnet, won by grip x MagicBlock VRF.",
+  "image": "https://raw.githubusercontent.com/LSUDOKO/ClawRush/main/app/public/meta/gem.png",
+  "external_url": "https://clawrush.pages.dev",
+  "attributes": [
+    {
+      "trait_type": "cabinet",
+      "value": "ClawRush #1"
+    },
+    {
+      "trait_type": "network",
+      "value": "devnet"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "https://raw.githubusercontent.com/LSUDOKO/ClawRush/main/app/public/meta/gem.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image"
+  }
+}
