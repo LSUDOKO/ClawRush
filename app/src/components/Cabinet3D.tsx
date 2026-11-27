@@ -2,7 +2,8 @@
 // Real-time 3D cabinet (three.js). World mapping is 1:1 with on-chain grid units:
 // world x = (x - 500) / 100, world z = (500 - z) / 100, capsule radius = radius / 100.
 // FRONT camera looks along -z (left/right = x); SIDE camera looks along -x (left/right = z).
-// Two fixed cameras, no orbit: players still switch views to judge depth, as on-chain aim needs.
+// Two fixed aiming cameras: players switch views to judge depth, as on-chain aim needs.
+// ORBIT is a third, spectator-only camera that circles the cabinet while someone else plays.
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
@@ -14,7 +15,7 @@ import CabinetCanvas, { type Anim, type View } from "./CabinetCanvas";
 const U = 100;
 const wx = (x: number) => (x - GRID / 2) / U;
 const wz = (z: number) => (GRID / 2 - z) / U;
-const CAMS: Record<View, { pos: THREE.Vector3; look: THREE.Vector3 }> = {
+const CAMS: Record<Exclude<View, "orbit">, { pos: THREE.Vector3; look: THREE.Vector3 }> = {
   front: { pos: new THREE.Vector3(0, 10.4, 9.9), look: new THREE.Vector3(0, 0.5, -0.5) },
   side: { pos: new THREE.Vector3(9.9, 10.4, 0), look: new THREE.Vector3(-0.5, 0.5, 0) },
 };
@@ -147,7 +148,7 @@ export default function Cabinet3D(props: { cabinet: Cabinet | null; claw: { x: n
     scene.environmentIntensity = 0.55;
 
     const cam = new THREE.PerspectiveCamera(52, 1, 0.1, 60);
-    const v0 = CAMS[st.current.view];
+    const v0 = CAMS[st.current.view === "orbit" ? "front" : st.current.view];
     cam.position.copy(v0.pos);
     const look = v0.look.clone();
     cam.lookAt(look);
@@ -218,6 +219,7 @@ export default function Cabinet3D(props: { cabinet: Cabinet | null; claw: { x: n
     const ro = new ResizeObserver(resize); ro.observe(el); resize();
 
     const v = new THREE.Vector3();
+    const orbitPos = new THREE.Vector3(), orbitLook = new THREE.Vector3(0, 0.6, 0);
     const toScreen = (p: THREE.Vector3) => { v.copy(p).project(cam); return { x: (v.x + 1) / 2 * el.clientWidth, y: (1 - v.y) / 2 * el.clientHeight }; };
 
     let raf = 0, last = performance.now();
@@ -228,8 +230,11 @@ export default function Cabinet3D(props: { cabinet: Cabinet | null; claw: { x: n
       const { cabinet, claw: cp, view, anim, reduced } = st.current;
       const ease = reduced ? 1 : 1 - Math.exp(-dt * 7);
 
-      // Camera glides between the two fixed views
-      const c = CAMS[view];
+      // Camera glides between the fixed views; orbit circles slowly (a fixed 3/4 angle under reduced motion)
+      const orbitA = reduced ? Math.PI / 4 : now / 9000;
+      const c = view === "orbit"
+        ? { pos: orbitPos.set(Math.sin(orbitA) * 11.5, 9.2, Math.cos(orbitA) * 11.5), look: orbitLook }
+        : CAMS[view];
       cam.position.lerp(c.pos, reduced ? 1 : 1 - Math.exp(-dt * 5));
       look.lerp(c.look, reduced ? 1 : 1 - Math.exp(-dt * 5));
       cam.lookAt(look);
@@ -357,13 +362,13 @@ export default function Cabinet3D(props: { cabinet: Cabinet | null; claw: { x: n
     };
   }, []);
 
-  if (failed) return <CabinetCanvas {...props} />;
+  if (failed) return <CabinetCanvas {...props} view={props.view === "orbit" ? "front" : props.view} />;
   const { cabinet, view } = props;
   return (
     <div ref={host} className="relative h-full w-full" role="img" aria-label={`Claw cabinet, ${view} view, ${cabinet?.capsules.filter((c) => c.active).length ?? 0} capsules`}>
       <div ref={overlay} className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden />
       <div className="pointer-events-none absolute inset-x-2 bottom-1.5 flex items-center justify-between font-display text-[11px] text-white/80 text-outline" aria-hidden>
-        <span>{view === "front" ? "FRONT VIEW · LEFT ↔ RIGHT" : "SIDE VIEW · NEAR ↔ FAR"}</span>
+        <span>{view === "front" ? "FRONT VIEW · LEFT ↔ RIGHT" : view === "side" ? "SIDE VIEW · NEAR ↔ FAR" : "ORBIT VIEW · SPECTATING"}</span>
         <span className="flex items-center gap-1"><i className="inline-block h-2.5 w-2.5 rounded-full bg-[var(--magenta)]" /> = SLIPS</span>
       </div>
     </div>

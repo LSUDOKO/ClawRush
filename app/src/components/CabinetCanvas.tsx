@@ -6,7 +6,8 @@ import type { Cabinet } from "@/lib/chain";
 import { MINT_KEYS, MINT_DECIMALS } from "@/lib/chain";
 import { CHUTE_X, CHUTE_Z, GRID } from "@/lib/math";
 
-export type View = "front" | "side";
+// "orbit" is a spectator-only 3D camera; the 2D fallback draws it as the front view.
+export type View = "front" | "side" | "orbit";
 export type Anim = { phase: "idle" | "drop" | "hold" | "lift"; t0: number; outcome?: number; capsuleIdx?: number };
 
 const COLORS = ["#ffd23f", "#3df5ff", "#ff3dbd"];
