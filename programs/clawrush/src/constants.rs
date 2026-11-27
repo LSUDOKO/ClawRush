@@ -44,6 +44,7 @@ pub const SEED_MYSTERY: &[u8] = b"mystery";
 pub const SEED_VAULT: &[u8] = b"vault";
 pub const SEED_PLAYER: &[u8] = b"player";
 pub const SEED_FAUCET: &[u8] = b"faucet";
+pub const SEED_KEEPER: &[u8] = b"keeper";
 
 /// Capsule kinds.
 pub const KIND_TOKEN: u8 = 0;

@@ -22,3 +22,9 @@ pub struct PrizeSettled { pub winner: Pubkey, pub mint: Pubkey, pub amount: u64 
 pub struct TurnExpired { pub player: Pubkey, pub round: u64, pub vrf_cancelled: bool }
 #[event]
 pub struct CabinetRestocked { pub added: u8, pub active: u8 }
+
+#[event]
+pub struct KeeperSet {
+    pub cabinet_id: u8,
+    pub keeper: Pubkey,
+}

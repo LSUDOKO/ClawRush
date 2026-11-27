@@ -194,3 +194,13 @@ pub struct PlayerProfile {
     pub faucet_last: i64,
     pub last_round: u64,
 }
+
+/// Low-privilege restock role, so a hosted keeper never holds the cabinet authority (also the upgrade key).
+/// A keeper can only add capsules that pass the same bounds and solvency checks as an authority restock.
+#[account]
+#[derive(InitSpace)]
+pub struct KeeperRole {
+    pub cabinet_id: u8,
+    pub bump: u8,
+    pub keeper: Pubkey,
+}
