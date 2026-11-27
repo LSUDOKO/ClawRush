@@ -131,6 +131,13 @@ export class Player {
     }).instruction();
     return this.rec("drop_claw", await sendTx(signer === this.session ? this.erS : this.er, [ix], [signer], { cu: 400_000 }), "er");
   }
+  /** drop_claw_public: the private mystery vault is derived on chain, not listed, so this transaction stays readable. */
+  async dropPublic(seed = Math.floor(Math.random() * 256), signer: Keypair = this.session) {
+    const ix = await this.pe.methods.dropClawPublic(seed).accountsPartial({
+      signer: signer.publicKey, profile: this.profile, config: configPda(), cabinet: cabinetPda(), oracleQueue: VRF_EPHEMERAL_QUEUE,
+    }).instruction();
+    return this.rec("drop_claw_public", await sendTx(signer === this.session ? this.erS : this.er, [ix], [signer], { cu: 400_000 }), "er");
+  }
   /** Wait for the VRF callback to resolve this player's round. Returns cabinet.last and the callback latency. */
   async waitResult(round: number, timeoutMs = 40_000) {
     const t0 = Date.now();
