@@ -157,6 +157,8 @@ export default function Game() {
 
   // Turn start chime
   const wasMyTurn = useRef(false);
+  // Orbit is for spectators: snap back to an aiming camera when your turn starts.
+  useEffect(() => { if (myTurn && view === "orbit") setView("front"); }, [myTurn, view]);
   useEffect(() => { if (myTurn && !wasMyTurn.current) { sfx.turn(); buzz(40); } wasMyTurn.current = myTurn; }, [myTurn]);
 
   // ───── Joystick → throttled move_claw (fire-and-forget, client-side prediction) ─────
@@ -464,9 +466,9 @@ export default function Game() {
       {/* View + timer */}
       <div className="flex items-center justify-between gap-2">
         <div className="flex gap-2" role="group" aria-label="Camera view">
-          {(["front", "side"] as View[]).map((v) => (
+          {((myTurn ? ["front", "side"] : ["front", "side", "orbit"]) as View[]).map((v) => (
             <button key={v} onClick={() => setView(v)} aria-pressed={view === v}
-              className={`btn3d h-11 px-4 text-base uppercase ${view === v ? "btn-gold" : "btn-violet"}`}>{v}</button>
+              className={`btn3d h-11 ${myTurn ? "px-4" : "px-3"} text-base uppercase ${view === v ? "btn-gold" : "btn-violet"}`}>{v}</button>
           ))}
         </div>
         <TimerRing left={turnLeft} total={15} label={cab?.turnOwner === NO_TURN ? "Cabinet idle" : myTurn ? "YOUR TURN!" : `${short(cab?.turnOwner ?? "")} playing`} />
